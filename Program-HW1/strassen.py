@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 from math import ceil, log
-from optparse import OptionParser
+import argparse, os, sys
 
-# Decorator for counting function calls.
+# Decorator for counting function calls (from R. Fink).
 # See: https://stackoverflow.com/a/21717396/8542716
 def call_counter(f):
     """
@@ -60,8 +60,18 @@ def matrix_product(A, B):
 if __name__ == "__main__":
   """MAIN
   """
-  filename = "./data/LabStrassenInput-2.txt"
-  n, A, B = read_matrix_file(filename)
+  parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm.')
+  parser.add_argument('Path', metavar='input file path', type=str,
+                       help='a path to a file containing pairs of matrices.')
+
+  args = parser.parse_args()
+  input_file = args.Path
+
+  if not os.path.isfile(input_file):
+      print('The file specified does not exist. Exiting...')
+      sys.exit()
+
+  n, A, B = read_matrix_file(input_file)
   matrix_print(A)
   print()
   matrix_print(B)
