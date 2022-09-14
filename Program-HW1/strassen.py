@@ -22,6 +22,26 @@ def call_counter(f):
     wrapped.calls = 0
     return wrapped
 
+def break_on_lf(filename):
+  with open(filename) as reader:
+    contents = reader.read()
+    matrices = contents.split('\n\n')
+    matrices = matrices[:-1]
+    return matrices
+
+def read_matrices(filename):
+  """FIXME
+  """
+  A = []
+  B = []
+  k = 0
+  m = break_on_lf(filename)
+  n = len(m) # n = number of individual matrices in the file read.
+  for idx in range(0,n):
+    matrix = m[idx].split('\n')
+    print(matrix)
+
+
 def read_matrix_file(filename):
   """FIXME
   """
@@ -61,8 +81,8 @@ if __name__ == "__main__":
   """MAIN
   """
   parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm.')
-  parser.add_argument('Path', metavar='input file path', type=str,
-                       help='a path to a file containing pairs of matrices.')
+  parser.add_argument('Path', metavar='input file path:', type=str,
+                       help='a path to a file containing matrices.')
 
   args = parser.parse_args()
   input_file = args.Path
