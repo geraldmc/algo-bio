@@ -25,8 +25,8 @@ def call_counter(f):
 def break_on_lf(filename):
   with open(filename) as reader:
     contents = reader.read()
-    matrices = contents.split('\n\n')
-    matrices = matrices[:-1]
+    matrices = contents.split('\n\n') # FIXME: this might fail
+    matrices = matrices[:-1] # remove trailing newline
     return matrices
 
 def read_matrices(filename):
