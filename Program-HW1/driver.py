@@ -11,7 +11,6 @@
 __author__      = "Gerald McCollam"
 __copyright__   = "Copyright 2022, Planet Earth"
 
-
 from math import ceil, log
 import argparse, os, sys
 from filehandler.io import read_matrices, matrix_print
@@ -24,6 +23,8 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. Compare with brute force algorithm.')
   parser.add_argument('Path', metavar='input file path:', type=str,
                        help='a path to a file containing matrices.')
+  parser.add_argument('Matrix', metavar='Create paired matrices?:', type=str,
+                      help='command to create paired matrices.')
 
   args = parser.parse_args()
   input_file = args.Path
@@ -35,3 +36,8 @@ if __name__ == "__main__":
   filename = './data/LabStrassenInput.txt'
   m = read_matrices(filename)
   matrix_print(m)
+  
+  if args.makematrix = True
+    A = create_random_matrix(n)
+    B = create_random_matrix(n)
+    save_matrix(A, B, "%i.in" % n)

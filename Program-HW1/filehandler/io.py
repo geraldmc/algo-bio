@@ -10,7 +10,7 @@ def break_on_lf(filename):
   """
   with open(filename) as reader:
     contents = reader.read()
-    matrices = contents.split('\n\n') # FIXME: this might fail
+    matrices = contents.split('\n\n') # FIXME: this could easily fail
     matrices = matrices[:-1] # remove trailing newline
     return matrices
 
