@@ -16,10 +16,12 @@ from math import ceil, log
 import argparse, os, sys
 from filehandler.io import read_matrices, matrix_print
 
+# See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
+
 if __name__ == "__main__":
   """MAIN
   """
-  parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm.')
+  parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. Compare with brute force algorithm.')
   parser.add_argument('Path', metavar='input file path:', type=str,
                        help='a path to a file containing matrices.')
 
