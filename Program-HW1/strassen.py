@@ -32,15 +32,13 @@ def break_on_lf(filename):
 def read_matrices(filename):
   """FIXME
   """
-  A = []
-  B = []
-  k = 0
+  m_dict = {}
   m = break_on_lf(filename)
   n = len(m) # n = number of individual matrices in the file read.
   for idx in range(0,n):
-    matrix = m[idx].split('\n')
-    print(matrix)
-
+    m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] # first element is key, values are matrix values
+    #m_list.append(m[idx].split('\n'))
+  return m_dict
 
 def read_matrix_file(filename):
   """FIXME
@@ -65,6 +63,12 @@ def matrix_print(m):
   """
   for line in m:
       print("\t".join(map(str, line)))
+
+def matrix_print(m):
+  """FIXME
+  """
+  for key, value in m.items():
+      print(key, value)
 
 def matrix_product(A, B):
   """FIXME
