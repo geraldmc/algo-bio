@@ -5,6 +5,8 @@ import argparse, os, sys
 
 # Decorator for counting function calls (from R. Fink).
 # See: https://stackoverflow.com/a/21717396/8542716
+# See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
+
 def call_counter(f):
     """
     Adds a ".calls" variable to the function that increments w/every call.
