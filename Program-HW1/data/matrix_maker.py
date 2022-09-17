@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 
-"""Create random integer n×n matrices."""
+"""Create random integer matrices."""
 
 # Core Library modules
 import random
 
 random.seed(1234)
 
-def create_random_matrix(n):
-    #max_val = 1000  # I don't want to get Java / C++ into trouble ;-)
+def create_random_matrix(n, limit):
+    assert type(n) is int and n > 0 and n < 100
     matrix = []
     for i in range(n):
-        matrix.append([random.randint(0, max_val) for el in range(n)])
+        matrix.append([random.randint(0, limit) for el in range(n)])
     return matrix
 
 

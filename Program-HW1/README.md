@@ -46,6 +46,9 @@ will be generated.
 
 ---
 
+REFERENCES
+Pomerance, Andrew, Edward Ott, Michelle Girvan, and Wolfgang Losert. “The Effect of Network Topology on the Stability of Discrete State Models of Genetic Control.” Proceedings of the National Academy of Sciences of the United States of America 106, no. 20 (May 19, 2009): 8209–14. https://doi.org/10.1073/pnas.0900142106.
+
 
  Email to student: 
 © 2022 Gerald McCollam

@@ -29,3 +29,9 @@ def matrix_print(m):
   """
   for key, value in m.items():
       print(key, value)
+
+def matrix_print_from_input(a,b):
+  """FIXME
+  """
+  print(a)
+  print(b)

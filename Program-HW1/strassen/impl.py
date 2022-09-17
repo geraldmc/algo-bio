@@ -5,7 +5,6 @@ import argparse, os, sys
 
 # Decorator for counting function calls (from R. Fink).
 # See: https://stackoverflow.com/a/21717396/8542716
-# See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
 
 def call_counter(f):
     """
@@ -82,25 +81,3 @@ def matrix_product(A, B):
           for j in range(n):
               C[i][j] += A[i][k] * B[k][j]
   return C
-
-if __name__ == "__main__":
-  """MAIN
-  """
-  parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm.')
-  parser.add_argument('Path', metavar='input file path:', type=str,
-                       help='a path to a file containing matrices.')
-
-  args = parser.parse_args()
-  input_file = args.Path
-
-  if not os.path.isfile(input_file):
-      print('The file specified does not exist. Exiting...')
-      sys.exit()
-
-  n, A, B = read_matrix_file(input_file)
-  matrix_print(A)
-  print()
-  matrix_print(B)
-  print()
-  print(matrix_product(A,B))
-  print()
