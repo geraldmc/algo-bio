@@ -13,7 +13,9 @@ def create_matrix_dict(m):
 
 
 def create_random_matrix(n, limit):
-  """FIXME
+  """Create a square matrix using randomly generated positive integers.
+     The variable 'n' is the order of the matrix.
+     The variable 'limit' is the range of positive integers used.
   """
   assert type(n) is int and n > 0 and n < 100
   matrix = []

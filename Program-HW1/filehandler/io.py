@@ -19,18 +19,47 @@ def read_matrices(filename):
   """
   A = []
   B = []
-  #m_dict = {}
+  m_dict = {}
   m = break_on_lf(filename)
   n = len(m) # n = number of matrices read.
   # in following dict assignment, the order is the dict key, 
   # the value is the matrix itself.
   for idx in range(0,n):
-    #m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] 
+    m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] 
   return m_dict
 
-def read_matrix_file(filename):
+def process_input_matrix(m):
+  k = list(m.keys())
+  C = {}
+  for key,val in enumerate(k):
+    A = []
+    B = []
+    print("Processing matrix {} with order {} from input file".format(key+1, val))
+    d = m[val]
+    for idx in range(0,int(len(d)/2)): # first half of list
+      A.append([int(i) for i in d[idx].split(' ') if i])
+    mid = idx+1
+    for idx in range(mid, len(d)): # second half of list
+      B.append([int(i) for i in d[idx].split(' ') if i])
+    C[key] = A, B
+  return C
+
+def matrix_print_from_dict(m):
   """FIXME
   """
+  for key, value in m.items():
+      print(key, value)
+
+def matrix_print_from_list(a,b):
+  """FIXME
+  """
+  print(a)
+  print(b)
+
+  """
+  GUTTER ---------------------------------
+
+  def read_matrix_file(filename):
   A = []
   B = []
   n = 0
@@ -46,15 +75,15 @@ def read_matrix_file(filename):
         B.append([int(el) for el in line.strip().split()])
     return int(n.strip()), A, B
 
-    
-def matrix_print(m):
-  """FIXME
-  """
-  for key, value in m.items():
-      print(key, value)
+def read_matrix_file(filename):
+  A = []
+  B = []
+  n = 0
+  n = reader.readline()
+  for idx in range(0, int(n)):
+    line = reader.readline()
+    if line != "":
+      A.append([int(el) for el in line.strip().split()])
+  return int(n.strip()), A
 
-def matrix_print_from_input(a,b):
-  """FIXME
   """
-  print(a)
-  print(b)

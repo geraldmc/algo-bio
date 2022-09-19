@@ -10,7 +10,7 @@ __semester__    = "Fall, 2022"
 
 from math import ceil, log
 import argparse, os, sys
-from filehandler.io import read_matrices, matrix_print, matrix_print_from_input
+from filehandler.io import read_matrices, process_input_matrix, matrix_print_from_list
 from data.matrix_maker import create_random_matrix
 
 # See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
@@ -28,8 +28,9 @@ def prompt_file_input():
 
 def prompt_matrix_creation():
     # do everything required to support matrix creation
-    n = int(input("Enter matrix size: "))
-    return(n)
+    n = int(input("Enter matrix order: "))
+    r = int(input("Enter matrix value range ((0,?)): "))
+    return(n, r)
 
 parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. \
                                   Compare with brute force algorithm.')
@@ -44,11 +45,13 @@ args = parser.parse_args()
 
 if args.file:
     p = prompt_file_input()
-    print(p)
     m = read_matrices(p)
-    matrix_print(m)
+    result = process_input_matrix(m)
+    print('Read {} matrix pairs from file {}'.format(len(result), p))
+    for idx in range(0,len(result)): 
+      matrix_print_from_list(result[idx][0], result[idx][1])
 else:
-    order = prompt_matrix_creation()
-    A = create_random_matrix(order, 2)
-    B = create_random_matrix(order, 2)
-    matrix_print_from_input(A,B)
+    order, r = prompt_matrix_creation()
+    A = create_random_matrix(order, r)
+    B = create_random_matrix(order, r)
+    matrix_print_from_list(A,B)
