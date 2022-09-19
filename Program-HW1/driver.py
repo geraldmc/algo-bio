@@ -1,15 +1,12 @@
 #!/usr/bin/env python
 
 """driver.py: Driver class.
-  Gerald McCollam
-  605.620.FA22.
-  Programming Project #1
-  September 27th 2022
-
 """
-
 __author__      = "Gerald McCollam"
-__copyright__   = "Copyright 2022, Planet Earth"
+__assignment__  = "Programming Problem 1"
+__class__       = "605.620"
+__semester__    = "Fall, 2022"
+
 
 from math import ceil, log
 import argparse, os, sys
@@ -30,7 +27,7 @@ def prompt_file_input():
     return (p)
 
 def prompt_matrix_creation():
-    # do everything that is required to support matrix creation
+    # do everything required to support matrix creation
     n = int(input("Enter matrix size: "))
     return(n)
 
@@ -48,6 +45,8 @@ args = parser.parse_args()
 if args.file:
     p = prompt_file_input()
     print(p)
+    m = read_matrices(p)
+    matrix_print(m)
 else:
     order = prompt_matrix_creation()
     A = create_random_matrix(order, 2)

@@ -17,13 +17,36 @@ def break_on_lf(filename):
 def read_matrices(filename):
   """FIXME
   """
-  m_dict = {}
+  A = []
+  B = []
+  #m_dict = {}
   m = break_on_lf(filename)
-  n = len(m) # n = number of individual matrices in the file read.
+  n = len(m) # n = number of matrices read.
+  # in following dict assignment, the order is the dict key, 
+  # the value is the matrix itself.
   for idx in range(0,n):
-    m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] # first element is key, values are matrix values
+    #m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] 
   return m_dict
 
+def read_matrix_file(filename):
+  """FIXME
+  """
+  A = []
+  B = []
+  n = 0
+  with open(filename) as reader:
+    n = reader.readline()
+    for idx in range(0, int(n)):
+      line = reader.readline()
+      if line != "":
+        A.append([int(el) for el in line.strip().split()])
+    for idx in range(0, int(n)):
+      line = reader.readline()
+      if line != "":
+        B.append([int(el) for el in line.strip().split()])
+    return int(n.strip()), A, B
+
+    
 def matrix_print(m):
   """FIXME
   """
