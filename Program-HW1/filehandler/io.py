@@ -3,19 +3,24 @@
 """io.py: Functions for handling I/O."""
 
 __author__      = "Gerald McCollam"
-__copyright__   = "Copyright 2022, Planet Earth"
+__assignment__  = "Programming Problem 1"
+__class__       = "605.620"
+__semester__    = "Fall, 2022"
 
 def break_on_lf(filename):
-  """FIXME
+  """Preprocess the input file to extract an
+     arbitrary number of square matrices.
   """
   with open(filename) as reader:
     contents = reader.read()
-    matrices = contents.split('\n\n') # FIXME: this could easily fail
+    matrices = contents.split('\n\n') # FIXME: this might fail...
     matrices = matrices[:-1] # remove trailing newline
     return matrices
 
 def read_matrices(filename):
-  """FIXME
+  """ Read the matrices from file.
+      This function calls the preprocess function break_on_lf().
+      Returns a dictionary object keyed on the order of the matrix.
   """
   A = []
   B = []
@@ -29,6 +34,12 @@ def read_matrices(filename):
   return m_dict
 
 def process_input_matrix(m):
+  """ Process the matrix dictionary object produced by read_matrices().
+      This dict contains the order of the matrix and its contents. 
+      For each dict in the series, extract matrix values in their proper
+      order. Returns a dictionary object keyed on a count of the number
+      of matrices read. The output values are lists.
+  """   
   k = list(m.keys())
   C = {}
   for key,val in enumerate(k):

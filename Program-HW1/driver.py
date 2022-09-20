@@ -22,12 +22,12 @@ if __name__ == "__main__":
 import argparse
 
 def prompt_file_input():
-    # do everything required to support inputing a file
+    # Everything required to support inputing a file
     p = input("Enter input path: ")
     return (p)
 
 def prompt_matrix_creation():
-    # do everything required to support matrix creation
+    # Everything required to support matrix creation
     n = int(input("Enter matrix order: "))
     r = int(input("Enter matrix value range (0,n): "))
     return(n, r)
@@ -35,7 +35,6 @@ def prompt_matrix_creation():
 parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. \
                                   Compare with brute force algorithm.')
 group = parser.add_mutually_exclusive_group(required=True)
-
 group.add_argument('-file', action="store_true",
                     help='a path to a file containing matrices.')
 group.add_argument('-create matrices', action="store_true",

@@ -3,7 +3,9 @@
 """perf.py: Functions for analyzing performance."""
 
 __author__      = "Gerald McCollam"
-__copyright__   = "Copyright 2022, Planet Earth"
+__assignment__  = "Programming Problem 1"
+__class__       = "605.620"
+__semester__    = "Fall, 2022"
 
 def call_counter(f):
     """
