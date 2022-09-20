@@ -29,7 +29,7 @@ def prompt_file_input():
 def prompt_matrix_creation():
     # do everything required to support matrix creation
     n = int(input("Enter matrix order: "))
-    r = int(input("Enter matrix value range ((0,?)): "))
+    r = int(input("Enter matrix value range (0,n): "))
     return(n, r)
 
 parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. \
@@ -47,9 +47,12 @@ if args.file:
     p = prompt_file_input()
     m = read_matrices(p)
     result = process_input_matrix(m)
+    print()
     print('Read {} matrix pairs from file {}'.format(len(result), p))
-    for idx in range(0,len(result)): 
-      matrix_print_from_list(result[idx][0], result[idx][1])
+    for idx in range(0,len(result)):
+      A = result[idx][0]
+      B = result[idx][1]
+      matrix_print_from_list(A,B)
 else:
     order, r = prompt_matrix_creation()
     A = create_random_matrix(order, r)

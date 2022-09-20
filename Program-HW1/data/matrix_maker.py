@@ -7,11 +7,6 @@ import random
 
 random.seed(1234)
 
-def create_matrix_dict(m):
-  d = {}
-  m = [[1, 0, 0, 0], [2, 0, 2, 2], [0, 0, 1, 0], [0, 0, 0, 1]]
-
-
 def create_random_matrix(n, limit):
   """Create a square matrix using randomly generated positive integers.
      The variable 'n' is the order of the matrix.
