@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """io.py: Functions for handling I/O."""
 
@@ -61,11 +61,27 @@ def matrix_print_from_dict(m):
   for key, value in m.items():
       print(key, value)
 
-def matrix_print_from_list(a,b):
+def dual_matrix_print_stdout(A,B):
   """FIXME
   """
-  print(a)
-  print(b)
+  print()
+  print('Input:')
+  print(A)
+  print(B)
+
+def single_matrix_print_stdout(C):
+  """FIXME
+  """
+  print('Matrix Product:')
+  print(C)
+
+def matrix_print_to_file(A,B,handle):
+  """FIXME
+  """
+  with open(handle, 'w') as f:
+    f.write(A)
+    f.write(B)
+
 
   """
   GUTTER ---------------------------------

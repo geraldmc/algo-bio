@@ -19,7 +19,7 @@ def create_random_matrix(n, limit):
   return matrix
 
 def save_matrix(A, B, filename):
-  """FIXME
+  """Save the created matrix to a file.
   """
   f = open(filename, "w")
   for i, matrix in enumerate([A, B]):
