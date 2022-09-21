@@ -34,11 +34,11 @@ def read_matrices(filename):
   return m_dict
 
 def process_input_matrix(m):
-  """ Process the matrix dictionary object produced by read_matrices().
-      This dict contains the order of the matrix and its contents. 
-      For each dict in the series, extract matrix values in their proper
-      order. Returns a dictionary object keyed on a count of the number
-      of matrices read. The output values are lists.
+  """ Process the matrix dictionary object produced by read_matrices(f).
+      This dict contains the order of a matrix and its contents. 
+      For each dict in the series, it extracts matrix values in their proper
+      order. It returns a dictionary object keyed on a count of the number
+      of matrices read. The output dictionary values are lists.
   """   
   k = list(m.keys())
   C = {}
@@ -55,13 +55,7 @@ def process_input_matrix(m):
     C[key] = A, B
   return C
 
-def matrix_print_from_dict(m):
-  """FIXME
-  """
-  for key, value in m.items():
-      print(key, value)
-
-def dual_matrix_print_stdout(A,B):
+def print_dual_stdout(A,B):
   """FIXME
   """
   print()
@@ -69,13 +63,13 @@ def dual_matrix_print_stdout(A,B):
   print(A)
   print(B)
 
-def single_matrix_print_stdout(C):
+def print_single_stdout(C):
   """FIXME
   """
   print('Matrix Product:')
   print(C)
 
-def matrix_print_to_file(A,B,handle):
+def print_matrix_to_file(A,B,handle):
   """FIXME
   """
   with open(handle, 'w') as f:
@@ -85,6 +79,11 @@ def matrix_print_to_file(A,B,handle):
 
   """
   GUTTER ---------------------------------
+
+def matrix_print_from_dict(m):
+  for key, value in m.items():
+      print(key, value)
+
 
   def read_matrix_file(filename):
   A = []

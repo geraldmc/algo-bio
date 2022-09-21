@@ -11,10 +11,10 @@ __semester__    = "Fall, 2022"
 from math import ceil, log
 import argparse, os, sys
 from filehandler.io import read_matrices, process_input_matrix
-from filehandler.io import dual_matrix_print_stdout, single_matrix_print_stdout
+from filehandler.io import print_dual_stdout, print_single_stdout
 from data.matrix_maker import create_random_matrix
-from bruteforce import impl as bf 
-from strassen import impl as st
+from algorithms import bruteforce as bf 
+from algorithms import strassen as st
 
 # See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
 
@@ -66,18 +66,20 @@ if args.file:
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      dual_matrix_print_stdout(A,B)
+      print_dual_stdout(A,B)
       C = bf.standard_matrix_product(A,B)
+      D = st.strassen(A, B)
       print()
-      single_matrix_print_stdout(C)
+      print_single_stdout(C)
 elif args.create:
     order, r = prompt_matrix_creation()
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
     C = bf.standard_matrix_product(A,B)
-    dual_matrix_print_stdout(A,B)
+    D = st.strassen(A, B)
+    print_dual_stdout(A,B)
     print()
-    single_matrix_print_stdout(C)
+    print_single_stdout(C)
 
 else:
   A=[[2, 1], [1, 5]]
