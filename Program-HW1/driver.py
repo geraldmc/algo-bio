@@ -29,12 +29,15 @@ def prompt_file_input():
     p = input("Enter input path: ")
     return (p)
 
-def prompt_file_output(out, A, B):
+def prompt_file_output(out, A, B, order):
+  print('OK. Writing output to file: {}. Done!'.format(out.name))
+  out.write(str(order) + "\n") 
   for i, matrix in enumerate([A, B]):
     if i != 0:
       pass
     for line in matrix:
       out.write(" ".join(map(str, line)) + "\n")
+  out.write("\n")
 
 def prompt_matrix_creation():
     # Everything required to support matrix creation
@@ -51,7 +54,7 @@ group.add_argument('-file', action="store_true",
 group.add_argument('-create', action="store_true",
                     help='provide the order and an interval range to \
                       create a new paired matrix.')
-group.add_argument('-plot', action='store', 
+group.add_argument('-write', action='store', 
                     type=argparse.FileType('w'), dest='output',
                     help="direct a plot to a named output file")
 
@@ -82,6 +85,7 @@ elif args.create:
     print_single_stdout(C)
 
 else:
-  A=[[2, 1], [1, 5]]
-  B=[[6, 7], [4, 3]]
-  prompt_file_output(args.output, A,B)
+  order, r = prompt_matrix_creation()
+  A = create_random_matrix(order, r)
+  B = create_random_matrix(order, r)
+  prompt_file_output(args.output, A, B, order)

@@ -45,7 +45,7 @@ def process_input_matrix(m):
   for key,val in enumerate(k):
     A = []
     B = []
-    print("Processing matrix {} with order {} from input file".format(key+1, val))
+    #print("Processing matrix {} with order {} from input file".format(key+1, val))
     d = m[val]
     for idx in range(0,int(len(d)/2)): # first half of list
       A.append([int(i) for i in d[idx].split(' ') if i])

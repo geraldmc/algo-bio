@@ -32,7 +32,6 @@ def strassen(A, B):
   [[-1, 2, -1, 0], [3, -1, 0, 2], [-4, 0, -3, 1], [0, -2, 1, 2]]
 
   """
-  assert len(A) == len(B)
   small = 3
   if len(A) <= small:
     return bf.standard_matrix_product(A, B) # more efficient for small n
