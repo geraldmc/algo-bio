@@ -7,6 +7,7 @@ def matrix_add(A, B):
   """ Sum of two square matrices.
   """
   n = len(A)
+  # init sq. matrix w/ zero
   C = [[0 for j in range(0, n)] for i in range(0, n)]
   for i in range(0, n):
     for j in range(0, n):
@@ -17,6 +18,7 @@ def matrix_subtract(A, B):
   """ Difference of two square matrices.
   """
   n = len(A)
+  # init sq. matrix w/ zero
   C = [[0 for j in range(0, n)] for i in range(0, n)]
   for i in range(0, n):
     for j in range(0, n):
