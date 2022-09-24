@@ -28,15 +28,45 @@ optional arguments:
 For purposes of the assignment (to test proper parsing of input and writing of output) one should type:
 
 ```
-python driver.py -f './data/LabStrassenInput.txt'
+python driver.py -file
 ```
 
-output *similar* to
+You will be prompted for a path to an input file and to an output file. You will be given a choice to write to that file or to the console. Output to a file (part of the assignment's requirement) will look like the following:
 
 ```
-    foo bar
-    bar foo
-    foo bar
+Enter input path: ./data/LabStrassenInput.txt
+Enter output path: ./foo.txt
+
+Read 3 matrix pairs from file ./data/LabStrassenInput.txt
+Print the result[s] to a file? (Yes|No):
+
+[Matrix Input 1]
+2
+2 1
+1 5
+6 7
+4 3
+
+[Matrix Product 1]
+16 17
+26 22
+
+[Matrix Input 2]
+4
+3 2 1 4
+-1 2 0 1
+2 3 -1 -2
+5 1 1 0
+-1 2 -1 0
+3 -1 0 2
+-4 0 -3 1
+0 -2 1 2
+
+[Matrix Product 2]
+-1 -4 -2 13
+7 -6 2 6
+11 5 -1 1
+-6 9 -8 3
 ```
 
 will be generated.
