@@ -1,9 +1,9 @@
 
-# Requirements
+## Requirements
 
   * Python 3+
 
-# Sample Execution & Output
+## Execution & Output
 
 To understand how this all works, please first type: 
 
@@ -25,10 +25,10 @@ optional arguments:
   -test OUTPUT  direct a matrix to a named output file
 ```
 
-If run using:
+For purposes of the assignment (to test proper parsing of input and writing of output) one should type:
 
 ```
-python driver.py './data/LabStrassenInput.txt'
+python driver.py -f './data/LabStrassenInput.txt'
 ```
 
 output *similar* to
