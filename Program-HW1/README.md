@@ -1,11 +1,11 @@
 
 ## Requirements
 
-  * Python 3+
+  * Python 3+ (any version of Python 2 will fail).
 
 ## Execution & Output
 
-To understand how this all works, please first type: 
+The program is made up of several modules. The user need only be concerned with the file `driver.py` To learn more, please type: 
 
 ```
 python driver.py -h
