@@ -3,14 +3,9 @@
 
   * Python 3+
 
-> This code makes use of the `f"..."` or [f-string
-> syntax](https://www.python.org/dev/peps/pep-0498/). This syntax was
-> introduced in Python 3.6.
-
-
 # Sample Execution & Output
 
-If run without command line arguments, using
+To understand how this all works, please first type: 
 
 ```
 python driver.py -h
@@ -19,16 +14,18 @@ python driver.py -h
 the following usage message will be displayed.
 
 ```
-Apply Strassen's algorithm. Compare with brute force algorithm.
+usage: driver.py [-h] (-file | -create | -test OUTPUT)
 
-positional arguments:
-  input file path:  a path to a file containing matrices.
+Apply Strassen's algorithm. Compare it with a 'brute force' algorithm.
 
 optional arguments:
-  -h, --help        show this help message and exit
+  -h, --help    show this help message and exit
+  -file         provide a path to a file containing one or more paired matrices.
+  -create       provide the order and an interval range to create a new paired matrix.
+  -test OUTPUT  direct a matrix to a named output file
 ```
 
-If run using
+If run using:
 
 ```
 python driver.py './data/LabStrassenInput.txt'

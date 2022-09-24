@@ -11,7 +11,7 @@ __semester__    = "Fall, 2022"
 from math import ceil, log
 import argparse, os, sys
 from filehandler.io import read_matrices, process_input_matrix
-from filehandler.io import print_dual_stdout, print_single_stdout
+from filehandler.io import input_stdout, output_stdout, file_output
 from data.matrix_maker import create_random_matrix
 from algorithms import bruteforce as bf 
 from algorithms import strassen as st
@@ -24,29 +24,20 @@ if __name__ == "__main__":
 
 import argparse
 
-def prompt_file_input():
-    # Everything required to support inputing a file
-    p = input("Enter input path: ")
-    return (p)
-
-def prompt_file_output(out, A, B, order):
-  print('OK. Writing output to file: {}. Done!'.format(out.name))
-  out.write(str(order) + "\n") 
-  for i, matrix in enumerate([A, B]):
-    if i != 0:
-      pass
-    for line in matrix:
-      out.write(" ".join(map(str, line)) + "\n")
-  out.write("\n")
+def default():
+    # Support input and output w/ file.
+    inp = input("Enter input path: ")
+    outp = input("Enter output path: ")
+    return (inp, outp)
 
 def prompt_matrix_creation():
-    # Everything required to support matrix creation
-    n = int(input("Enter matrix order: "))
-    r = int(input("Enter matrix value range (0,n): "))
-    return(n, r)
+    # Support matrix creation
+    ord = int(input("Enter matrix order: "))
+    rang = int(input("Enter value range (0,n): "))
+    return(ord, rang)
 
 parser = argparse.ArgumentParser(description='Apply Strassen\'s algorithm. \
-                                  Compare with brute force algorithm.')
+                                  Compare it with a \'brute force\' algorithm.')
 group = parser.add_mutually_exclusive_group(required=True)
 group.add_argument('-file', action="store_true",
                     help='provide a path to a file containing one or \
@@ -54,38 +45,58 @@ group.add_argument('-file', action="store_true",
 group.add_argument('-create', action="store_true",
                     help='provide the order and an interval range to \
                       create a new paired matrix.')
-group.add_argument('-write', action='store', 
+group.add_argument('-test', action='store', 
                     type=argparse.FileType('w'), dest='output',
-                    help="direct a plot to a named output file")
+                    help="direct a matrix to a named output file")
 
 args = parser.parse_args()
 
-if args.file:
-    p = prompt_file_input()
-    m = read_matrices(p)
+if args.file: # this is the default path for the assignment!
+    inp, outp = default()
+    m = read_matrices(inp)
     result = process_input_matrix(m)
     print()
-    print('Read {} matrix pairs from file {}'.format(len(result), p))
+    print('Read {} matrix pairs from file {}'.format(len(result), inp))
+    response = input('Print the result[s] to a file? (Yes|No): ').lower()
+    affirm = (lambda x: 0 if x.strip()=='no' else 1)(response)
+
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      print_dual_stdout(A,B)
       C = bf.standard_matrix_product(A,B)
       D = st.strassen(A, B)
+      if affirm:
+        with open(outp, 'a+') as f: # this will *append*, if the file exists.
+          f.write('[Matrix Input {}]'.format(idx+1) + '\n')
+          f.write(str(len(A))+'\n')
+          f.write('\n'.join(' '.join(map(str,sl)) for sl in A))
+          f.write('\n')
+          f.write('\n'.join(' '.join(map(str,sl)) for sl in B))
+          f.write('\n\n')
+          f.write('[Matrix Product {}]'.format(idx+1) + '\n')
+          f.write('\n'.join(' '.join(map(str,sl)) for sl in C))
+          f.write('\n\n')
+      else: 
+        input_stdout(A,B,C,D,(idx+1))
       print()
-      print_single_stdout(C)
-elif args.create:
+      if affirm:
+        pass
+      else: 
+        output_stdout(C)
+
+elif args.create: 
     order, r = prompt_matrix_creation()
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
     C = bf.standard_matrix_product(A,B)
     D = st.strassen(A, B)
-    print_dual_stdout(A,B)
+    input_stdout(A,B)
     print()
-    print_single_stdout(C)
+    output_stdout(C)
 
-else:
+else: # for testing.
   order, r = prompt_matrix_creation()
-  A = create_random_matrix(order, r)
-  B = create_random_matrix(order, r)
-  prompt_file_output(args.output, A, B, order)
+  A = create_random_matrix(o, r)
+  B = create_random_matrix(o, r)
+  handle = None
+  file_output(A, B, order, handle, args.output)

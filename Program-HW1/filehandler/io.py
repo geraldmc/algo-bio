@@ -55,15 +55,17 @@ def process_input_matrix(m):
     C[key] = A, B
   return C
 
-def print_dual_stdout(A,B):
+def input_stdout(A,B,C,D,count):
   """FIXME
   """
   print()
-  print('Input:')
+  print('Matrix Input ({}):'.format(count))
   print(A)
   print(B)
+  print(C)
+  print(D)
 
-def print_single_stdout(C):
+def output_stdout(C):
   """FIXME
   """
   print('Matrix Product:')
@@ -75,6 +77,22 @@ def print_matrix_to_file(A,B,handle):
   with open(handle, 'w') as f:
     f.write(A)
     f.write(B)
+
+def file_output(A, B, order, handle, out=None):
+  if out == None:
+    with open(handle, 'w') as f:
+      f.write(A)
+      f.write(B)
+      print('OK. Writing output to file: {}. Done!'.format(f.name))
+  else:
+    out.write(str(order) + "\n") 
+    for i, matrix in enumerate([A, B]):
+      if i != 0:
+        pass
+      for line in matrix:
+        out.write(" ".join(map(str, line)) + "\n")
+    out.write("\n")
+    print('OK. Writing output to file: {}. Done!'.format(out.name))
 
 
   """
