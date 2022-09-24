@@ -20,7 +20,7 @@ Apply Strassen's algorithm. Compare it with a 'brute force' algorithm.
 
 optional arguments:
   -h, --help    show this help message and exit
-  -file         provide a path to a file containing one or more paired matrices.
+  -file         provide a path to a file containing one or more paired matrices. <- choose this one!>
   -create       provide the order and an interval range to create a new paired matrix.
   -test OUTPUT  direct a matrix to a named output file
 ```
