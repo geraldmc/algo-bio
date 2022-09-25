@@ -89,22 +89,27 @@ def strassen(A, B, n):
     a, b, c, d = split(A)
     e, f, g, h = split(B)
 
-    # p1 = a*(f-h), multiplication occurs
+    # p1 = a*(f-h), multiplication occurs here
     p1 = strassen(a, subtract_matrix(f, h), n/2)
     increment_global_by_one()
-    # p2 = (a+b)*h, multiplication occurs
+    # p2 = (a+b)*h, multiplication occurs here
     p2 = strassen(add_matrix(a, b), h, n/2)
     increment_global_by_one()
-    # p3 = (c+d)*e, multiplication occurs
+    # p3 = (c+d)*e, multiplication occurs here
     p3 = strassen(add_matrix(c, d), e, n/2)
-    # p4 = d*(g-e), multiplication occurs
+    increment_global_by_one()
+    # p4 = d*(g-e), multiplication occurs here
     p4 = strassen(d, subtract_matrix(g, e), n/2)
-    # p5 = (a+d)*(e+h), multiplication occurs
+    increment_global_by_one()
+    # p5 = (a+d)*(e+h), multiplication occurs here
     p5 = strassen(add_matrix(a, d), add_matrix(e, h), n/2)
-    # p6 = (b-d)*(g+h), multiplication occurs
+    increment_global_by_one()
+    # p6 = (b-d)*(g+h), multiplication occurs here
     p6 = strassen(subtract_matrix(b, d), add_matrix(g, h), n/2)
-    # p7 = (a-c)*(e+f), multiplication occurs
+    increment_global_by_one()
+    # p7 = (a-c)*(e+f), multiplication occurs here
     p7 = strassen(subtract_matrix(a, c), add_matrix(e, f), n/2)
+    increment_global_by_one()
 
     z11 = add_matrix(subtract_matrix(add_matrix(p5, p4), p2), p6)
     z12 = add_matrix(p1, p2)

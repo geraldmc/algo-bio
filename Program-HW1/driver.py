@@ -17,10 +17,8 @@ from algorithms import bruteforce as bf
 from algorithms import strassen as st
 from algorithms.strassen import print_global
 
-# See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
-
 if __name__ == "__main__":
-  """MAIN
+  """ Driver main function for interacting with all modules. 
   """
 
 import argparse
@@ -63,7 +61,6 @@ if args.file: # the default path for the assignment!
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      #C, count = bf.standard_matrix_product(A,B)
       C = st.strassen(A, B, len(A))
       if affirm:
         with open(outp, 'a+') as f: # this will *append*, if the file exists.
