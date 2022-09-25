@@ -55,7 +55,7 @@ Printed 3 matrix pairs/products to file ./foo.txt
 etc...
 ```
 
-will be generated.
+will be generated. If choosing `No` the output will be directed to stdout. 
 
 ---
 
