@@ -38,7 +38,8 @@ Enter input path: ./data/LabStrassenInput.txt
 Enter output path: ./foo.txt
 
 Read 3 matrix pairs from file ./data/LabStrassenInput.txt
-Print the result[s] to a file? (Yes|No):
+Print the result[s] to a file? (Yes|No): Yes
+Printed 3 matrix pairs/products to file ./foo.txt
 
 [Matrix Input 1]
 2
@@ -50,23 +51,6 @@ Print the result[s] to a file? (Yes|No):
 [Matrix Product 1]
 16 17
 26 22
-
-[Matrix Input 2]
-4
-3 2 1 4
--1 2 0 1
-2 3 -1 -2
-5 1 1 0
--1 2 -1 0
-3 -1 0 2
--4 0 -3 1
-0 -2 1 2
-
-[Matrix Product 2]
--1 -4 -2 13
-7 -6 2 6
-11 5 -1 1
--6 9 -8 3
 
 etc...
 ```
