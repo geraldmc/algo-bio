@@ -5,13 +5,13 @@
 
 ## Execution & Output
 
-The program is made up of several modules. The user need only interact with the file `driver.py`. To learn more, please type: 
+The program is made up of several modules. The user need only interact with the file `driver.py`. To learn more, please type the following at the command prompt: 
 
 ```
-python driver.py -h
+>> python driver.py -h
 ```
 
-and the following usage message will be displayed.
+and the following message will be displayed.
 
 ```
 usage: driver.py [-h] (-file | -create | -test OUTPUT)
@@ -25,7 +25,29 @@ optional arguments:
   -test OUTPUT  direct a matrix to a named output file
 ```
 
-For purposes of the assignment (to test parsing of input and writing of output) one should type:
+The code is delivered in a zipped file. Once unzipped it will have the following directory structure:
+
+```
+├── Program-HW1
+│   ├── README.md
+│   ├── algorithms
+│   │   ├── __init__.py
+│   │   ├── bruteforce.py
+│   │   └── strassen.py
+│   ├── analysis
+│   │   ├── __init__.py
+│   │   └── perf_runner.ipynb
+│   ├── data
+│   │   ├── LabStrassenInput.txt
+│   │   ├── __init__.py
+│   │   └── matrix_maker.py
+│   ├── driver.py
+│   └── filehandler
+│       ├── __init__.py
+│       └── io.py
+```
+
+For purposes of the assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
 
 ```
 python driver.py -file
