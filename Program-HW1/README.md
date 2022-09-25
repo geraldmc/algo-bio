@@ -83,17 +83,17 @@ If choosing `No` the output will be directed to stdout. There are other options 
 
 I have tested each algorithm on order sizes that are powers of two. The results are in the following table. This table and a graph of the same results are included in the Analysis section. 
 
-| N   | Naive      | Strassen  |
-|-----|------------|-----------|
-| 1   | 1          | 0         |
-| 2   | 8          | 7         |
-| 4   | 64         | 56        |
-| 8   | 512        | 399       |
-| 16  | 4096       | 2800      |
-| 32  | 32,768     | 19,607    |
-| 64  | 262,144    | 137,256   |
-| 128 | 2,097,152  | 960,799   |
-| 256 | 16,777,216 | 6,725,600 |
+| Order (2^n) | Naive      | Strassen  |
+|-------------|------------|-----------|
+| 1           | 1          | 0         |
+| 2           | 8          | 7         |
+| 4           | 64         | 56        |
+| 8           | 512        | 399       |
+| 16          | 4096       | 2800      |
+| 32          | 32,768     | 19,607    |
+| 64          | 262,144    | 137,256   |
+| 128         | 2,097,152  | 960,799   |
+| 256         | 16,777,216 | 6,725,600 |
 
 ---
 
