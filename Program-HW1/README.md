@@ -52,7 +52,7 @@ To run the program change directories `cd Program-HW1` and execute the file name
 >> python driver.py -file
 ```
 
-You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` will send the output to a named file. If you unzip the supplied code (gmccollam_code.zip) the data file as specified in the assignment will be available under the directory `./data` as indicated below.
+You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` will send the output to a named file. If you unzip the supplied code then the data file as specified in the assignment will be available under the directory `./data` as indicated below.
 
 ```
 Enter input path: ./data/LabStrassenInput.txt
