@@ -46,7 +46,7 @@ The code is delivered in a zipped file. Once unzipped it will have the following
 │       ├── __init__.py
 │       └── io.py
 ```
-To run the program please execute `cd Program-HW1` and execute the file named `driver.py` as described previously. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
+To run the program change directories `cd Program-HW1` and execute the file named `driver.py` as described previously. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
 
 ```
 >> python driver.py -file
