@@ -1,17 +1,17 @@
 
 ## Requirements
 
-  * Python 3+ (any version of Python 2 will fail).
+  * Python 3+ is required. No external libraries used.
 
 ## Execution & Output
 
-The program is made up of several modules. The user need only interact with the file `driver.py` To learn more, please type: 
+The program is made up of several modules. The user need only interact with the file `driver.py`. To learn more, please type: 
 
 ```
 python driver.py -h
 ```
 
-the following usage message will be displayed.
+and the following usage message will be displayed.
 
 ```
 usage: driver.py [-h] (-file | -create | -test OUTPUT)
@@ -20,18 +20,18 @@ Apply Strassen's algorithm. Compare it with a 'brute force' algorithm.
 
 optional arguments:
   -h, --help    show this help message and exit
-  -file         provide a path to a file containing one or more paired matrices. (<- choose this one!)
-  -create       provide the order and an interval range to create a new paired matrix.
+  -file         a path to a file containing one or more paired matrices.
+  -create       the order and an interval range to create a paired matrix.
   -test OUTPUT  direct a matrix to a named output file
 ```
 
-For purposes of the assignment (to test proper parsing of input and writing of output) one should type:
+For purposes of the assignment (to test parsing of input and writing of output) one should type:
 
 ```
 python driver.py -file
 ```
 
-You will be prompted for a path to an input file and to an output file. You will be given a choice to write to that file or to the console. Choose`Yes`. Output to a file (part of the assignment's requirement) will look like the following:
+You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` will send the output to a named file. If you unzip the supplied code (gmccollam_code.zip) the data file as specified in the assignment will be available under the directory `./data` as indicated below.
 
 ```
 Enter input path: ./data/LabStrassenInput.txt
@@ -55,8 +55,11 @@ Printed 3 matrix pairs/products to file ./foo.txt
 etc...
 ```
 
-If choosing `No` the output will be directed to stdout. 
+If choosing `No` the output will be directed to stdout. There are other options available for testing but this is the intended use for grading purposes.
 
+## Performance
+
+I have tested each algorithm on order sizes that are powers of two. The results are in the following table. This table and a graph of the same results are included in the Analysis section. 
 
 | N   | Naive      | Strassen  |
 |-----|------------|-----------|
