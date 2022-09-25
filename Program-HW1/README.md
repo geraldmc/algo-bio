@@ -46,11 +46,10 @@ The code is delivered in a zipped file. Once unzipped it will have the following
 │       ├── __init__.py
 │       └── io.py
 ```
-
-For purposes of the assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
+To run the program please execute `cd Program-HW1` and execute the file named `driver.py` as described previously. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
 
 ```
-python driver.py -file
+>> python driver.py -file
 ```
 
 You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` will send the output to a named file. If you unzip the supplied code (gmccollam_code.zip) the data file as specified in the assignment will be available under the directory `./data` as indicated below.
