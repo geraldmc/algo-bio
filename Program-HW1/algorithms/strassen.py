@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#from algorithms.bruteforce import direct_multiply as dm
-#from algorithms.bruteforce import zero_matrix as zm
-
 # See: https://stackoverflow.com/questions/52137431/strassens-algorithm-bug-in-python-implementation
 
+strassen_count = 0
+
+def increment_global_by_one():
+    global strassen_count    # Needed to modify global copy of strassen_count
+    strassen_count += 1
+
+def print_global():
+    print("Number of Strassen Multiplications: ({})".format(strassen_count)) 
 
 def zero_matrix(r, c):
   """Creates a matrix filled with zeros.
@@ -13,8 +18,7 @@ def zero_matrix(r, c):
   matrix = [[0 for row in range(r)] for col in range(c)]
   return matrix
 
-
-def direct_multiply(x, y):
+def brute_multiply(x, y):
   if len(x[0]) != len(y):
     return "Multiplication is not possible!"
   else:
@@ -25,11 +29,10 @@ def direct_multiply(x, y):
           p_matrix[i][j] += x[i][k] * y[k][j]
   return p_matrix
 
-
 def split(matrix):
-  """Split matrix into quarters."""
+  """Split input matrix into 1/4's.
+  """
   a = b = c = d = matrix
-
   while len(a) > len(matrix)/2:
     a = a[:len(a)//2]
     b = b[:len(b)//2]
@@ -46,6 +49,8 @@ def split(matrix):
   return a, b, c, d
 
 def add_matrix(a, b):
+  """FIXME
+  """
   if type(a) == int:
     d = a + b
   else:
@@ -58,6 +63,8 @@ def add_matrix(a, b):
   return d
 
 def subtract_matrix(a, b):
+  """FIXME
+  """
   if type(a) == int:
     d = a - b
   else:
@@ -70,29 +77,33 @@ def subtract_matrix(a, b):
   return d
 
 def strassen(A, B, n):
+  """FIXME
+  """
   # base case: 1x1 matrix
   if n == 1:
     z = [[0]]
     z[0][0] = A[0][0] * B[0][0]
     return z
   else:
-    # split matrices into quarters
+    # split matrices into 1/4th's
     a, b, c, d = split(A)
     e, f, g, h = split(B)
 
-    # p1 = a*(f-h)
+    # p1 = a*(f-h), multiplication occurs
     p1 = strassen(a, subtract_matrix(f, h), n/2)
-    # p2 = (a+b)*h
+    increment_global_by_one()
+    # p2 = (a+b)*h, multiplication occurs
     p2 = strassen(add_matrix(a, b), h, n/2)
-    # p3 = (c+d)*e
+    increment_global_by_one()
+    # p3 = (c+d)*e, multiplication occurs
     p3 = strassen(add_matrix(c, d), e, n/2)
-    # p4 = d*(g-e)
+    # p4 = d*(g-e), multiplication occurs
     p4 = strassen(d, subtract_matrix(g, e), n/2)
-    # p5 = (a+d)*(e+h)
+    # p5 = (a+d)*(e+h), multiplication occurs
     p5 = strassen(add_matrix(a, d), add_matrix(e, h), n/2)
-    # p6 = (b-d)*(g+h)
+    # p6 = (b-d)*(g+h), multiplication occurs
     p6 = strassen(subtract_matrix(b, d), add_matrix(g, h), n/2)
-    # p7 = (a-c)*(e+f)
+    # p7 = (a-c)*(e+f), multiplication occurs
     p7 = strassen(subtract_matrix(a, c), add_matrix(e, f), n/2)
 
     z11 = add_matrix(subtract_matrix(add_matrix(p5, p4), p2), p6)
@@ -111,19 +122,33 @@ def strassen(A, B, n):
     return z
 
 if __name__ == "__main__":
-  """ May run this as a script, to test
+  """ Run this as a script, to test.
   """
-  A1 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
-  B1 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
+  A1 = [[2,1],[1,5,]]
+  B1 = [[6,7],[4,3]]
 
   A2 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
   B2 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
 
-  A3 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
-  B3 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
+  A3 = [[1,0,1,2,0,-1,-1,-1], [-1,1,-1,1,2,0,0,3],
+        [1,-1,2,-3,-1,1,1,0], [0,2,3,2,1,0,-1,-2],
+        [2,3,-1,0,-1,0,-1,0], [1,2,2,1,0,1,1,2],
+        [3,-1,0,2,2,2,2,1], [2,-2,1,-3,3,0,1,2] ]
+  B3 = [[1,0,1,2,0,-1,-1,-1], [-1,1,-1,1,2,0,0,3],
+        [1,-1,2,-3,-1,1,1,0], [0,2,3,2,1,0,-1,-2],
+        [2,3,-1,0,-1,0,-1,0], [1,2,2,1,0,1,1,2],
+        [3,-1,0,2,2,2,2,1], [2,-2,1,-3,3,0,1,2] ]
 
-  print(f"A = {A1}")
-  print(f"B = {B1}")
+  print_global()
+  print(f"Using Strassen's:\nA*B = {strassen(A1, B1, 2)}")
+  print_global()
+  print(f"Using \'brute force\':\nA*B = {brute_multiply(A1, B1)}")
 
-  print(f"Using Strassen's:\na*b = {strassen(A1, B1, 4)}")
-  print(f"Using \'brute force\':\na*b = {direct_multiply(A1, B1)}")
+  print(f"Using Strassen's:\nA*B = {strassen(A2, B2, 4)}")
+  print_global()
+  print(f"Using \'brute force\':\nA*B = {brute_multiply(A2, B2)}")
+  print_global()
+
+  print(f"Using Strassen's:\nA*B = {strassen(A3, B3, 8)}")
+  print_global()
+  print(f"Using \'brute force\':\nA*B = {brute_multiply(A3, B3)}")

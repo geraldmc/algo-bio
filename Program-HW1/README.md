@@ -57,12 +57,23 @@ etc...
 
 If choosing `No` the output will be directed to stdout. 
 
+
+| N   | Naive      | Strassen  |
+|-----|------------|-----------|
+| 1   | 1          | 0         |
+| 2   | 8          | 2         |
+| 4   | 64         | 16        |
+| 8   | 512        | 114       |
+| 16  | 4,096      | 800       |
+| 32  | 32,768     | 5,602     |
+| 64  | 262,144    | 39,216    |
+| 128 | 2,097,152  | 274,514   |
+| 256 | 16,777,216 | 1,921,600 |
+
 ---
 
-REFERENCES
+## REFERENCES
 Pomerance, Andrew, Edward Ott, Michelle Girvan, and Wolfgang Losert. “The Effect of Network Topology on the Stability of Discrete State Models of Genetic Control.” Proceedings of the National Academy of Sciences of the United States of America 106, no. 20 (May 19, 2009): 8209–14. https://doi.org/10.1073/pnas.0900142106.
 
 
  Email to student: gmccoll2@jhu.edu
- 
-© 2022 Gerald McCollam

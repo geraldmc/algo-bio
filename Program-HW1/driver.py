@@ -15,6 +15,7 @@ from filehandler.io import input_stdout, output_stdout, file_output
 from data.matrix_maker import create_random_matrix
 from algorithms import bruteforce as bf 
 from algorithms import strassen as st
+from algorithms.strassen import print_global
 
 # See: https://martin-thoma.com/strassen-algorithm-in-python-java-cpp/
 
@@ -48,7 +49,6 @@ group.add_argument('-create', action="store_true",
 group.add_argument('-test', action='store', 
                     type=argparse.FileType('w'), dest='output',
                     help="direct a matrix to a named output file")
-
 args = parser.parse_args()
 
 if args.file: # the default path for the assignment!
@@ -82,11 +82,13 @@ if args.file: # the default path for the assignment!
 
 elif args.create: # for testing to console 
     order, r = prompt_matrix_creation()
+    assert order in [1, 2, 4, 8, 16, 32, 64, 128, 256]
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
     C, count = bf.standard_matrix_product(A,B)
-    D = st.strassen(A, B, order)
-    input_stdout(A,B,C, count,1)
+    D = st.strassen(A,B,order)
+    input_stdout(A,B,C,count,1)
+    print_global()
     print()
 else: # for testing to file.
   order, r = prompt_matrix_creation()

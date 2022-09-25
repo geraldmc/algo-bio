@@ -64,7 +64,7 @@ def input_stdout(A,B,C,count,index):
   print(B)
   print('Matrix Product ({}):'.format(index))
   print(C)
-  print('Number of multiplications ({}):'.format(count))
+  print('Number of naive multiplications ({}):'.format(count))
 
 
 def output_stdout(C):
