@@ -51,7 +51,7 @@ group.add_argument('-test', action='store',
 
 args = parser.parse_args()
 
-if args.file: # this is the default path for the assignment!
+if args.file: # the default path for the assignment!
     inp, outp = default()
     m = read_matrices(inp)
     result = process_input_matrix(m)
@@ -77,26 +77,19 @@ if args.file: # this is the default path for the assignment!
           f.write('\n'.join(' '.join(map(str,sl)) for sl in C))
           f.write('\n\n')
       else: 
-        input_stdout(A,B,C,D,(idx+1))
-      print()
-      if affirm:
-        pass
-      else: 
-        output_stdout(C)
+        input_stdout(A,B,C,(idx+1))
+    print('Printed {} matrix pairs/products to file {}'.format(len(result), outp))
 
-elif args.create: 
+elif args.create: # for testing to console 
     order, r = prompt_matrix_creation()
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
     C = bf.standard_matrix_product(A,B)
     D = st.strassen(A, B)
-    input_stdout(A,B)
+    input_stdout(A,B,C,1)
     print()
-    output_stdout(C)
-
-else: # for testing.
+else: # for testing to file.
   order, r = prompt_matrix_creation()
-  A = create_random_matrix(o, r)
-  B = create_random_matrix(o, r)
-  handle = None
-  file_output(A, B, order, handle, args.output)
+  A = create_random_matrix(order, r)
+  B = create_random_matrix(order, r)
+  file_output(A, B, order, args.output)

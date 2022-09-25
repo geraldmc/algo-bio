@@ -45,7 +45,6 @@ def process_input_matrix(m):
   for key,val in enumerate(k):
     A = []
     B = []
-    #print("Processing matrix {} with order {} from input file".format(key+1, val))
     d = m[val]
     for idx in range(0,int(len(d)/2)): # first half of list
       A.append([int(i) for i in d[idx].split(' ') if i])
@@ -55,15 +54,16 @@ def process_input_matrix(m):
     C[key] = A, B
   return C
 
-def input_stdout(A,B,C,D,count):
-  """FIXME
+def input_stdout(A,B,C,count):
+  """ Convenience function for printing input 
+      and multiplication results to the console. 
   """
   print()
   print('Matrix Input ({}):'.format(count))
   print(A)
   print(B)
+  print('Matrix Product ({}):'.format(count))
   print(C)
-  print(D)
 
 def output_stdout(C):
   """FIXME
@@ -71,32 +71,25 @@ def output_stdout(C):
   print('Matrix Product:')
   print(C)
 
-def print_matrix_to_file(A,B,handle):
-  """FIXME
-  """
-  with open(handle, 'w') as f:
-    f.write(A)
-    f.write(B)
-
-def file_output(A, B, order, handle, out=None):
-  if out == None:
-    with open(handle, 'w') as f:
-      f.write(A)
-      f.write(B)
-      print('OK. Writing output to file: {}. Done!'.format(f.name))
-  else:
-    out.write(str(order) + "\n") 
-    for i, matrix in enumerate([A, B]):
-      if i != 0:
-        pass
-      for line in matrix:
-        out.write(" ".join(map(str, line)) + "\n")
-    out.write("\n")
-    print('OK. Writing output to file: {}. Done!'.format(out.name))
-
+def file_output(A, B, order, handle):
+  handle.write(str(order) + "\n") 
+  for i, matrix in enumerate([A, B]):
+    if i != 0:
+      pass
+    for line in matrix:
+      handle.write(" ".join(map(str, line)) + "\n")
+  handle.write("\n")
+  print('OK. Wrote output to file: {}. Done!'.format(handle.name))
+  handle.close()
 
   """
   GUTTER ---------------------------------
+
+def print_matrix_to_file(A,B,handle):
+
+  with open(handle, 'w') as f:
+    f.write(A)
+    f.write(B)
 
 def matrix_print_from_dict(m):
   for key, value in m.items():

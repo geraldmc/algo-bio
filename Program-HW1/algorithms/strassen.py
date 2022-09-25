@@ -7,7 +7,7 @@ def matrix_add(A, B):
   """ Sum of two square matrices.
   """
   n = len(A)
-  # init sq. matrix w/ zero
+  # init sq. matrix w/ zeroes
   C = [[0 for j in range(0, n)] for i in range(0, n)]
   for i in range(0, n):
     for j in range(0, n):
@@ -18,7 +18,7 @@ def matrix_subtract(A, B):
   """ Difference of two square matrices.
   """
   n = len(A)
-  # init sq. matrix w/ zero
+  # init sq. matrix w/ zeroes
   C = [[0 for j in range(0, n)] for i in range(0, n)]
   for i in range(0, n):
     for j in range(0, n):
@@ -27,12 +27,6 @@ def matrix_subtract(A, B):
 
 def strassen(A, B):
   """ Strassen's Algorithm
-  [[2, 1], [1, 5]]
-  [[6, 7], [4, 3]]
-
-  [[3, 2, 1, 4], [-1, 2, 0, 1], [2, 3, -1, -2], [5, 1, 1, 0]]
-  [[-1, 2, -1, 0], [3, -1, 0, 2], [-4, 0, -3, 1], [0, -2, 1, 2]]
-
   """
   small = 3
   if len(A) <= small:
