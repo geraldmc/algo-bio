@@ -128,3 +128,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Other
+Program-HW1/run_strassen.py
+Program-HW1/delete_this.py

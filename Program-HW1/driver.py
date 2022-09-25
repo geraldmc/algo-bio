@@ -63,8 +63,8 @@ if args.file: # the default path for the assignment!
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      C = bf.standard_matrix_product(A,B)
-      D = st.strassen(A, B)
+      #C, count = bf.standard_matrix_product(A,B)
+      C = st.strassen(A, B, len(A))
       if affirm:
         with open(outp, 'a+') as f: # this will *append*, if the file exists.
           f.write('[Matrix Input {}]'.format(idx+1) + '\n')
@@ -84,9 +84,9 @@ elif args.create: # for testing to console
     order, r = prompt_matrix_creation()
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
-    C = bf.standard_matrix_product(A,B)
-    D = st.strassen(A, B)
-    input_stdout(A,B,C,1)
+    C, count = bf.standard_matrix_product(A,B)
+    D = st.strassen(A, B, order)
+    input_stdout(A,B,C, count,1)
     print()
 else: # for testing to file.
   order, r = prompt_matrix_creation()

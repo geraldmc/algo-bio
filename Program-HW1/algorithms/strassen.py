@@ -1,109 +1,129 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from math import ceil, log
-from algorithms import bruteforce as bf
+#from algorithms.bruteforce import direct_multiply as dm
+#from algorithms.bruteforce import zero_matrix as zm
 
-def matrix_add(A, B):
-  """ Sum of two square matrices.
-  """
-  n = len(A)
-  # init sq. matrix w/ zeroes
-  C = [[0 for j in range(0, n)] for i in range(0, n)]
-  for i in range(0, n):
-    for j in range(0, n):
-      C[i][j] = A[i][j] + B[i][j]
-  return C
+# See: https://stackoverflow.com/questions/52137431/strassens-algorithm-bug-in-python-implementation
 
-def matrix_subtract(A, B):
-  """ Difference of two square matrices.
-  """
-  n = len(A)
-  # init sq. matrix w/ zeroes
-  C = [[0 for j in range(0, n)] for i in range(0, n)]
-  for i in range(0, n):
-    for j in range(0, n):
-      C[i][j] = A[i][j] - B[i][j]
-  return C
 
-def strassen(A, B):
-  """ Strassen's Algorithm
+def zero_matrix(r, c):
+  """Creates a matrix filled with zeros.
   """
-  small = 3
-  if len(A) <= small:
-    return bf.standard_matrix_product(A, B) # more efficient for small n
+  matrix = [[0 for row in range(r)] for col in range(c)]
+  return matrix
+
+
+def direct_multiply(x, y):
+  if len(x[0]) != len(y):
+    return "Multiplication is not possible!"
   else:
-    # initialize sub-matrices
-    sub_size = len(A) // 2
-    a11 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    a12 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    a21 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    a22 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
+    p_matrix = zero_matrix(len(x), len(y[0]))
+    for i in range(len(x)):
+      for j in range(len(y[0])):
+        for k in range(len(y)):
+          p_matrix[i][j] += x[i][k] * y[k][j]
+  return p_matrix
 
-    b11 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    b12 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    b21 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    b22 = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
 
-    aResult = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
-    bResult = [[0 for j in range(0, sub_size)] for i in range(0, sub_size)]
+def split(matrix):
+  """Split matrix into quarters."""
+  a = b = c = d = matrix
 
-    # dividing the matrices in 4 sub-matrices:
-    for i in range(0, sub_size):
-      for j in range(0, sub_size):
-        a11[i][j] = A[i][j]  # top left
-        a12[i][j] = A[i][j + sub_size]  # top right
-        a21[i][j] = A[i + sub_size][j]  # bottom left
-        a22[i][j] = A[i + sub_size][j + sub_size]  # bottom right
+  while len(a) > len(matrix)/2:
+    a = a[:len(a)//2]
+    b = b[:len(b)//2]
+    c = c[len(c)//2:]
+    d = d[len(d)//2:]
 
-        b11[i][j] = B[i][j]  # top left
-        b12[i][j] = B[i][j + sub_size]  # top right
-        b21[i][j] = B[i + sub_size][j]  # bottom left
-        b22[i][j] = B[i + sub_size][j + sub_size]  # bottom right
+  while len(a[0]) > len(matrix[0])//2:
+    for i in range(len(a[0])//2):
+      a[i] = a[i][:len(a[i])//2]
+      b[i] = b[i][len(b[i])//2:]
+      c[i] = c[i][:len(c[i])//2]
+      d[i] = d[i][len(d[i])//2:]
 
-    # Calculating p1 to p7:
-    aResult = matrix_add(a11, a22)
-    bResult = matrix_add(b11, b22)
-    p1 = strassen(aResult, bResult)  # p1 = (a11+a22) * (b11+b22)
+  return a, b, c, d
 
-    aResult = matrix_add(a21, a22)  # a21 + a22
-    p2 = strassen(aResult, b11)  # p2 = (a21+a22) * (b11)
+def add_matrix(a, b):
+  if type(a) == int:
+    d = a + b
+  else:
+    d = []
+    for i in range(len(a)):
+      c = []
+      for j in range(len(a[0])):
+        c.append(a[i][j] + b[i][j])
+      d.append(c)
+  return d
 
-    bResult = matrix_subtract(b12, b22)  # b12 - b22
-    p3 = strassen(a11, bResult)  # p3 = (a11) * (b12 - b22)
+def subtract_matrix(a, b):
+  if type(a) == int:
+    d = a - b
+  else:
+    d = []
+    for i in range(len(a)):
+      c = []
+      for j in range(len(a[0])):
+        c.append(a[i][j] - b[i][j])
+      d.append(c)
+  return d
 
-    bResult = matrix_subtract(b21, b11)  # b21 - b11
-    p4 = strassen(a22, bResult)  # p4 = (a22) * (b21 - b11)
+def strassen(A, B, n):
+  # base case: 1x1 matrix
+  if n == 1:
+    z = [[0]]
+    z[0][0] = A[0][0] * B[0][0]
+    return z
+  else:
+    # split matrices into quarters
+    a, b, c, d = split(A)
+    e, f, g, h = split(B)
 
-    aResult = matrix_add(a11, a12)  # a11 + a12
-    p5 = strassen(aResult, b22)  # p5 = (a11+a12) * (b22)
+    # p1 = a*(f-h)
+    p1 = strassen(a, subtract_matrix(f, h), n/2)
+    # p2 = (a+b)*h
+    p2 = strassen(add_matrix(a, b), h, n/2)
+    # p3 = (c+d)*e
+    p3 = strassen(add_matrix(c, d), e, n/2)
+    # p4 = d*(g-e)
+    p4 = strassen(d, subtract_matrix(g, e), n/2)
+    # p5 = (a+d)*(e+h)
+    p5 = strassen(add_matrix(a, d), add_matrix(e, h), n/2)
+    # p6 = (b-d)*(g+h)
+    p6 = strassen(subtract_matrix(b, d), add_matrix(g, h), n/2)
+    # p7 = (a-c)*(e+f)
+    p7 = strassen(subtract_matrix(a, c), add_matrix(e, f), n/2)
 
-    aResult = matrix_subtract(a21, a11)  # a21 - a11
-    bResult = matrix_add(b11, b12)  # b11 + b12
-    p6 = strassen(aResult, bResult)  # p6 = (a21-a11) * (b11+b12)
+    z11 = add_matrix(subtract_matrix(add_matrix(p5, p4), p2), p6)
+    z12 = add_matrix(p1, p2)
+    z21 = add_matrix(p3, p4)
+    z22 = add_matrix(subtract_matrix(subtract_matrix(p5, p3), p7), p1)
 
-    aResult = matrix_subtract(a12, a22)  # a12 - a22
-    bResult = matrix_add(b21, b22)  # b21 + b22
-    p7 = strassen(aResult, bResult)  # p7 = (a12-a22) * (b21+b22)
+    z = zero_matrix(len(z11)*2, len(z11)*2) # zero out a new matrix
+    for i in range(len(z11)):
+      for j in range(len(z11)):
+        z[i][j] = z11[i][j]
+        z[i][j+len(z11)] = z12[i][j]
+        z[i+len(z11)][j] = z21[i][j]
+        z[i+len(z11)][j+len(z11)] = z22[i][j]
 
-    # calculating c21, c21, c11 e c22:
-    c12 = matrix_add(p3, p5)  # c12 = p3 + p5
-    c21 = matrix_add(p2, p4)  # c21 = p2 + p4
+    return z
 
-    aResult = matrix_add(p1, p4)  # p1 + p4
-    bResult = matrix_add(aResult, p7)  # p1 + p4 + p7
-    c11 = matrix_subtract(bResult, p5)  # c11 = p1 + p4 - p5 + p7
+if __name__ == "__main__":
+  """ May run this as a script, to test
+  """
+  A1 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
+  B1 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
 
-    aResult = matrix_add(p1, p3)  # p1 + p3
-    bResult = matrix_add(aResult, p6)  # p1 + p3 + p6
-    c22 = matrix_subtract(bResult, p2)  # c22 = p1 + p3 - p2 + p6
+  A2 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
+  B2 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
 
-    # Grouping the results obtained in a single matrix:
-    C = [[0 for j in range(0, len(A))] for i in range(0, len(A))]
+  A3 = [[3,2,1,4],[-1,2,0,1],[2,3,-1,-2],[5,1,1,0]]
+  B3 = [[-1,2,-1,0],[3,-1,0,2],[-4,0,-3,1],[0,-2,1,2]]
 
-    for i in range(0, sub_size):
-      for j in range(0, sub_size):
-        C[i][j] = c11[i][j]
-        C[i][j + sub_size] = c12[i][j]
-        C[i + sub_size][j] = c21[i][j]
-        C[i + sub_size][j + sub_size] = c22[i][j]
-  return C
+  print(f"A = {A1}")
+  print(f"B = {B1}")
+
+  print(f"Using Strassen's:\na*b = {strassen(A1, B1, 4)}")
+  print(f"Using \'brute force\':\na*b = {direct_multiply(A1, B1)}")

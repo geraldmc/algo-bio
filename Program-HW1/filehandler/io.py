@@ -54,16 +54,18 @@ def process_input_matrix(m):
     C[key] = A, B
   return C
 
-def input_stdout(A,B,C,count):
+def input_stdout(A,B,C,count,index):
   """ Convenience function for printing input 
       and multiplication results to the console. 
   """
   print()
-  print('Matrix Input ({}):'.format(count))
+  print('Matrix Input ({}):'.format(index))
   print(A)
   print(B)
-  print('Matrix Product ({}):'.format(count))
+  print('Matrix Product ({}):'.format(index))
   print(C)
+  print('Number of multiplications ({}):'.format(count))
+
 
 def output_stdout(C):
   """FIXME
