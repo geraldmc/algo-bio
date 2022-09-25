@@ -5,7 +5,7 @@
 
 ## Execution & Output
 
-The program is made up of several modules. The user need only interact the file `driver.py` To learn more, please type: 
+The program is made up of several modules. The user need only interact with the file `driver.py` To learn more, please type: 
 
 ```
 python driver.py -h
