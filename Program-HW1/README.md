@@ -31,7 +31,7 @@ For purposes of the assignment (to test proper parsing of input and writing of o
 python driver.py -file
 ```
 
-You will be prompted for a path to an input file and to an output file. You will be given a choice to write to that file or to the console. Output to a file (part of the assignment's requirement) will look like the following:
+You will be prompted for a path to an input file and to an output file. You will be given a choice to write to that file or to the console. Choose`Yes`. Output to a file (part of the assignment's requirement) will look like the following:
 
 ```
 Enter input path: ./data/LabStrassenInput.txt
@@ -55,7 +55,7 @@ Printed 3 matrix pairs/products to file ./foo.txt
 etc...
 ```
 
-will be generated. If choosing `No` the output will be directed to stdout. 
+If choosing `No` the output will be directed to stdout. 
 
 ---
 
