@@ -7,21 +7,24 @@ def zero_matrix(r, c):
   return matrix
 
 def standard_matrix_product(A, B):
-  """ Product of two square matrices.
-      This represents a 'brute force' algorithm
+  """ Returns the product of two square matrices.
+      This implementation represents a 'brute force' algorithm
       with time complexity of O(n^3).
   """
+  assert len(A[0]) == len(B)
   n = len(A)
   count=0
-  # init sq. matrix w/ zeroes
+  # initialize a sq. matrix w/ zeroes
   C = [[0 for i in range(n)] for j in range(n)]
-  for i in range(n): # n...
-    for k in range(n): # times n...
-      for j in range(n): # times n = n^3
-        C[i][j] += A[i][k] * B[k][j]
+
+  for i in range(n): # loop n times...
+    for k in range(n): # times n times...
+      for j in range(n): # times n times = n^3
+        C[i][j] += A[i][k] * B[k][j] # multiply
         count+=1
   return C, count
 
+'''
 def direct_multiply(A, B):
   count=0
   if len(A[0]) != len(B):
@@ -34,3 +37,4 @@ def direct_multiply(A, B):
           C[i][j] += A[i][k] * B[k][j]
           count+=1
   return C, count
+'''

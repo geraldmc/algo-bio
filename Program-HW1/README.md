@@ -5,7 +5,7 @@
 
 ## Execution & Output
 
-The program is made up of several modules. The user need only interact with the file `driver.py`. To learn more, please type the following at the command prompt: 
+The program is made up of several modules. The user only interacts with the file `driver.py`. To learn more, please type the following at the command prompt: 
 
 ```
 >> python driver.py -h
@@ -25,7 +25,7 @@ optional arguments:
   -test OUTPUT  direct a matrix to a named output file
 ```
 
-The code is delivered in a zipped file. Once unzipped it will have the following directory structure:
+The code is delivered in a zipped file. Once unzipped it has the following directory structure:
 
 ```
 ├── Program-HW1
@@ -46,13 +46,13 @@ The code is delivered in a zipped file. Once unzipped it will have the following
 │       ├── __init__.py
 │       └── io.py
 ```
-To run the program change directories `cd Program-HW1` and execute the file named `driver.py` as described previously. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
+To run the program change directories `cd Program-HW1` and execute the file named `driver.py` as described. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
 
 ```
 >> python driver.py -file
 ```
 
-You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` will send the output to a named file. If you unzip the supplied code then the data file as specified in the assignment will be available under the directory `./data` as indicated below.
+You will be prompted for paths to input and output files. You may direct the resulting output to a specified file or to the console. Choosing `Yes` sends the output to a named file. If you unzip the supplied code then the assignment-provided data file will be available under the directory `./data` as indicated below.
 
 ```
 Enter input path: ./data/LabStrassenInput.txt
@@ -76,7 +76,11 @@ Printed 3 matrix pairs/products to file ./foo.txt
 etc...
 ```
 
-If choosing `No` the output will be directed to stdout. There are other options available for testing but this is the intended use for grading purposes.
+If choosing `No` the output will be directed to stdout. There are two other options available for testing but these are not intended for grading purposes.
+
+## Supporting Code
+
+There are several modules contained in this submission: `algorithms` contains implementations of Strassen's and the standard algorithm; `analysis` contains a Python notebook to render plots of the algorithms' performance (may be run directly to generate the plot); `data` for the input data and for creating new matrices for testing; and `filehandler` for file input and output. 
 
 ## Performance
 

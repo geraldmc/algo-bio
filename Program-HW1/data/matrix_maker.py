@@ -2,10 +2,9 @@
 
 """Create random integer matrices."""
 
-# Core Library modules
 import random
 
-random.seed(1234)
+random.seed(123)
 
 def create_random_matrix(n, limit):
   """Create a square matrix using randomly generated positive integers.
@@ -17,13 +16,3 @@ def create_random_matrix(n, limit):
   for i in range(n):
       matrix.append([random.randint(0, limit) for el in range(n)])
   return matrix
-
-def save_matrix(A, B, filename):
-  """Save the created matrix to a file.
-  """
-  f = open(filename, "w")
-  for i, matrix in enumerate([A, B]):
-      if i != 0:
-          f.write("\n")
-      for line in matrix:
-          f.write("\t".join(map(str, line)) + "\n")

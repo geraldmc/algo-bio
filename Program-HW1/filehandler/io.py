@@ -14,7 +14,7 @@ def break_on_lf(filename):
   with open(filename) as reader:
     contents = reader.read()
     matrices = contents.split('\n\n') # FIXME: this might fail...
-    matrices = matrices[:-1] # remove trailing newline
+    matrices = matrices[:-1] # remove trailing newlinedirect
     return matrices
 
 def read_matrices(filename):
@@ -83,46 +83,3 @@ def file_output(A, B, order, handle):
   handle.write("\n")
   print('OK. Wrote output to file: {}. Done!'.format(handle.name))
   handle.close()
-
-  """
-  GUTTER ---------------------------------
-
-def print_matrix_to_file(A,B,handle):
-
-  with open(handle, 'w') as f:
-    f.write(A)
-    f.write(B)
-
-def matrix_print_from_dict(m):
-  for key, value in m.items():
-      print(key, value)
-
-
-  def read_matrix_file(filename):
-  A = []
-  B = []
-  n = 0
-  with open(filename) as reader:
-    n = reader.readline()
-    for idx in range(0, int(n)):
-      line = reader.readline()
-      if line != "":
-        A.append([int(el) for el in line.strip().split()])
-    for idx in range(0, int(n)):
-      line = reader.readline()
-      if line != "":
-        B.append([int(el) for el in line.strip().split()])
-    return int(n.strip()), A, B
-
-def read_matrix_file(filename):
-  A = []
-  B = []
-  n = 0
-  n = reader.readline()
-  for idx in range(0, int(n)):
-    line = reader.readline()
-    if line != "":
-      A.append([int(el) for el in line.strip().split()])
-  return int(n.strip()), A
-
-  """

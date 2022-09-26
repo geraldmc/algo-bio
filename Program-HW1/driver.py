@@ -11,7 +11,7 @@ __semester__    = "Fall, 2022"
 from math import ceil, log
 import argparse, os, sys
 from filehandler.io import read_matrices, process_input_matrix
-from filehandler.io import input_stdout, output_stdout, file_output
+from filehandler.io import input_stdout, file_output
 from data.matrix_maker import create_random_matrix
 from algorithms import bruteforce as bf 
 from algorithms import strassen as st
@@ -61,7 +61,8 @@ if args.file: # the default path for the assignment!
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      C = st.strassen(A, B, len(A))
+      C, count = bf.standard_matrix_product(A,B)
+      #C = st.strassen(A, B, len(A))
       if affirm:
         with open(outp, 'a+') as f: # this will *append*, if the file exists.
           f.write('[Matrix Input {}]'.format(idx+1) + '\n')
@@ -74,7 +75,7 @@ if args.file: # the default path for the assignment!
           f.write('\n'.join(' '.join(map(str,sl)) for sl in C))
           f.write('\n\n')
       else: 
-        input_stdout(A,B,C,(idx+1))
+        input_stdout(A,B,C,count,(idx+1))
     print('Printed {} matrix pairs/products to file {}'.format(len(result), outp))
 
 elif args.create: # for testing to console 
@@ -82,7 +83,7 @@ elif args.create: # for testing to console
     assert order in [1, 2, 4, 8, 16, 32, 64, 128, 256]
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
-    C, count = bf.standard_matrix_product(A,B)
+    #C, count = bf.standard_matrix_product(A,B)
     D = st.strassen(A,B,order)
     input_stdout(A,B,C,count,1)
     print_global()

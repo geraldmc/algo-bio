@@ -89,7 +89,7 @@ def strassen(A, B, n):
     a, b, c, d = split(A)
     e, f, g, h = split(B)
 
-    # p1 = a*(f-h), multiplication occurs here
+    # p1 = a*(f-h), multiplication occurs heredire
     p1 = strassen(a, subtract_matrix(f, h), n/2)
     increment_global_by_one()
     # p2 = (a+b)*h, multiplication occurs here
