@@ -156,13 +156,7 @@ if __name__ == "__main__":
   print_global()
   print(f"Using Strassen's:\nA*B = {strassen(A1, B1, 2)}")
   print_global()
-  print(f"Using \'brute force\':\nA*B = {brute_multiply(A1, B1)}")
-
-  print(f"Using Strassen's:\nA*B = {strassen(A2, B2, 4)}")
+  print(f"A*B = {strassen(A2, B2, 4)}")
   print_global()
-  print(f"Using \'brute force\':\nA*B = {brute_multiply(A2, B2)}")
+  print(f"A*B = {strassen(A3, B3, 8)}")
   print_global()
-
-  print(f"Using Strassen's:\nA*B = {strassen(A3, B3, 8)}")
-  print_global()
-  print(f"Using \'brute force\':\nA*B = {brute_multiply(A3, B3)}")

@@ -63,7 +63,6 @@ if args.file: # the default path for the assignment!
       A = result[idx][0]
       B = result[idx][1]
       C, count = bf.naive_matrix_product(A,B)
-      #C = st.strassen(A, B, len(A))
       if affirm:
         with open(outp, 'a+') as f: # this will *append*, if the file exists.
           f.write('[Matrix Input {}]'.format(idx+1) + '\n')
@@ -85,7 +84,6 @@ elif args.create: # for testing to console
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
     C, count = bf.naive_matrix_product(A,B)
-    #C = st.strassen(A,B,order)
     input_stdout(A,B,C,count,1)
     print_global()
     print()

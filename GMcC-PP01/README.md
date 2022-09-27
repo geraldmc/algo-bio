@@ -5,7 +5,7 @@
 
 ## Execution & Output
 
-The program is made up of several modules. The user only interacts with the file `driver.py`. To learn more, please type the following at the command prompt: 
+The program is made up of several modules. The user interacts with the file `driver.py`. To learn more, please type the following at the command prompt: 
 
 ```
 >> python driver.py -h
@@ -76,7 +76,25 @@ Printed 3 matrix pairs/products to file ./foo.txt
 etc...
 ```
 
-If choosing `No` the output will be directed to stdout. There are two other options available for testing but these are not intended for grading purposes.
+If choosing `No` the output will be directed to stdout. Note that I have used the naive form of matrix multiplication to handle the input/output part of this exercise. To directly test my implementation of Strassen's algorithm please execute the following steps. From the project root cd into `algorithms` and execute the file Strassen.py:
+
+```
+>> python straseen.py
+```
+This produces the following output:
+
+```
+Number of Strassen Multiplications: (0)
+Using Strassen's:
+A*B = [[16, 17], [26, 22]]
+Number of Strassen Multiplications: (7)
+A*B = [[-1, -4, -2, 13], [7, -6, 2, 6], [11, 5, -1, 1], [-6, 9, -8, 3]]
+Number of Strassen Multiplications: (63)
+A*B = [[-4, 4, 6, 3, -4, -3, -6, -10], [7, 4, 0, -5, 11, 0, 0, 8], [6, -11, 0, -8, -4, 4, 8, 5], [-4, 11, 7, 1, -6, 1, -4, -3], [-7, 2, -2, 8, 6, -5, -4, 6], [9, -1, 10, -3, 11, 4, 5, 10], [18, 9, 13, 12, 5, 3, 0, -2], [18, -5, -4, -11, -3, 1, 3, 3]]
+Number of Strassen Multiplications: (462)
+```
+
+
 
 ## Supporting Code
 
