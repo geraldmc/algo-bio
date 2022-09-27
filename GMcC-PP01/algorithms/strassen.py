@@ -1,7 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# See: https://stackoverflow.com/questions/52137431/strassens-algorithm-bug-in-python-implementation
+# ---------------------------------------------------------------------
+# Note:
+# This file maye be run as a script. To do so enter the following at the 
+# command prompt:
+
+# >> python strassen.py
+
+# See: https://stackoverflow.com/questions/52137431/strassens-algorithm-\
+# bug-in-python-implementation
+# ---------------------------------------------------------------------  
 
 strassen_count = 0
 

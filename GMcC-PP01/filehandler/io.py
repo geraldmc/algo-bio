@@ -13,8 +13,8 @@ def break_on_lf(filename):
   """
   with open(filename) as reader:
     contents = reader.read()
-    matrices = contents.split('\n\n') # FIXME: this might fail...
-    matrices = matrices[:-1] # remove trailing newlinedirect
+    matrices = contents.split('\n\n')
+    matrices = matrices[:-1] # FIXME: remove trailing newlines?
     return matrices
 
 def read_matrices(filename):
@@ -27,10 +27,16 @@ def read_matrices(filename):
   m_dict = {}
   m = break_on_lf(filename)
   n = len(m) # n = number of matrices read.
-  # in following dict assignment, the order is the dict key, 
-  # the value is the matrix itself.
-  for idx in range(0,n):
-    m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] 
+
+  # In following dict assignment, the order is the dict key, 
+  # the value is the matrix itself. This is wrapped in a try block 
+  # as the input file prvioded for testing has changed several times.
+  try:
+    for idx in range(0,n):
+      m_dict[int(m[idx][:1][0])] = m[idx][1:].split('\n')[1:] 
+  except Exception as e:
+    print("WARNING! An ", e.__class__, "exception has occurred. Please continue...")
+    print()
   return m_dict
 
 def process_input_matrix(m):
@@ -66,14 +72,9 @@ def input_stdout(A,B,C,count,index):
   print(C)
   print('Number of naive multiplications ({}):'.format(count))
 
-
-def output_stdout(C):
+def file_output(A, B, order, handle):
   """FIXME
   """
-  print('Matrix Product:')
-  print(C)
-
-def file_output(A, B, order, handle):
   handle.write(str(order) + "\n") 
   for i, matrix in enumerate([A, B]):
     if i != 0:

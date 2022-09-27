@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""driver.py: Main driver class for Strassen/Brute force comparison.
+"""driver.py: Main class for Strassen/Brute force comparison.
 """
+
 __author__      = "Gerald McCollam"
 __assignment__  = "Programming Problem 1"
 __class__       = "605.620"
@@ -61,8 +62,8 @@ if args.file: # the default path for the assignment!
     for idx in range(0,len(result)):
       A = result[idx][0]
       B = result[idx][1]
-      #C, count = bf.standard_matrix_product(A,B)
-      C = st.strassen(A, B, len(A))
+      C, count = bf.naive_matrix_product(A,B)
+      #C = st.strassen(A, B, len(A))
       if affirm:
         with open(outp, 'a+') as f: # this will *append*, if the file exists.
           f.write('[Matrix Input {}]'.format(idx+1) + '\n')
@@ -83,7 +84,7 @@ elif args.create: # for testing to console
     assert order in [1, 2, 4, 8, 16, 32, 64, 128, 256]
     A = create_random_matrix(order, r)
     B = create_random_matrix(order, r)
-    C, count = bf.standard_matrix_product(A,B)
+    C, count = bf.naive_matrix_product(A,B)
     #C = st.strassen(A,B,order)
     input_stdout(A,B,C,count,1)
     print_global()
