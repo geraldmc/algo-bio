@@ -86,7 +86,6 @@ Note that I have used the naive form of matrix multiplication to handle the inpu
 This produces the following output:
 
 ```
-Number of Strassen Multiplications: (0)
 Using Strassen's:
 A*B = [[16, 17], [26, 22]]
 Number of Strassen Multiplications: (7)
