@@ -153,7 +153,6 @@ if __name__ == "__main__":
         [2,3,-1,0,-1,0,-1,0], [1,2,2,1,0,1,1,2],
         [3,-1,0,2,2,2,2,1], [2,-2,1,-3,3,0,1,2] ]
 
-  print_global()
   print(f"Using Strassen's:\nA*B = {strassen(A1, B1, 2)}")
   print_global()
   print(f"A*B = {strassen(A2, B2, 4)}")
