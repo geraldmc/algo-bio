@@ -78,7 +78,7 @@ etc...
 
 If choosing `No` the output will be directed to stdout. 
 
-Note that I have used the naive form of matrix multiplication to handle the input/output part of this exercise. To directly test my implementation of Strassen's algorithm please execute the following steps. From the project root cd into `algorithms` and execute the file Strassen.py:
+Note that I have used the naive form of matrix multiplication to handle the input/output part of this exercise. To directly test my implementation of Strassen's algorithm please execute the following steps. From the project root cd into `algorithms` and execute the file `strassen.py`:
 
 ```
 >> python strassen.py
