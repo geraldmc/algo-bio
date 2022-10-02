@@ -24,10 +24,12 @@ def get_tsp_path(path, i, j, n):
     return []
   if i <= j:
     k = path[i][j]
+    print(k)
     return [k] + get_tsp_path(path, k, j, n-1)
   else:
     k = path[j][i]
     return get_tsp_path(path, i, k, n-1) + [k]
+    #print(k)
 
 # Parse command line for the points.
 def coords(s):
@@ -79,8 +81,7 @@ def LBP(sp):
       path[i][j] = i+1
     # - end second inner for
   
-  #print('Path:')
-  #print(get_tsp_path(path, i, j, n))
+  #get_tsp_path(path, i, j, n)
   
   # - end outer for loop
   D[0][0] = D[0][1] + dist(sp[0], sp[1])
