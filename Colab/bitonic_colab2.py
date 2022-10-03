@@ -20,6 +20,8 @@ class Point:
           yield i
 
 def get_tsp_path(path, i, j, n):
+  """ Used with LBP to print out the final path.
+  """
   if n < 0:
     return []
   if i <= j:
@@ -33,12 +35,14 @@ def get_tsp_path(path, i, j, n):
 
 # Parse command line for the points.
 def coords(s):
-    try:
-        x, y = map(int, s.split(','))
-        return x, y
-    except:
-        raise argparse.ArgumentTypeError(\
-          "Coordinates must be entered x,y `space` x,y `space` ...")
+  """ Parse the command line for x,y integers.
+  """
+  try:
+      x, y = map(int, s.split(','))
+      return x, y
+  except:
+      raise argparse.ArgumentTypeError(\
+        "Coordinates must be entered x,y `space` x,y `space` ...")
 
 def dist(p1, p2):
   ''' This dist function calculates square root.
@@ -57,7 +61,7 @@ def init_matrix(n, val):
   return d
 
 def LBP(sp):
-  """FIXME
+  """ Implements shortest bitonic path.
   """
   n = len(sp)
   D = init_matrix(n, _inf) # inits to infinity
@@ -88,7 +92,9 @@ def LBP(sp):
   path[0][0] = 1
   return D, path
 
-if __name__ == '__main__':    
+if __name__ == '__main__':
+  """ Driver for the program.
+  """
   from itertools import repeat
   _inf = float('inf')
   _m1  = -1
