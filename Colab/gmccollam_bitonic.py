@@ -53,6 +53,7 @@ def BTSP(sp):
       Returns the length of the shortest bitonic path.
       Index from 0 to n-1.
   """
+  _inf = float('inf')
   n = len(sp)
   DP = init_matrix(n, _inf) # inits to infinity
   # init DP to the distance of the last two points in array (n-2, n-1)
@@ -73,26 +74,27 @@ def BTSP(sp):
     #print('second loop...')
     #print(DP)
     # - end second inner for
+
   # - end outer for loop
+
   DP[0][0] = DP[0][1] + dist(sp[0], sp[1])
   #print('set base case.')
   #print(DP)
   return DP
 
 if __name__ == '__main__':
-  """ Driver.
+  """ Driver---------------------------------------------------
   
   Examples: 
   >> python gmccollam_bitonic.py -c 0,0 1,1 2,0
-  >> Shortest Bitonic Path (LBP1): 4.828427
+  >> Shortest Bitonic Path (SBP): 4.828427
 
   >> python gmccollam_bitonic.py -c 0,0 1,2 2,1 3,2 4,0 
-  >> Shortest Bitonic Path (LBP1): 10.944272
+  >> Shortest Bitonic Path (SBP): 10.944272
   
   """
 
   from itertools import repeat
-  _inf = float('inf')
   
   parser = argparse.ArgumentParser(description='Bitonic Traveling Salesman Problem (Bitonic TSP).')
   parser.add_argument('--coords', '-c', help="x,y coordinates, separated by space.", 
@@ -105,6 +107,6 @@ if __name__ == '__main__':
 
   sp = sortX(points) # sort points along x axis
   D = BTSP(sp)
-  lbp_rounded = round(D[0][0], 6)
+  result = round(D[0][0], 6)
 
-  print('Shortest Bitonic Path (LBP1): {}.'.format(lbp_rounded))
+  print('Shortest Bitonic Path (SBP): {}.'.format(result))
