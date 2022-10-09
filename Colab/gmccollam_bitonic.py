@@ -86,12 +86,18 @@ if __name__ == '__main__':
   """ Driver---------------------------------------------------
   
   Examples: 
+  n=3
   >> python gmccollam_bitonic.py -c 0,0 1,1 2,0
   >> Shortest Bitonic Path (SBP): 4.828427
 
+  n=4
+  >> python gmccollam_bitonic.py -c 0,1 1,2 2,0 3,1
+  >> Shortest Bitonic Path (SBP): 7.300563
+
+  n=5
   >> python gmccollam_bitonic.py -c 0,0 1,2 2,1 3,2 4,0 
   >> Shortest Bitonic Path (SBP): 10.944272
-  
+
   """
 
   from itertools import repeat
