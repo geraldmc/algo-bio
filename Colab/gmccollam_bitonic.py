@@ -88,7 +88,7 @@ if __name__ == '__main__':
   Examples: 
   n=3
   >> python gmccollam_bitonic.py -c 0,0 1,1 2,0
-  >> Shortest Bitonic Path (SBP): 4.828427
+  >> Shortest Bitonic Path (SBP): 4.82842712
 
   n=4
   >> python gmccollam_bitonic.py -c 0,1 1,2 2,0 3,1
