@@ -20,9 +20,21 @@ usage: driver.py [-f] (-file )
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
 
 ```
-├── GMcC-PP02
-│   ├── README.md
-
+.
+├── LICENSE
+├── README.md
+├── data
+│   └── Input.txt
+├── driver.py
+├── filehandler
+│   ├── __init__.py
+│   └── io.py
+├── hashtables
+│   ├── __init__.py
+│   └── hash.py
+├── pytest.ini
+└── tests
+    └── test_hashtables.py
 ```
 To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
 
