@@ -14,7 +14,15 @@ The program is made up of several modules. The user interacts with the file `dri
 and the following message will be displayed.
 
 ```
-usage: driver.py [-f] (-file )
+>> python driver.py -h
+
+usage: driver.py [-h] -file
+
+Exercise in hashing.
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -file       provide a path to a file containing hash input.
 ```
 
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
@@ -49,7 +57,7 @@ Enter file input path: ./data/Input.txt
 ```
 
 ## Tests
-This program supports unit testing with `PyTest`. To run the unit tests execute the following:
+This program supports unit testing with `PyTest`. To run the unit tests execute the following: PyTest must be installed to run tests..
 
 ```
 >> python -m pytest ./tests
