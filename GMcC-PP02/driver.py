@@ -3,6 +3,8 @@
 
 """driver.py
 """
+import argparse
+
 
 from filehandler.io import pre_process
 
@@ -11,13 +13,9 @@ __assignment__  = "Programming Problem 2"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-import argparse
-
 if __name__ == "__main__":
   """ Main driver for interacting with other modules. 
   """
-
-import argparse
 
 def default():
   # Support file input.
