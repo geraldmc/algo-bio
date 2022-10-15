@@ -36,24 +36,24 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 └── tests
     └── test_hashtables.py
 ```
-To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. For purposes of this assignment (to test parsing of input and writing of output) please enter the following at the command prompt:
+To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. 
 
 ```
->> python driver.py -file
+>> python driver.py -f
 ```
 
-You will be prompted for paths to input and output files.
+You will be prompted for a path to the input file.
 
 ```
+Enter file input path: ./data/Input.txt
 ```
 
-```
-```
+## Tests
+This program supports unit testing with `PyTest`. To run the unit tests execute the following:
 
 ```
+>> python -m pytest ./tests
 ```
-
-
 
 ## Supporting Code
 
