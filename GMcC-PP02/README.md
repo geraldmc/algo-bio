@@ -57,7 +57,7 @@ Enter file input path: ./data/Input.txt
 ```
 
 ## Tests
-This program supports unit testing with `PyTest`. To run the unit tests execute the following: PyTest must be installed to run tests..
+This program supports unit testing using `pytest`. To run the tests execute the following (Note: pyTest must be installed to run tests).
 
 ```
 >> python -m pytest ./tests
