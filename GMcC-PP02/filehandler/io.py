@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""io.py
-"""
-
 def pre_process(f):
   """Preprocess input.
   """
