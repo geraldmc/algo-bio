@@ -132,3 +132,8 @@ dmypy.json
 # Other
 Program-HW1/run_strassen.py
 Program-HW1/delete_this.py
+
+Colab/Text-Pseudocode-Post.txt
+Colab/bitonic-summary.pdf
+Colab/bitonic.pdf
+Colab/gmccollam_bitonic.py

@@ -1,8 +1,20 @@
 import pytest
 
-from hashtables.hash import SimpleHash1
+from hashtable.Simple import *
+from hashtable.ChainHash import *
+from hashtable.LinProbeHash import *
+from hashtable.QuadHash import *
 
-BUCKET=100
+SLOTS=120
 
-def test_simple1_only_none_value_when_created():
-    assert None not in SimpleHash1(capacity=BUCKET).values
+def test_simple_none_values_when_created():
+    assert None not in Simple(capacity=SLOTS).values
+
+def test_simple_none_values_when_created():
+    assert None not in ChainHash(capacity=SLOTS).values
+
+def test_simple_none_values_when_created():
+    assert None not in LinProbeHash(capacity=SLOTS).values
+
+def test_simple_none_values_when_created():
+    assert None not in QuadHash(capacity=SLOTS).values

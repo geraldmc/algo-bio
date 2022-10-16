@@ -2,7 +2,7 @@
 
 BLANK = object()
 
-class SimpleHash1:
+class Simple:
     def __init__(self, capacity):
         self.values = capacity * [BLANK]
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 def pre_process(f):
-  """Preprocess input.
+  """Preprocess file input.
   """
   result = ''
   try:
@@ -16,3 +16,6 @@ def pre_process(f):
   except (FileNotFoundError, PermissionError, OSError):
     print("Error opening file. Please try again.")
   return result[:-1] 
+
+def output_results_to(f):
+  pass

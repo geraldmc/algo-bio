@@ -113,6 +113,7 @@ if __name__ == '__main__':
 
   sp = sortX(points) # sort points along x axis
   D = BTSP(sp)
+  #print(D)
   result = round(D[0][0], 6)
 
   print('Shortest Bitonic Path (SBP): {}.'.format(result))
