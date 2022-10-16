@@ -4,15 +4,15 @@
 def pre_process(f):
   """Preprocess input.
   """
-  l2 = ''
+  result = ''
   try:
     with open(f) as reader:
       try:
         contents = reader.read()
         l1 = contents.split('\n\n')
-        l2 = [l.split('\n') for l in l1]
-      except (IOError, OSError):
+        result = [l.split('\n') for l in l1]
+      except (OSError):
         print("Error reading from file")
   except (FileNotFoundError, PermissionError, OSError):
     print("Error opening file. Please try again.")
-  return l2[:-1] 
+  return result[:-1] 
