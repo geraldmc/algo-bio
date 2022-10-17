@@ -28,7 +28,6 @@ optional arguments:
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
 
 ```
-.
 ├── LICENSE
 ├── README.md
 ├── data
@@ -37,9 +36,13 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 ├── filehandler
 │   ├── __init__.py
 │   └── io.py
-├── hashtables
-│   ├── __init__.py
-│   └── hash.py
+├── hashtable
+│   ├── BaseHash.py
+│   ├── ChainHash.py
+│   ├── LinProbeHash.py
+│   ├── MutableHash.py
+│   ├── QuadHash.py
+│   └── __init__.py
 ├── pytest.ini
 └── tests
     └── test_hashtables.py
