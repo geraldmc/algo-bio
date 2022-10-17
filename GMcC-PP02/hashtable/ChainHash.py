@@ -7,4 +7,7 @@ class ChainHash(BaseHash):
     super().__init__(capacity)
 
   def __insert__(self):
-    print('insert from ChainHash')
+    pass
+
+  def output(self):
+    print("printing from ChainHash...")

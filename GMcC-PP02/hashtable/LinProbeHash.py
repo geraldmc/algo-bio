@@ -7,4 +7,7 @@ class LinProbeHash(BaseHash):
     super().__init__(capacity)
 
   def __insert__(self):
-    print('insert from LinProbeHash')
+    pass
+
+  def output(self):
+    print("printing from LinProbeHash...")

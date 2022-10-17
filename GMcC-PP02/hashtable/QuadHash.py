@@ -7,4 +7,7 @@ class QuadHash(BaseHash):
     super().__init__(capacity)
 
   def __insert__(self):
-    print('insert from QuadHash')
+    pass
+
+  def output(self):
+    print("printing from Quadhash...")
