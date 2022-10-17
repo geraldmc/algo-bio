@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 # QuadHash.py
 
 from hashtable.BaseHash import BaseHash 
@@ -11,3 +14,8 @@ class QuadHash(BaseHash):
 
   def output(self):
     print("printing from Quadhash...")
+
+if __name__ == "__main__":
+  """ Driver for debugging. 
+  """
+  pass
