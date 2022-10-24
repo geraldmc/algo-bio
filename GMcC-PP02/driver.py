@@ -5,9 +5,13 @@
 """
 import argparse
 from array import array # for contiguous typed arrays
-from hashtable.ChainHash import ChainHash
-from hashtable.LinProbeHash import LinProbeHash
-from hashtable.QuadHash import QuadHash
+#from hashing.TableMap import TableMap
+#from hashing.HashMap import HashMap
+#from hashing.MutableHash import MutableHash
+from hashing.ChainHashMap import ChainHashMap
+#from hashtable.ChainHash import ChainHash
+#from hashtable.LinProbeHash import LinProbeHash
+#from hashtable.QuadHash import QuadHash
 
 from filehandler.io import pre_process
 
@@ -26,35 +30,44 @@ def default():
     print('File not found.')
   return (inp.strip())
 
-def initChainHash(data):
-  ch = ChainHash(capacity=SLOTS)
-  ch.output()
+def runChainHash(data):
+  chm = ChainHashMap(capacity=SLOTS)
+  for idx in range(len(data)):
+    chm[idx] = chm._hash_MOD(data[idx])
+  return chm
 
-def initLinProbeHash(data):
+def runLinProbeHash(data):
   ph = LinProbeHash(capacity=SLOTS)
   ph.output()
 
-def initQuadHash(data):
+def runQuadHash(data):
   qh = QuadHash(capacity=SLOTS)
   qh.output()
 
 if __name__ == "__main__":
   """ Main driver for interacting with other modules. 
   """
+  _items = []
+  parser = argparse.ArgumentParser(description='Exercise in hashing.')
+  group = parser.add_mutually_exclusive_group(required=True)
+  group.add_argument('-file', action="store_true",
+                      help='provide a path to a file containing hash input.')
+  args = parser.parse_args()
 
-parser = argparse.ArgumentParser(description='Exercise in hashing.')
-group = parser.add_mutually_exclusive_group(required=True)
-group.add_argument('-file', action="store_true",
-                    help='provide a path to a file containing hash input.')
-args = parser.parse_args()
+  if args.file: # the default path for the assignment!
+    inp_data = []
+    inp = default()
+    raw_input = pre_process(inp)
+    for s in raw_input:
+      inp_data.append([int(i) for i in s]) # convert to ints
+    flat_list = [item for sub in inp_data for item in sub]
+    chm = runChainHash(flat_list)
 
-if args.file: # the default path for the assignment!
-  inp_data = []
-  inp = default()
-  raw_input = pre_process(inp)
-  for s in raw_input:
-    inp_data.append([int(i) for i in s]) # convert to ints
-  initChainHash(inp_data)
-  initLinProbeHash(inp_data)
-  initQuadHash(inp_data)
-  #print(inp_data)
+    for key, value in chm.items():
+      _items.append(f"{key!r}: {value!r}")
+
+
+    print(_items)
+    #runLinProbeHash(inp_data)
+    #runQuadHash(inp_data)
+    #print(inp_data)

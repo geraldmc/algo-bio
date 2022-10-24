@@ -3,7 +3,7 @@
 
 # QuadHash.py
 
-from hashtable.BaseHash import BaseHash 
+#from hashtable.BaseHash import BaseHash 
 
 class QuadHash(BaseHash):
   def __init__(self, capacity):
@@ -18,4 +18,5 @@ class QuadHash(BaseHash):
 if __name__ == "__main__":
   """ Driver for debugging. 
   """
+  from .BaseHash import BaseHash
   pass

@@ -10,7 +10,7 @@ SLOTS=120
 
 @pytest.fixture
 def hash_table():
-  sample_data = ChainHash(capacity=120)
+  sample_data = ChainHash(capacity=10)
   sample_data[0] = 12501
   sample_data[1] = 84763
   sample_data[2] = 22599

@@ -1,26 +1,31 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+# MutableHash.py
+
 try:
   from collections.abc import MutableMapping
 except ImportError:
   from collections import MutableMapping
 
 class MutableHash(MutableMapping):
-  """Base class extends Python's MutableMapping."""
+  """Base class that extends Python's MutableMapping."""
   def __init__(self):
     super().__init__()
 
-  def __delitem__ (self):
+  def __delitem__(self):
     pass
 
-  def __getitem__ (self):
+  def __getitem__(self):
     pass
 
-  def __iter__ (self):
+  def __iter__(self):
     pass
 
-  def __len__ (self):
+  def __len__(self):
     pass
 
-  def __setitem__ (self):
+  def __setitem__(self):
     pass
 
   class _Item:
@@ -40,3 +45,9 @@ class MutableHash(MutableMapping):
   
     def __lt__(self, other):
       return self._key < other._key # compare items based on their keys
+
+if __name__ == "__main__":
+  """ Driver for test. 
+  """
+  mh = MutableHash()
+  print(dir(mh))

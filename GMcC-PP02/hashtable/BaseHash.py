@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from typing import NamedTuple, Any
 
 class BaseHash(ABC):
+
   def __init__(self, capacity):
       self.pairs = capacity * [None]
 
@@ -38,12 +39,25 @@ class BaseHash(ABC):
       except KeyError:
           return default
 
+  def __str__(self):
+      pairs = []
+      for key, value in self.pairs:
+          pairs.append(f"{key!r}: {value!r}")
+      return "{" + ", ".join(pairs) + "}"
+
   def _index(self, key):
       return hash(key) % len(self)
 
   @abstractmethod
   def __insert__(self):
       pass
+  
+  @classmethod
+  def from_dict(cls, dictionary, capacity=None):
+      hash_table = cls(capacity or len(dictionary))
+      for key, value in dictionary.items():
+          hash_table[key] = value
+      return hash_table
 
 class Pair(NamedTuple):
     key: Any

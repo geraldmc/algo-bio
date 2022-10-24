@@ -16,6 +16,6 @@ class LinProbeHash(BaseHash):
     print("printing from LinProbeHash...")
 
   if __name__ == "__main__":
-    """ Driver for debugging. 
+    """ Driver for test. 
     """
     pass
