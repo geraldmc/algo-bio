@@ -34,6 +34,8 @@ def runChainHash(data):
   chm = ChainHashMap(capacity=SLOTS)
   for idx in range(len(data)):
     chm[idx] = chm._hash_MOD(data[idx])
+    #hash = key % 1000
+    #table[hash].AddFirst(key, value)
   return chm
 
 def runLinProbeHash(data):
@@ -61,13 +63,15 @@ if __name__ == "__main__":
     for s in raw_input:
       inp_data.append([int(i) for i in s]) # convert to ints
     flat_list = [item for sub in inp_data for item in sub]
+    flat_list = [50, 700, 76, 85, 92, 73, 101]
     chm = runChainHash(flat_list)
 
-    for key, value in chm.items():
-      _items.append(f"{key!r}: {value!r}")
+    
+    #for key, value in chm.items():
+    #  _items.append(f"{key!r}: {value!r}")
 
 
-    print(_items)
+    print(chm[1])
     #runLinProbeHash(inp_data)
     #runQuadHash(inp_data)
     #print(inp_data)

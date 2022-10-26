@@ -8,7 +8,7 @@ from MutableHash import MutableHash
 from abc import abstractmethod
 
 class HashMap(MutableHash):
-  """Map implementation using an unordered list."""
+  """HashMap implementation with an unordered list."""
 
   def __init__ (self, capacity):
     '''Create an empty hash-table map.''' 
