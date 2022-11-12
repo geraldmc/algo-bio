@@ -17,5 +17,15 @@ def pre_process(f):
     print("Error opening file. Please try again.")
   return result[:-1] 
 
+def traverse(o, tree_types=(list, tuple)):
+  ''' print(list(traverse(inp_data)))
+  '''
+  if isinstance(o, tree_types):
+    for value in o:
+      for subvalue in traverse(value, tree_types):
+        yield subvalue
+  else:
+    yield o
+
 def output_results_to(f):
   pass

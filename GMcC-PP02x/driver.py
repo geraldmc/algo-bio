@@ -4,14 +4,9 @@
 """driver.py
 """
 import argparse
-from array import array # for contiguous typed arrays
-#from hashing.TableMap import TableMap
-#from hashing.HashMap import HashMap
-#from hashing.MutableHash import MutableHash
-from hashing.ChainHashMap import ChainHashMap
-#from hashtable.ChainHash import ChainHash
-#from hashtable.LinProbeHash import LinProbeHash
-#from hashtable.QuadHash import QuadHash
+from hashtables.LinearProbing import LinearProbing
+from hashtables.QuadraticProbing import QuadraticProbing
+from hashtables.SeparateChaining import SeparateChaining
 
 from filehandler.io import pre_process
 
@@ -30,26 +25,18 @@ def default():
     print('File not found.')
   return (inp.strip())
 
-def runChainHash(data):
-  chm = ChainHashMap(capacity=SLOTS)
-  for idx in range(len(data)):
-    chm[idx] = chm._hash_MOD(data[idx])
-    #hash = key % 1000
-    #table[hash].AddFirst(key, value)
-  return chm
+def ChainHash(data):
+  sch = SeparateChaining()
 
-def runLinProbeHash(data):
-  ph = LinProbeHash(capacity=SLOTS)
-  ph.output()
+def LinProbeHash(data):
+  lph = LinearProbing()
 
-def runQuadHash(data):
-  qh = QuadHash(capacity=SLOTS)
-  qh.output()
+def QuadHash(data):
+  qph = QuadraticProbing()
 
 if __name__ == "__main__":
   """ Main driver for interacting with other modules. 
   """
-  _items = []
   parser = argparse.ArgumentParser(description='Exercise in hashing.')
   group = parser.add_mutually_exclusive_group(required=True)
   group.add_argument('-file', action="store_true",
@@ -63,15 +50,13 @@ if __name__ == "__main__":
     for s in raw_input:
       inp_data.append([int(i) for i in s]) # convert to ints
     flat_list = [item for sub in inp_data for item in sub]
-    flat_list = [50, 700, 76, 85, 92, 73, 101]
-    chm = runChainHash(flat_list)
+    lph = LinearProbing()
+    qph = QuadraticProbing()
+    sch = SeparateChaining()
+
+    for element in flat_list:
+      lph.insert(element)
+      #qph.insert(element)
+      #sch.insert(element)
 
     
-    #for key, value in chm.items():
-    #  _items.append(f"{key!r}: {value!r}")
-
-
-    print(chm[1])
-    #runLinProbeHash(inp_data)
-    #runQuadHash(inp_data)
-    #print(inp_data)
