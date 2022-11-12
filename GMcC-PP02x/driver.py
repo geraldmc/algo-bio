@@ -54,9 +54,4 @@ if __name__ == "__main__":
     qph = QuadraticProbing()
     sch = SeparateChaining()
 
-    for element in flat_list:
-      lph.insert(element)
-      #qph.insert(element)
-      #sch.insert(element)
-
     

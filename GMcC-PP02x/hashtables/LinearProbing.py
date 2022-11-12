@@ -10,8 +10,8 @@ class Node:
 
 class LinearProbing:
   '''Collision handling via linear probing.
-  When a collision occurs, add one to the hash function,
-  check if the location is free. State list key: 
+  When a collision occurs, we add one to the hash function,
+  and check to see if the location is free. State list key is:
   1 = occupied, 0 = empty and -1 = deleted
   '''
   def __init__(self, modulus=120, slot_size=120, slot_depth=1, load_factor=1.00):
@@ -48,7 +48,7 @@ class LinearProbing:
     if not state: state = self.state
     index = self.hash_func_mod(key)
     while self.state[index] == 1:
-      index = (index + 1) % len(self.table)
+      index = (index + 1) % len(self.table) # probe
     table[index], state[index] = key, 1
   
   def insert(self, key):
@@ -60,10 +60,10 @@ class LinearProbing:
     self.__insert(key)
 
   def search(self, key):
-    index = self.hash_func(key)
+    index = self.hash_func_mod(key)
     while (self.table[index] != key or self.state[index] == -1) and \
         self.state[index] == 1:
-      index = (index + 1) % len(self.table)
+      index = (index + 1) % self.modulus
     if self.table[index] == key:
       return index
     return -1
@@ -74,16 +74,17 @@ class LinearProbing:
       self.state[index] = -1
  
   def collision_count(self, keys):
-    ''' Return count of all collisions
+    ''' Return count of possible collisions
     '''
     hashed_items = []
     for k in keys:
       hashed_items.append(self.hash_func_mod(k))
     unique = set(hashed_items)
-    return len(hashed_items)-len(unique) # diff of
+    return len(hashed_items)-len(unique) # diff=collisions
 
   @property
   def slots_remaining(self):
+    ''' Used in chaining'''
     if self.slot_depth>1:
       return len(self.table)*self.slot_depth - self.items_count
     else:
@@ -109,7 +110,6 @@ if __name__ == "__main__":
   data = [item for sub in data for item in sub]
 
   # Testing ----------------------------------------------------------------
-
   ht = LinearProbing(modulus=41)
 
   for k in data:
@@ -118,11 +118,27 @@ if __name__ == "__main__":
   # Quick tests
   if ht.modulus == 120:
     assert ht.collision_count(data) == 17
-  elif ht.hash_func_mod == 113:
+  elif ht.modulus == 113:
     assert ht.collision_count(data) == 14
-  elif ht.hash_func_mod == 41:
+  elif ht.modulus == 41:
     assert ht.collision_count(data) == 27
   
+  if ht.slot_size ==120:
+    assert ht.slots_remaining == 60
+    assert ht.table[61] == None
+    assert ht.state[60] == 0
+    assert ht.state[61] == 0
+
+  ht = LinearProbing() #  modulus = 120
+  assert ht.hash_func_mod(55555) == 115
+  assert ht.state[115] == 0
+  ht.insert(55555)
+  assert ht.state[115] == 1
+  ht.delete(55555)
+  assert ht.state[115] == -1
+
+  print('Good!')
+
   #print(ht.slots_remaining)
   #for k in keys:
   #  ht.insert(k)

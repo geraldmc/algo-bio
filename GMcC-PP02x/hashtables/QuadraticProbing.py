@@ -44,7 +44,7 @@ class QuadraticProbing:
     if not state: state = self.state
     index, h = self.hash_func_mod(key), 1
     while self.state[index] == 1:
-      index = (index + h * h) % len(self.table)
+      index = (index + h * h) % self.modulus
       h += 1
     table[index], state[index] = key, 1
     
@@ -61,7 +61,7 @@ class QuadraticProbing:
     while (self.table[index] != key or\
       self.state[index] == -1) and\
         self.state[index] == 1:
-      index = (index + h * h) % len(self.table)
+      index = (index + h * h) % self.modulus
       h += 1
     if self.table[index] == key:
       return index
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     # Quick tests
   if qdp.modulus == 120:
     assert qdp.collision_count(data) == 17
-  elif qdp.hash_func_mod == 113:
+  elif qdp.modulus == 113:
     assert qdp.collision_count(data) == 14
-  elif qdp.hash_func_mod == 41:
+  elif qdp.modulus == 41:
     assert qdp.collision_count(data) == 27
