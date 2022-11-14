@@ -10,7 +10,8 @@ class Node:
     self.next = None
 
 class QuadraticProbing:
-  def __init__(self, modulus=120, slot_size=120, slot_depth=1, load_factor=1.00):
+  def __init__(self, hash_method=1, modulus=120, slot_size=120, 
+               slot_depth=1, load_factor=1.00):
     self.items_count = 0
     self.load_factor = load_factor
     self.modulus = modulus
@@ -22,6 +23,7 @@ class QuadraticProbing:
     else:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
+    self.hash_method = hash_method
     self.first_collisions = 0
     self.second_collisions = 0
 
@@ -30,6 +32,16 @@ class QuadraticProbing:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
     if not slot_size: slot_size = len(self.table)
     return key % self.modulus
+
+  def hash_func(self, key):
+    import math
+    if self.modulus not in [120, 113, 41]:
+      raise ValueError('Modulus value is limited to 120, 113, 41.')
+    if not self.slot_size:  self.slot_size = len(self.table)
+    if self.hash_method==1:
+      return key % self.modulus # simple modulus
+    elif self.hash_method==2:
+      return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative
     
   def __rehash(self):
     new_table = [None] * len(self.table) * 2
@@ -42,9 +54,9 @@ class QuadraticProbing:
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
     if not state: state = self.state
-    index, h = self.hash_func_mod(key), 1
+    index, h = self.hash_func(key), 1
     while self.state[index] == 1:
-      index = (index + h * h) % self.modulus
+      index = (index + h * h) % self.modulus # quadratic probing
       h += 1
     table[index], state[index] = key, 1
     
@@ -57,9 +69,9 @@ class QuadraticProbing:
     self.__insert(key)
 
   def search(self, key):
-    index, h = self.hash_function(key), 1
-    while (self.table[index] != key or\
-      self.state[index] == -1) and\
+    index, h = self.hash_func(key), 1
+    while (self.table[index] != key or \
+      self.state[index] == -1) and \
         self.state[index] == 1:
       index = (index + h * h) % self.modulus
       h += 1
@@ -108,7 +120,7 @@ if __name__ == "__main__":
 
   # Testing ----------------------------------------------------------------
 
-  qdp = QuadraticProbing(modulus=41)
+  qdp = QuadraticProbing()
   for k in data:
     qdp.insert(k)
 
@@ -119,3 +131,11 @@ if __name__ == "__main__":
     assert qdp.collision_count(data) == 14
   elif qdp.modulus == 41:
     assert qdp.collision_count(data) == 27
+
+  assert qdp.hash_func(55555) == 115
+
+  if qdp.slot_size ==120:
+    assert qdp.slots_remaining == 60
+    assert qdp.state[115] == 1
+    assert qdp.state[60] == 0
+    assert qdp.state[61] == 0

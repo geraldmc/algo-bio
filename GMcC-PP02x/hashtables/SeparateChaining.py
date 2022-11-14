@@ -124,7 +124,7 @@ if __name__ == "__main__":
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
 
-  # Testing ----------------------------------------------------------------
+  # Tests ----------------------------------------------------------------
 
   sch = SeparateChaining(modulus=41)
   for k in data:

@@ -14,7 +14,8 @@ class LinearProbing:
   and check to see if the location is free. State list key is:
   1 = occupied, 0 = empty and -1 = deleted
   '''
-  def __init__(self, modulus=120, slot_size=120, slot_depth=1, load_factor=1.00):
+  def __init__(self, hash_method=1, modulus=120, slot_size=120, 
+               slot_depth=1, load_factor=1.00):
     self.items_count = 0
     self.load_factor = load_factor
     self.modulus = modulus
@@ -26,15 +27,20 @@ class LinearProbing:
     else:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
+    self.hash_method = hash_method
     self.first_collisions = 0
     self.second_collisions = 0
 
-  def hash_func_mod(self, key, slot_size=None):
+  def hash_func(self, key):
+    import math
     if self.modulus not in [120, 113, 41]:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
-    if not slot_size: slot_size = len(self.table)
-    return key % self.modulus
-  
+    if not self.slot_size:  self.slot_size = len(self.table)
+    if self.hash_method==1:
+      return key % self.modulus # simple modulus
+    elif self.hash_method==2:
+      return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative
+
   def __rehash(self):
     new_table = [None] * len(self.table) * 2
     new_state = [0] * len(self.table) * 2
@@ -46,7 +52,7 @@ class LinearProbing:
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
     if not state: state = self.state
-    index = self.hash_func_mod(key)
+    index = self.hash_func(key)
     while self.state[index] == 1:
       index = (index + 1) % len(self.table) # probe
     table[index], state[index] = key, 1
@@ -60,7 +66,7 @@ class LinearProbing:
     self.__insert(key)
 
   def search(self, key):
-    index = self.hash_func_mod(key)
+    index = self.hash_func(key)
     while (self.table[index] != key or self.state[index] == -1) and \
         self.state[index] == 1:
       index = (index + 1) % self.modulus
@@ -78,7 +84,7 @@ class LinearProbing:
     '''
     hashed_items = []
     for k in keys:
-      hashed_items.append(self.hash_func_mod(k))
+      hashed_items.append(self.hash_func(k))
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff=collisions
 
@@ -109,35 +115,47 @@ if __name__ == "__main__":
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
 
-  # Testing ----------------------------------------------------------------
+  # Tests ----------------------------------------------------------------
   ht = LinearProbing(modulus=41)
 
   for k in data:
     ht.insert(k)
 
   # Quick tests
-  if ht.modulus == 120:
-    assert ht.collision_count(data) == 17
-  elif ht.modulus == 113:
-    assert ht.collision_count(data) == 14
-  elif ht.modulus == 41:
-    assert ht.collision_count(data) == 27
-  
-  if ht.slot_size ==120:
-    assert ht.slots_remaining == 60
-    assert ht.table[61] == None
-    assert ht.state[60] == 0
-    assert ht.state[61] == 0
+  if ht.hash_method == 1:
+    if ht.modulus == 120:
+      assert ht.collision_count(data) == 17
+    elif ht.modulus == 113:
+      assert ht.collision_count(data) == 14
+    elif ht.modulus == 41:
+      assert ht.collision_count(data) == 27
+    
+    if ht.slot_size ==120:
+      assert ht.slots_remaining == 60
+      assert ht.table[61] == None
+      assert ht.state[60] == 0
+      assert ht.state[61] == 0
 
-  ht = LinearProbing() #  modulus = 120
-  assert ht.hash_func_mod(55555) == 115
-  assert ht.state[115] == 0
-  ht.insert(55555)
-  assert ht.state[115] == 1
-  ht.delete(55555)
-  assert ht.state[115] == -1
+    ht = LinearProbing() #  modulus = 120
+    assert ht.hash_func(55555) == 115
+    assert ht.state[115] == 0
+    ht.insert(55555)
+    assert ht.state[115] == 1
+    ht.delete(55555)
+    assert ht.state[115] == -1
+
+  if ht.hash_method == 2:
+    pass
 
   print('Good!')
+
+  ''' GUTTER ---------------------------------
+  def hash_func_mod(self, key, slot_size=None):
+    if self.modulus not in [120, 113, 41]:
+      raise ValueError('Modulus value is limited to 120, 113, 41.')
+    if not slot_size: slot_size = len(self.table)
+    return key % self.modulus
+  
 
   #print(ht.slots_remaining)
   #for k in keys:
@@ -147,3 +165,5 @@ if __name__ == "__main__":
   #      pairs = []
   #      for idx in range(self.slot_size):
   #       pairs.append(self.slots[self.hash_func(key)][idx])
+
+  '''
