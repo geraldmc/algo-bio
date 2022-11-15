@@ -25,7 +25,7 @@ if __name__ == "__main__":
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
 
-  ht = LinearProbing(hash_method=1, slot_size=120)
+  ht = LinearProbing(hash_method=1, slot_depth=3, slot_size=120)
   #print(data)
 
-  plot(distribute(data, hash_function=ht, num_containers=2))
+  plot(distribute(data, hash_function=ht, num_containers=12))

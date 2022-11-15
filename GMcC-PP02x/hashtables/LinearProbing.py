@@ -21,9 +21,10 @@ class LinearProbing:
     self.modulus = modulus
     self.slot_size = slot_size
     self.slot_depth = slot_depth
-    if self.slot_depth>1: # either 1 or 3 for this assignment
+    if self.slot_depth>1: # either 1 or 3
       self.table = [[None for i in range(slot_depth)] for _ in range(slot_size)]
       self.state = [[0 for i in range(slot_depth)] for _ in range(slot_size)]
+      self.slot_size = self.slot_size*self.slot_depth
     else:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
@@ -35,11 +36,13 @@ class LinearProbing:
     import math
     if self.modulus not in [120, 113, 41]:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
-    if not self.slot_size:  self.slot_size = len(self.table)
+    #if not self.slot_size:  self.slot_size = len(self.table)
     if self.hash_method==1:
-      return key % self.modulus # simple modulus
+      try:
+        return key % self.modulus # basic hash
+      except TypeError: print(key)
     elif self.hash_method==2:
-      return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative
+      return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative hash
 
   def __rehash(self):
     new_table = [None] * len(self.table) * 2
@@ -53,17 +56,32 @@ class LinearProbing:
     if not table: table = self.table
     if not state: state = self.state
     index = self.hash_func(key)
-    while self.state[index] == 1:
-      index = (index + 1) % len(self.table) # probe
-    table[index], state[index] = key, 1
+    if self.slot_depth>1:
+      j, probing = self.multiarray_insert(self.state, index)
+      while probing:
+        index = (index + 1) % self.modulus
+        j, probing = self.multiarray_insert(self.state, index)
+      table[index][j], state[index][j] = key, 1
+    else:
+      while self.state[index] == 1:
+        if len(self.table) > self.modulus:
+          index = (index + 1) % len(self.table) # probe
+        else:
+          index = (index + 1) % self.modulus
+      table[index], state[index] = key, 1
   
   def insert(self, key):
     self.items_count += 1
     load_factor = self.items_count / len(self.table)
-    if load_factor > self.load_factor:
-      self.table, self.state = self.__rehash()
-      self.load_factor = load_factor
-    self.__insert(key)
+    if self.slots_remaining == -1:
+      raise IndexError('Table is full. Enable rehashing?') 
+      # FOLLOWING WILL REHASH AND EXPAND TABLE, DISABLED.
+      #if load_factor > self.load_factor:
+      #  self.table, self.state = self.__rehash()
+      #  self.load_factor = load_factor
+    else:
+      self.__insert(key)
+      
 
   def search(self, key):
     index = self.hash_func(key)
@@ -87,6 +105,27 @@ class LinearProbing:
       hashed_items.append(self.hash_func(k))
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff=collisions
+
+  '''
+  def multiarray_insert(self, s, index):
+    from collections import deque
+    stack=[]
+    for i, row in enumerate(s):
+        for j, item in enumerate(row):
+            if item != 1:
+                stack.append((i,j))
+    i,j = deque(stack).popleft()
+    return i,j
+  '''
+
+  def multiarray_insert(self, s, index):
+    if index == None:
+      return -1, False
+    if 0 in s[index]:
+      idx = s[index].index(0) # index of first 0
+      return idx, False
+    else:
+      return -1, True
 
   @property
   def slots_remaining(self):
@@ -116,10 +155,12 @@ if __name__ == "__main__":
   data = [item for sub in data for item in sub]
 
   # Tests ----------------------------------------------------------------
-  ht = LinearProbing(modulus=41)
+  ht = LinearProbing(modulus=113)
 
   for k in data:
     ht.insert(k)
+
+  print(len(ht.table), ht.modulus)
 
   # Quick tests
   if ht.hash_method == 1:
@@ -132,9 +173,6 @@ if __name__ == "__main__":
     
     if ht.slot_size ==120:
       assert ht.slots_remaining == 60
-      assert ht.table[61] == None
-      assert ht.state[60] == 0
-      assert ht.state[61] == 0
 
     ht = LinearProbing() #  modulus = 120
     assert ht.hash_func(55555) == 115

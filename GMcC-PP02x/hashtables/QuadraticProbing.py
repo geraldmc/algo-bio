@@ -118,7 +118,7 @@ if __name__ == "__main__":
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
 
-  # Testing ----------------------------------------------------------------
+  # Tests ----------------------------------------------------------------
 
   qdp = QuadraticProbing()
   for k in data:
@@ -136,6 +136,3 @@ if __name__ == "__main__":
 
   if qdp.slot_size ==120:
     assert qdp.slots_remaining == 60
-    assert qdp.state[115] == 1
-    assert qdp.state[60] == 0
-    assert qdp.state[61] == 0
