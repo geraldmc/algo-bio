@@ -60,6 +60,7 @@ class LinearProbing:
       j, probing = self.multiarray_insert(self.state, index)
       while probing:
         index = (index + 1) % self.modulus
+        print(index)
         j, probing = self.multiarray_insert(self.state, index)
       table[index][j], state[index][j] = key, 1
     else:
@@ -75,18 +76,36 @@ class LinearProbing:
     load_factor = self.items_count / len(self.table)
     if self.slots_remaining == -1:
       raise IndexError('Table is full. Enable rehashing?') 
-      # FOLLOWING WILL REHASH AND EXPAND TABLE, DISABLED.
+      # REHASH AND EXPAND TABLE, DISABLED.
       #if load_factor > self.load_factor:
       #  self.table, self.state = self.__rehash()
       #  self.load_factor = load_factor
     else:
       self.__insert(key)
-      
+
+  def multiarray_search(self, key):
+    index = self.hash_func(key)
+    if self.slot_depth>1:
+      for i, e in enumerate(self.state):
+          try:
+              return i, e.index(key)
+          except ValueError:
+              pass
+      raise ValueError("{!r} not found".format(key))
+    else:
+      while ( self.table[index] != key \
+          or  self.state[index] == -1) \
+          and self.state[index] == 1:
+        index = (index + 1) % self.modulus
+      if self.table[index] == key:
+        return index
+      return -1
 
   def search(self, key):
     index = self.hash_func(key)
-    while (self.table[index] != key or self.state[index] == -1) and \
-        self.state[index] == 1:
+    while ( self.table[index] != key \
+        or  self.state[index] == -1) \
+        and self.state[index] == 1:
       index = (index + 1) % self.modulus
     if self.table[index] == key:
       return index
@@ -106,21 +125,10 @@ class LinearProbing:
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff=collisions
 
-  '''
-  def multiarray_insert(self, s, index):
-    from collections import deque
-    stack=[]
-    for i, row in enumerate(s):
-        for j, item in enumerate(row):
-            if item != 1:
-                stack.append((i,j))
-    i,j = deque(stack).popleft()
-    return i,j
-  '''
-
   def multiarray_insert(self, s, index):
     if index == None:
       return -1, False
+    print(index)
     if 0 in s[index]:
       idx = s[index].index(0) # index of first 0
       return idx, False
