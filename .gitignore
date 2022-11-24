@@ -133,8 +133,6 @@ dmypy.json
 Program-HW1/run_strassen.py
 Program-HW1/delete_this.py
 
-Colab/Text-Pseudocode-Post.txt
-Colab/bitonic-summary.pdf
-Colab/bitonic.pdf
-Colab/gmccollam_bitonic.py
+Colab/*
 ignore/
+command_line.py
