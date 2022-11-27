@@ -150,21 +150,6 @@ if __name__ == "__main__":
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
 
-  # Tests ----------------------------------------------------------------
-
   qdp = QuadraticProbing()
   for k in data:
     qdp.insert(k)
-
-    # Quick tests
-  if qdp.modulus == 120:
-    assert qdp.collision_count(data) == 17
-  elif qdp.modulus == 113:
-    assert qdp.collision_count(data) == 14
-  elif qdp.modulus == 41:
-    assert qdp.collision_count(data) == 27
-
-  assert qdp.hash_func(55555) == 115
-
-  if qdp.slot_size ==120:
-    assert qdp.slots_remaining == 60

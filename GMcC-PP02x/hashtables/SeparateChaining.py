@@ -107,7 +107,7 @@ class SeparateChaining:
     return new_table
 
 if __name__ == "__main__":
-  """ Driver for debugging. 
+  """ Driver. 
   """
   import sys
   import os
@@ -123,8 +123,6 @@ if __name__ == "__main__":
   for s in raw_input:
     data.append([int(i) for i in s]) # convert to ints  
   data = [item for sub in data for item in sub]
-
-  # Tests ----------------------------------------------------------------
 
   sch = SeparateChaining(modulus=113)
   for k in data:
