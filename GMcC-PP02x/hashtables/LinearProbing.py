@@ -45,14 +45,6 @@ class LinearProbing:
     elif self.hash_method==2:
       return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative hash
 
-  def __rehash(self):
-    new_table = [None] * len(self.table) * 2
-    new_state = [0] * len(self.table) * 2
-    for bucket in self.table:
-      if not bucket: continue
-      self.__insert(bucket, new_table, new_state)
-    return new_table, new_state
-
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
     if not state: state = self.state
@@ -119,14 +111,6 @@ class LinearProbing:
       state = self.flatten(self.state)
       state[index] = -1
       self.state = self.unflatten(state, self.slot_depth)
-
-  @property
-  def slots_remaining(self):
-    ''' Return slots remaining, based on slot depth.'''
-    if self.slot_depth>1:
-      return len(self.table)*self.slot_depth - self.items_count
-    else:
-      return len(self.table) - self.items_count
       
   def flatten(self, arr):
     ''' Convert a multi-dimensional array to single dimension'''
@@ -144,6 +128,23 @@ class LinearProbing:
       hashed_items.append(self.hash_func(k))
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff=collisions
+
+  @property
+  def slots_remaining(self):
+    ''' Return slots remaining, based on slot depth.'''
+    if self.slot_depth>1:
+      return len(self.table)*self.slot_depth - self.items_count
+    else:
+      return len(self.table) - self.items_count
+
+  def __rehash(self):
+    ''' NOT CURRENTLY USED'''
+    new_table = [None] * len(self.table) * 2
+    new_state = [0] * len(self.table) * 2
+    for bucket in self.table:
+      if not bucket: continue
+      self.__insert(bucket, new_table, new_state)
+    return new_table, new_state
   
 if __name__ == "__main__":
   """ Driver 

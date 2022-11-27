@@ -13,6 +13,7 @@ class Node:
     return str(self.key)
 
 class SeparateChaining:
+  ''' '''
   def __init__(self, modulus=120, slot_size=120, slot_depth=1):
     if slot_depth > 1:
       raise ValueError('Only single bucket size allowed.')
@@ -32,7 +33,6 @@ class SeparateChaining:
     if not slot_size: slot_size = len(self.table)
     return key % self.modulus
 
-  # insertion:
   def __insert_last(self, index, key):
     ''' Always insert new nodes following next.
     '''

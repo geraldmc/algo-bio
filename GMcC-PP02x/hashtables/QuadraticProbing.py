@@ -4,6 +4,8 @@
 # QuadraticProbing.py
 
 class QuadraticProbing:
+  ''' 
+  '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
                slot_depth=1, load_factor=1.00):
     self.items_count = 0
@@ -40,14 +42,6 @@ class QuadraticProbing:
       return key % self.modulus # simple modulus
     elif self.hash_method==2:
       return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative
-    
-  def __rehash(self):
-    new_table = [None] * len(self.table) * 2
-    new_state = [0] * len(self.table) * 2
-    for bucket in self.table:
-      if not bucket: continue
-      self.__insert(bucket, new_table, new_state)
-    return new_table, new_state
 
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
@@ -101,6 +95,15 @@ class QuadraticProbing:
       return len(self.table)*self.slot_depth - self.items_count
     else:
       return len(self.table) - self.items_count
+
+  def __rehash(self):
+    ''' NOT CURRENTLY IN USE'''
+    new_table = [None] * len(self.table) * 2
+    new_state = [0] * len(self.table) * 2
+    for bucket in self.table:
+      if not bucket: continue
+      self.__insert(bucket, new_table, new_state)
+    return new_table, new_state
 
 if __name__ == "__main__":
   """ Driver 
