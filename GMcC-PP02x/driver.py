@@ -35,6 +35,9 @@ def QuadHash(data, mod, depth, size=120):
   qph = QuadraticProbing(modulus=mod, slot_depth=depth, slot_size=size)
   for item in data:
     qph.insert(item)
+  plot(distribute(data, hash_function=qph, num_containers=12))
+  print('-- Quadratic Probing: mod={}, depth={}, size={}'.format(mod, depth, size))
+  print()
 
 def ChainHash(data, mod, depth):
   sch = SeparateChaining(modulus=mod)
@@ -50,7 +53,7 @@ if __name__ == "__main__":
                       help='provide a path to a file containing hash input.')
   args = parser.parse_args()
 
-  if args.file: # the default path for the assignment!
+  if args.file: # the default path
     inp_data = []
     inp = default()
     raw_input = pre_process(inp)
@@ -68,4 +71,4 @@ if __name__ == "__main__":
     ChainHash(input_list, mod=113, depth=1)               #6
 # Division modulo 41, bucket size = 3 ----------------------------------------
     LinProbeHash(input_list, mod=41, depth=3, size=40)    #7
-    #QuadHash(input_list, mod=41, depth=3, size=40)       #8
+    QuadHash(input_list, mod=41, depth=3, size=40)        #8

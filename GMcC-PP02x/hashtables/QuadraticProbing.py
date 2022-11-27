@@ -13,9 +13,10 @@ class QuadraticProbing:
     self.modulus = modulus
     self.slot_size = slot_size
     self.slot_depth = slot_depth
-    if self.slot_depth>1: # either 1 or 3 for this assignment
+    if self.slot_depth>1: # either 1 or 3
       self.table = [[None for i in range(slot_depth)] for _ in range(slot_size)]
       self.state = [[0 for i in range(slot_depth)] for _ in range(slot_size)]
+      self.slot_size = self.slot_size*self.slot_depth
     else:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
@@ -23,34 +24,52 @@ class QuadraticProbing:
     self.first_collisions = 0
     self.second_collisions = 0
 
-  def hash_func_mod(self, key, slot_size=None):
-    if self.modulus not in [120, 113, 41]:
-      raise ValueError('Modulus value is limited to 120, 113, 41.')
-    if not slot_size: slot_size = len(self.table)
-    return key % self.modulus
-
-  def hash_function(self, key, size=None):
-      if not size: size = len(self.table)
-      return key % size
-
   def hash_func(self, key):
     import math
     if self.modulus not in [120, 113, 41]:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
     if not self.slot_size:  self.slot_size = len(self.table)
-    if self.hash_method==1:
-      return key % self.modulus # simple modulus
-    elif self.hash_method==2:
-      return math.floor(self.slot_size*(key*0.357840 % 1)) # multiplicative
+    if self.hash_method==1: # simple division hashing
+      return key % self.modulus
+    elif self.hash_method==2: # multiplicative hashing
+      return math.floor(self.slot_size*(key*0.357840 % 1)) 
+
+  def quadratic(self, index, table):
+    found = False
+    # limit variable restricts function from infinite loop
+    limit = len(table)
+    i = 1
+    while i <= limit:
+      # quadratic probe
+      newIndex = index + (i**2)
+      newIndex = newIndex % self.slot_size
+      # if newIndex is available then break
+      if table[newIndex] == 0:
+        found = True
+        break
+      else:
+        # as the position is not empty increase i
+        i += 1
+    return newIndex
 
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
     if not state: state = self.state
-    index, h = self.hash_func(key), 1
-    while self.state[index] == 1:
-      index = (index + h * h) % self.modulus # quadratic probing
-      h += 1
-    table[index], state[index] = key, 1
+    if self.slot_depth>1:
+      index, h = self.hash_func(key), 1
+      table = self.flatten(self.table)
+      state = self.flatten(self.state)
+      while state[index] == 1:
+        # insert quadratic function
+        index = self.quadratic(index, state)
+      table[index], state[index] = key, 1
+      self.table = self.unflatten(table, self.slot_depth)
+      self.state = self.unflatten(state, self.slot_depth)
+    else:
+      index, h = self.hash_func(key), 1
+      while self.state[index] == 1:
+        index = self.quadratic(index, self.state)
+      table[index], state[index] = key, 1
 
   def insert(self, key):
     self.items_count += 1
@@ -79,6 +98,14 @@ class QuadraticProbing:
     index = self.search(key)
     if index > -1:
       self.state[index] = -1
+
+  def flatten(self, arr):
+    ''' Convert a multi-dimensional array to single dimension'''
+    return [item for sub in arr for item in sub]
+
+  def unflatten(self, arr, cols):
+    ''' Convert a single dimension array to multi-dimensional.'''
+    return [arr[i:i + cols] for i in range(0, len(arr), cols)]
 
   def collision_count(self, keys):
     ''' Return count of all collisions

@@ -10,10 +10,10 @@ __semester__    = "Fall, 2022"
 # https://gist.github.com/cs-fedy
 
 class LinearProbing:
-  '''Collision handling via linear probing. When a collision occurs, 
-     we add one to the hash function and check if the location is free. 
-     State key:
-      1 = occupied, 0 = empty and -1 = deleted
+  '''Collision handling via linear probing. When collisions occur, 
+     add 1 to the hash function and check if the next location is open. 
+     Continue until finding an empty slot or all slots are full. 
+     State key: 1 = occupied, 0 = empty and -1 = deleted
   '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
                slot_depth=1, load_factor=1.00):
