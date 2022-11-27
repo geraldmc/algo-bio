@@ -2,9 +2,12 @@
 # -*- coding: utf-8 -*-
 
 # LinearProbing.py
+__author__      = "Gerald McCollam"
+__assignment__  = "Programming Problem 2"
+__class__       = "605.620"
+__semester__    = "Fall, 2022"
 
 # https://gist.github.com/cs-fedy
-
 
 class LinearProbing:
   '''Collision handling via linear probing. When a collision occurs, 

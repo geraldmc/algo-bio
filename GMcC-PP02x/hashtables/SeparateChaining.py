@@ -4,7 +4,7 @@
 # SeparateChaining.py
 
 class Node:
-  ''' Node class is required for chaining method. '''
+  ''' Node class is required for chaining within table. '''
   def __init__(self, key):
     self.key = key
     self.next = None
@@ -34,6 +34,8 @@ class SeparateChaining:
 
   # insertion:
   def __insert_last(self, index, key):
+    ''' Always insert new nodes following next.
+    '''
     new_node = Node(key)
     if not self.table[index]:
       self.table[index] = new_node

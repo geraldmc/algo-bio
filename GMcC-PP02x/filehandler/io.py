@@ -27,5 +27,8 @@ def traverse(o, tree_types=(list, tuple)):
   else:
     yield o
 
-def output_results_to(f):
-  pass
+def output_results_to(f=None):
+  if f is None:
+    pass
+  else:
+    pass
