@@ -2,12 +2,6 @@
 # -*- coding: utf-8 -*-
 
 # QuadraticProbing.py
-# in state list: 1 means occupied, 0 means empty and -1 means deleted
-
-class Node:
-  def __init__(self, key):
-    self.key = key
-    self.next = None
 
 class QuadraticProbing:
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
@@ -32,6 +26,10 @@ class QuadraticProbing:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
     if not slot_size: slot_size = len(self.table)
     return key % self.modulus
+
+  def hash_function(self, key, size=None):
+      if not size: size = len(self.table)
+      return key % size
 
   def hash_func(self, key):
     import math
@@ -59,14 +57,18 @@ class QuadraticProbing:
       index = (index + h * h) % self.modulus # quadratic probing
       h += 1
     table[index], state[index] = key, 1
-    
+
   def insert(self, key):
     self.items_count += 1
     load_factor = self.items_count / len(self.table)
-    if load_factor > self.load_factor:
-      self.table, self.state = self.__rehash()
-      self.load_factor = load_factor
-    self.__insert(key)
+    if self.slots_remaining == -1:
+      raise IndexError('Table is full. Enable rehashing?') 
+      # REHASH AND EXPAND TABLE, DISABLED.
+      #if load_factor > self.load_factor:
+      #  self.table, self.state = self.__rehash()
+      #  self.load_factor = load_factor
+    else:
+      self.__insert(key)
 
   def search(self, key):
     index, h = self.hash_func(key), 1

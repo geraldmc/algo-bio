@@ -3,16 +3,14 @@
 
 # LinearProbing.py
 
-class Node:
-  def __init__(self, key):
-    self.key = key
-    self.next = None
+# https://gist.github.com/cs-fedy
+
 
 class LinearProbing:
-  '''Collision handling via linear probing.
-  When a collision occurs, we add one to the hash function,
-  and check to see if the location is free. State list key is:
-  1 = occupied, 0 = empty and -1 = deleted
+  '''Collision handling via linear probing. When a collision occurs, 
+     we add one to the hash function and check if the location is free. 
+     State key:
+      1 = occupied, 0 = empty and -1 = deleted
   '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
                slot_depth=1, load_factor=1.00):
@@ -36,7 +34,7 @@ class LinearProbing:
     import math
     if self.modulus not in [120, 113, 41]:
       raise ValueError('Modulus value is limited to 120, 113, 41.')
-    #if not self.slot_size:  self.slot_size = len(self.table)
+    if not self.slot_size:  self.slot_size = len(self.table)
     if self.hash_method==1:
       try:
         return key % self.modulus # basic hash
@@ -55,15 +53,20 @@ class LinearProbing:
   def __insert(self, key, table=None, state=None):
     if not table: table = self.table
     if not state: state = self.state
-    index = self.hash_func(key)
     if self.slot_depth>1:
-      j, probing = self.multiarray_insert(self.state, index)
-      while probing:
-        index = (index + 1) % self.modulus
-        print(index)
-        j, probing = self.multiarray_insert(self.state, index)
-      table[index][j], state[index][j] = key, 1
+      index = self.hash_func(key)
+      table = self.flatten(self.table)
+      state = self.flatten(self.state)
+      while state[index] == 1:
+        if len(table) > self.modulus:
+          index = (index + 1) % len(table) # probe
+        else:
+          index = (index + 1) % self.modulus
+      table[index], state[index] = key, 1
+      self.table = self.unflatten(table, self.slot_depth)
+      self.state = self.unflatten(state, self.slot_depth)
     else:
+      index = self.hash_func(key)
       while self.state[index] == 1:
         if len(self.table) > self.modulus:
           index = (index + 1) % len(self.table) # probe
@@ -83,16 +86,22 @@ class LinearProbing:
     else:
       self.__insert(key)
 
-  def multiarray_search(self, key):
-    index = self.hash_func(key)
+  def search(self, key):
     if self.slot_depth>1:
-      for i, e in enumerate(self.state):
-          try:
-              return i, e.index(key)
-          except ValueError:
-              pass
-      raise ValueError("{!r} not found".format(key))
+      index = self.hash_func(key)
+      table = self.flatten(self.table)
+      state = self.flatten(self.state)
+      while ( table[index] != key \
+          or  state[index] == -1) \
+          and state[index] == 1:
+        index = (index + 1) % self.modulus
+      if table[index] == key:
+        self.table = self.unflatten(table, self.slot_depth)
+        self.state = self.unflatten(state, self.slot_depth)
+        return index
+      return -1
     else:
+      index = self.hash_func(key)
       while ( self.table[index] != key \
           or  self.state[index] == -1) \
           and self.state[index] == 1:
@@ -101,21 +110,29 @@ class LinearProbing:
         return index
       return -1
 
-  def search(self, key):
-    index = self.hash_func(key)
-    while ( self.table[index] != key \
-        or  self.state[index] == -1) \
-        and self.state[index] == 1:
-      index = (index + 1) % self.modulus
-    if self.table[index] == key:
-      return index
-    return -1
-
   def delete(self, key):
     index = self.search(key)
     if index > -1:
-      self.state[index] = -1
- 
+      state = self.flatten(self.state)
+      state[index] = -1
+      self.state = self.unflatten(state, self.slot_depth)
+
+  @property
+  def slots_remaining(self):
+    ''' Return slots remaining, based on slot depth.'''
+    if self.slot_depth>1:
+      return len(self.table)*self.slot_depth - self.items_count
+    else:
+      return len(self.table) - self.items_count
+      
+  def flatten(self, arr):
+    ''' Convert a multi-dimensional array to single dimension'''
+    return [item for sub in arr for item in sub]
+
+  def unflatten(self, arr, cols):
+    ''' Convert a single dimension array to multi-dimensional.'''
+    return [arr[i:i + cols] for i in range(0, len(arr), cols)]
+
   def collision_count(self, keys):
     ''' Return count of possible collisions
     '''
@@ -124,26 +141,7 @@ class LinearProbing:
       hashed_items.append(self.hash_func(k))
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff=collisions
-
-  def multiarray_insert(self, s, index):
-    if index == None:
-      return -1, False
-    print(index)
-    if 0 in s[index]:
-      idx = s[index].index(0) # index of first 0
-      return idx, False
-    else:
-      return -1, True
-
-  @property
-  def slots_remaining(self):
-    ''' Used in chaining'''
-    if self.slot_depth>1:
-      return len(self.table)*self.slot_depth - self.items_count
-    else:
-      return len(self.table) - self.items_count
-      
-
+  
 if __name__ == "__main__":
   """ Driver 
   """
@@ -211,5 +209,33 @@ if __name__ == "__main__":
   #      pairs = []
   #      for idx in range(self.slot_size):
   #       pairs.append(self.slots[self.hash_func(key)][idx])
+
+  def multiarray_search(self, key):
+    index = self.hash_func(key)
+    if self.slot_depth>1:
+      for i, e in enumerate(self.state):
+          try:
+              return i, e.index(key)
+          except ValueError:
+              pass
+      raise ValueError("{!r} not found".format(key))
+    else:
+      while ( self.table[index] != key \
+          or  self.state[index] == -1) \
+          and self.state[index] == 1:
+        index = (index + 1) % self.modulus
+      if self.table[index] == key:
+        return index
+      return -1
+
+  def multiarray_insert(self, s, index):
+    if index == None:
+      return -1, False
+    try:
+      if 0 in s[index]:
+        idx = s[index].index(0) # index of first 0
+        return idx, False
+    except IndexError:
+      return -1, True
 
   '''
