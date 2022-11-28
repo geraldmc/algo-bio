@@ -28,42 +28,36 @@ optional arguments:
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
 
 ```
+.
 ├── LICENSE
 ├── README.md
+├── analysis
+│   ├── __init__.py
+│   └── metrics.py
 ├── data
-│   └── Input.txt
+│   ├── Input.txt
+│   └── extra.txt
 ├── driver.py
 ├── filehandler
 │   ├── __init__.py
 │   └── io.py
-├── hashtable
-│   ├── BaseHash.py
-│   ├── ChainHash.py
-│   ├── LinProbeHash.py
-│   ├── MutableHash.py
-│   ├── QuadHash.py
-│   └── __init__.py
-├── pytest.ini
-└── tests
-    └── test_hashtables.py
+├── hashtables
+│   ├── LinearProbing.py
+│   ├── QuadraticProbing.py
+│   ├── SeparateChaining.py
+│   └── __init__py
+└── perf.py
 ```
 To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. 
 
 ```
->> python driver.py -f
+>> python driver.py -file
 ```
 
 You will be prompted for a path to the input file.
 
 ```
 Enter file input path: ./data/Input.txt
-```
-
-## Tests
-This program supports unit testing using `pytest`. To run the tests execute the following (Note: pyTest must be installed to run tests).
-
-```
->> python -m pytest ./tests
 ```
 
 ## Supporting Code
