@@ -2,9 +2,13 @@
 # -*- coding: utf-8 -*-
 
 # SeparateChaining.py
+__author__      = "Gerald McCollam"
+__assignment__  = "Programming Problem 2"
+__class__       = "605.620"
+__semester__    = "Fall, 2022"
 
 class Node:
-  ''' Node class is required for chaining within table. '''
+  ''' Node class is required for chaining in table.'''
   def __init__(self, key):
     self.key = key
     self.next = None
@@ -28,12 +32,6 @@ class SeparateChaining:
     self.first_collisions = 0
     self.second_collisions = 0
 
-  #def hash_func(self, key, slot_size=None):
-  #  if self.modulus not in [120, 113]:
-  #    raise ValueError('Modulus value limited to 120, 113.')
-  #  if not slot_size: slot_size = len(self.table)
-  #  return key % self.modulus
-
   def hash_func(self, key):
     import math
     if self.modulus not in [120, 113]:
@@ -45,7 +43,7 @@ class SeparateChaining:
       return math.floor(self.slot_size*(key*0.357840 % 1)) 
 
   def __insert_last(self, index, key):
-    ''' Always insert new nodes following next.
+    ''' Always insert a new node following the last.
     '''
     new_node = Node(key)
     if not self.table[index]:
