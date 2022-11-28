@@ -37,7 +37,7 @@ class QuadraticProbing:
   def quadratic(self, index, table):
     found = False
     # limit variable restricts function from infinite loop
-    limit = len(table)
+    limit = len(table)-5
     i = 1
     while i <= limit:
       # quadratic probe
@@ -112,9 +112,14 @@ class QuadraticProbing:
     '''
     hashed_items = []
     for k in keys:
-      hashed_items.append(self.hash_func_mod(k))
+      hashed_items.append(self.hash_func(k))
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff of
+
+    if self.hash_method==1: # simple division hashing
+      return key % self.modulus
+    elif self.hash_method==2: # multiplicative hashing
+      return math.floor(self.slot_size*(key*0.357840 % 1)) 
 
   @property
   def slots_remaining(self):

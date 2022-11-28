@@ -25,7 +25,7 @@ class LinearProbing:
     if self.slot_depth>1: # either 1 or 3
       self.table = [[None for i in range(slot_depth)] for _ in range(slot_size)]
       self.state = [[0 for i in range(slot_depth)] for _ in range(slot_size)]
-      self.slot_size = self.slot_size*self.slot_depth
+      #self.slot_size = self.slot_size*self.slot_depth
     else:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
@@ -113,7 +113,7 @@ class LinearProbing:
       self.state = self.unflatten(state, self.slot_depth)
       
   def flatten(self, arr):
-    ''' Convert a multi-dimensional array to single dimension'''
+    ''' Convert a multi-dimensional array to a single dimension'''
     return [item for sub in arr for item in sub]
 
   def unflatten(self, arr, cols):

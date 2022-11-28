@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os 
 
 def pre_process(f):
   """Preprocess file input.
@@ -17,6 +18,43 @@ def pre_process(f):
     print("Error opening file. Please try again.")
   return result[:-1] 
 
+import os
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+def divide_chunks(l, n):
+  for i in range(0, len(l), n):
+    yield l[i:i+n]
+
+def print_5iter(generator):
+  try:
+    assert next(generator, None) is not None
+  except AssertionError:
+    print('Iterator was exhausted when print statement called.')
+  print()
+  while True:
+    try:
+      a,b,c,d,e = next(generator)
+    except (StopIteration, ValueError):
+      break
+    print(a,b,c,d,e)
+  print()
+
+def print_3iter(generator):
+  try:
+    assert next(generator, None) is not None
+  except AssertionError:
+    print('Iterator was exhausted when print statement called.')  
+  print()
+  while True:
+    try:
+      a,b,c = next(generator)
+    except (StopIteration):
+      break
+    print(a,b,c)
+  print()
+
 def traverse(o, tree_types=(list, tuple)):
   ''' print(list(traverse(inp_data)))
   '''
@@ -27,7 +65,7 @@ def traverse(o, tree_types=(list, tuple)):
   else:
     yield o
 
-def output_results_to(f=None):
+def output_results_to(data, f=None):
   if f is None:
     pass
   else:

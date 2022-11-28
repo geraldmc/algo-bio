@@ -14,12 +14,13 @@ class Node:
 
 class SeparateChaining:
   ''' '''
-  def __init__(self, modulus=120, slot_size=120, slot_depth=1):
+  def __init__(self, hash_method=1, modulus=120, slot_size=120, slot_depth=1):
     if slot_depth > 1:
       raise ValueError('Only single bucket size allowed.')
     if slot_size != 120:
       raise ValueError('Slot size must be 120.')
     self.items_count = 0
+    self.hash_method = hash_method
     self.modulus = modulus
     self.slot_size = slot_size
     self.slot_depth = slot_depth
@@ -27,11 +28,21 @@ class SeparateChaining:
     self.first_collisions = 0
     self.second_collisions = 0
 
-  def hash_func(self, key, slot_size=None):
+  #def hash_func(self, key, slot_size=None):
+  #  if self.modulus not in [120, 113]:
+  #    raise ValueError('Modulus value limited to 120, 113.')
+  #  if not slot_size: slot_size = len(self.table)
+  #  return key % self.modulus
+
+  def hash_func(self, key):
+    import math
     if self.modulus not in [120, 113]:
-      raise ValueError('Modulus value limited to 120, 113.')
-    if not slot_size: slot_size = len(self.table)
-    return key % self.modulus
+      raise ValueError('Modulus value is limited to 120, 113.')
+    if not self.slot_size:  self.slot_size = len(self.table)
+    if self.hash_method==1: # simple division hashing
+      return key % self.modulus
+    elif self.hash_method==2: # multiplicative hashing
+      return math.floor(self.slot_size*(key*0.357840 % 1)) 
 
   def __insert_last(self, index, key):
     ''' Always insert new nodes following next.
