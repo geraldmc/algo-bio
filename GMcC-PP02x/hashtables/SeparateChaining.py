@@ -17,7 +17,8 @@ class Node:
     return str(self.key)
 
 class SeparateChaining:
-  ''' '''
+  ''' 
+  '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, slot_depth=1):
     if slot_depth > 1:
       raise ValueError('Only single bucket size allowed.')

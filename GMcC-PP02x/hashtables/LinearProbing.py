@@ -7,8 +7,6 @@ __assignment__  = "Programming Problem 2"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-# https://gist.github.com/cs-fedy
-
 class LinearProbing:
   '''Collision handling via linear probing. When collisions occur, 
      add 1 to the hash function and check if the next location is open. 
