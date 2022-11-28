@@ -17,11 +17,12 @@ class Node:
     return str(self.key)
 
 class SeparateChaining:
-  ''' 
+  ''' Collision handling via separate chaining.
+     State key: 1 = occupied, 0 = empty and -1 = deleted
   '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, slot_depth=1):
     if slot_depth > 1:
-      raise ValueError('Only single bucket size allowed.')
+      raise ValueError('Only one bucket size allowed.')
     if slot_size != 120:
       raise ValueError('Slot size must be 120.')
     self.items_count = 0

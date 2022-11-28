@@ -8,7 +8,8 @@ __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
 class QuadraticProbing:
-  ''' 
+  ''' Collision handling via quadratic probing.
+     State key: 1 = occupied, 0 = empty and -1 = deleted
   '''
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
                slot_depth=1, load_factor=1.00):
@@ -39,6 +40,7 @@ class QuadraticProbing:
       return math.floor(self.slot_size*(key*0.357840 % 1)) 
 
   def quadratic(self, index, table):
+    ''' '''
     found = False
     # limit variable restricts function from infinite loop
     limit = len(table)-5
