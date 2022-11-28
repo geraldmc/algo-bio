@@ -131,7 +131,6 @@ class LinearProbing:
 
   @property
   def slots_remaining(self):
-    ''' Return slots remaining, based on slot depth.'''
     if self.slot_depth>1:
       return len(self.table)*self.slot_depth - self.items_count
     else:

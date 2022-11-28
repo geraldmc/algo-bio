@@ -54,7 +54,7 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   print('Misc statistics:')
   print('Primary collisions: {}'.format(lph.collision_count(data)))
   print('Slots remaining: {}'.format(lph.slots_remaining))
-  print('Slots used: {}'.format(lph.slots_remaining))
+  print('Slots used: {}'.format(lph.items_count))
   print(end='\n\n')
   print('--------------------------------------------------------------------END')
 
@@ -151,3 +151,5 @@ if __name__ == "__main__":
                  hash_method=2)                           #10
     ChainHash(input_list, mod=120, depth=1, size=120, 
                  hash_method=2)                           #10
+# ----------------------------------- FIN -----------------------------------
+
