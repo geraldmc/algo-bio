@@ -122,11 +122,6 @@ class QuadraticProbing:
     unique = set(hashed_items)
     return len(hashed_items)-len(unique) # diff of
 
-    if self.hash_method==1: # simple division hashing
-      return key % self.modulus
-    elif self.hash_method==2: # multiplicative hashing
-      return math.floor(self.slot_size*(key*0.357840 % 1)) 
-
   @property
   def slots_remaining(self):
     if self.slot_depth>1:
