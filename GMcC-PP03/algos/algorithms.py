@@ -39,17 +39,41 @@ def LCS1(s1,s2):
 	return str(opt[n][m]),S
 
 def LCS2(s1, s2):
-  matrix = [["" for x in range(len(s2))] for x in range(len(s1))]
+  ''' Dynamic Programming #2 implementation of LCS problem
+  '''
+  m = [["" for x in range(len(s2))] for x in range(len(s1))]
   for i in range(len(s1)):
     for j in range(len(s2)):
       if s1[i] == s2[j]:
         if i == 0 or j == 0:
-          matrix[i][j] = s1[i]
+          m[i][j] = s1[i]
         else:
-          matrix[i][j] = matrix[i-1][j-1] + s1[i]
+          m[i][j] = m[i-1][j-1] + s1[i]
       else:
-        matrix[i][j] = max(matrix[i-1][j], matrix[i][j-1], key=len)
+        m[i][j] = max(m[i-1][j], m[i][j-1], key=len)
 
-  cs = matrix[-1][-1]
+def print_LCS(X,Y):
+  # Create a string variable to store the lcs string
+  lcs = ""
 
-  return len(cs), cs
+  # Start from the right-most-bottom-most corner and
+  # one by one store characters in lcs[]
+  i = m
+  j = n
+  while i > 0 and j > 0:
+      # If current character in X[] and Y are same, then
+      # current character is part of LCS
+      if X[i-1] == Y[j-1]:
+          lcs += X[i-1]
+          i -= 1
+          j -= 1
+      # If not same, then find the larger of two and
+      # go in the direction of larger value
+      elif L[i-1][j] > L[i][j-1]:
+          i -= 1
+      else:
+          j -= 1
+  # We traversed the table in reverse order
+  # LCS is the reverse of what we got
+  lcs = lcs[::-1]
+  print("LCS of " + X + " and " + Y + " is " + lcs)
