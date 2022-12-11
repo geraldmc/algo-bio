@@ -29,26 +29,21 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 
 ```
 .
-├── LICENSE
 ├── README.md
 ├── analysis
 │   ├── __init__.py
 │   └── metrics.py
 ├── data
-│   ├── Input.txt
-│   └── extra.txt
+│   └── Input.txt
+├── docs
+│   └── Proj3.pdf
 ├── driver.py
 ├── filehandler
 │   ├── __init__.py
 │   └── io.py
-├── hashtables
-│   ├── LinearProbing.py
-│   ├── QuadraticProbing.py
-│   ├── SeparateChaining.py
-│   └── __init__py
 └── perf.py
 ```
-To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. 
+To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. 
 
 ```
 >> python driver.py -file
