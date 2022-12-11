@@ -15,7 +15,7 @@ __assignment__  = "Programming Problem 2"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-NUM_BINS = 6 # for distribution map
+NUM_BINS = 6 # for hash distribution map
 
 def default():
   # Support file input.
