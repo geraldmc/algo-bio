@@ -18,7 +18,7 @@ and the following message will be displayed.
 
 usage: driver.py [-h] -file
 
-Exercise in hashing.
+Exercise in longest common subsequence.
 
 optional arguments:
   -h, --help  show this help message and exit
@@ -35,8 +35,6 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 │   └── metrics.py
 ├── data
 │   └── Input.txt
-├── docs
-│   └── Proj3.pdf
 ├── driver.py
 ├── filehandler
 │   ├── __init__.py
