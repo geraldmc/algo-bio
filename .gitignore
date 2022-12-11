@@ -132,7 +132,7 @@ dmypy.json
 # Other
 Program-HW1/run_strassen.py
 Program-HW1/delete_this.py
-GMcC-PP03/*
+GMcC-PP03/docs/
 
 Colab/*
 ignore/
