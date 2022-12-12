@@ -24,6 +24,10 @@ if __name__ == "__main__":
 
   S1 = 'ACCGGTCGACTGCGCGGAAGCCGGCCGAA'
   S2 = 'GTCGTTCGGAATGCCGTTGCTCTGTAAA'
-
-  print(LCS1(S1, S2)) 
-  print(LCS2(S1, S2)) 
+  S3 = 'ATTGCATTGCATGGGCGCGATGCATTTGGTTAATTCCTCG'
+  S4 = 'CTTGCTTAAATGTGCA'
+  
+  sequences = [S1, S2, S3, S4]
+  for idx, seq in enumerate(sequences):
+    print(LCS1(S1, S2)) 
+    print(LCS2(S1, S2)) 
