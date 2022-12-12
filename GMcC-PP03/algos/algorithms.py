@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-def LCS1(s1,s2):
-	n = len(s1)
-	m = len(s2)
+def LCS1(X,Y):
+	n = len(X)
+	m = len(Y)
 
 	# Opt array stores the optimal solution value till ith and jth position for 2 strings
 	opt = [[0 for i in range(0,m+1)] for j in range(0,n+1)]
@@ -10,9 +10,10 @@ def LCS1(s1,s2):
 	pi = [[0 for i in range(0,m+1)] for j in range(0,n+1)]
 
 	# Calculate the length of the longest common subsequence
+  # in opt array, 
 	for i in range(1,n+1):
 		for j in range(1,m+1):
-			if s1[i-1] == s2[j-1]:
+			if X[i-1] == Y[j-1]:
 				opt[i][j] = opt[i-1][j-1] + 1
 				pi[i][j] = 0
 			elif opt[i][j-1] >= opt[i-1][j]:
@@ -20,7 +21,7 @@ def LCS1(s1,s2):
 				pi[i][j] = 1
 			else:
 				opt[i][j] = opt[i-1][j]
-				pi[i][j] = 2 #Length of the lcs is saved at opt[n][m]
+				pi[i][j] = 2 
 
 	# Calculate the longest common subsequence using the Pi array
 	i = n
@@ -29,7 +30,7 @@ def LCS1(s1,s2):
 
 	while i>0 and j>0:
 		if pi[i][j] == 0:
-			S = s1[i-1] + S
+			S = X[i-1] + S
 			i-=1
 			j-=1
 		elif pi[i][j] == 2:
@@ -37,20 +38,23 @@ def LCS1(s1,s2):
 		else:
 			j-=1
 	return str(opt[n][m]),S
+# end LCS1 -------------------
 
-def LCS2(s1, s2):
-  ''' Dynamic Programming #2 implementation of LCS problem
+def LCS2(X, Y):
+  ''' Dynamic implementation of LCS problem
   '''
-  m = [["" for x in range(len(s2))] for x in range(len(s1))]
-  for i in range(len(s1)):
-    for j in range(len(s2)):
-      if s1[i] == s2[j]:
+  m = [["" for x in range(len(Y))] for x in range(len(X))]
+  for i in range(len(X)):
+    for j in range(len(Y)):
+      if X[i] == Y[j]:
         if i == 0 or j == 0:
-          m[i][j] = s1[i]
+          m[i][j] = X[i]
         else:
-          m[i][j] = m[i-1][j-1] + s1[i]
+          m[i][j] = m[i-1][j-1] + X[i]
       else:
         m[i][j] = max(m[i-1][j], m[i][j-1], key=len)
+  cs = m[-1][-1]
+  return str(len(cs)), cs
 
 def print_LCS(X,Y):
   # Create a string variable to store the lcs string
