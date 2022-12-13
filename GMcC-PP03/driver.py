@@ -31,3 +31,12 @@ if __name__ == "__main__":
   for idx, seq in enumerate(sequences):
     print(LCS1(S1, S2)) 
     print(LCS2(S1, S2)) 
+
+# Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
+# import itertools
+# for a, b in itertools.combinations(mylist, 2):
+#    compare(a, b)
+
+# for i in range(len(mylist)):
+#    for j in range(i + 1, len(mylist)):
+#        compare(mylist[i], mylist[j])
