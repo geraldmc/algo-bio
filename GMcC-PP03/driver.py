@@ -22,7 +22,6 @@ def default():
     print('File not found.')
   return (inp.strip())
 
-
 if __name__ == "__main__":
   """ Driver. 
   """
@@ -44,3 +43,4 @@ if __name__ == "__main__":
 # Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
   for s1, s2 in itertools.combinations(sequences, 2):
     print(LCS2(s1, s2))
+
