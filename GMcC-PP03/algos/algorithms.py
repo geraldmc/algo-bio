@@ -6,8 +6,27 @@ Docstrings do appear in the bytecode, so you can access this through
 the ``__doc__`` attribute. This is also what you'll see if you call
 help() on a module or any other Python object.
 """
+from analysis.metrics import profile
 
+#https://www.enjoyalgorithms.com/blog/longest-common-subsequence
+@profile
 def LCS1(X, Y):
+  """
+  A brute-force approach using recursion. This returns the correct subsequence 
+  but in reverse. To fix, simply apply [::-1] to the resulting string.
+  """
+  if not X or not Y:
+    return ''
+  x, xs, y, ys = X[0], X[1:], Y[0], Y[1:]
+
+  if x == y:
+    return str(LCS1(xs, ys)) + x
+  else:
+    return max(LCS1(X, ys), LCS1(xs, Y), key=len)
+# end LCS1 ---------------------------------------------------------------------
+
+@profile
+def LCS2(X, Y):
   '''
     The first two functions (LCS1 and LCS2) are essentially equivalent. Each 
     takes as input sequences X[1..m] and Y[1..n], computes the LCS between 
@@ -30,9 +49,9 @@ def LCS1(X, Y):
             result += X[i-1]
 
     return result
-# end LCS1 ---------------------------------------------------------------------
+# end LCS2 ---------------------------------------------------------------------
 
-def LCS2(X, Y):
+def LCS3(X, Y):
   ''' 
 
   '''
@@ -48,9 +67,10 @@ def LCS2(X, Y):
         m[i][j] = max(m[i-1][j], m[i][j-1], key=len)
   cs = m[-1][-1]
   return str(len(cs)), cs
-# end LCS2 ---------------------------------------------------------------------
 
-def LCS3(X,Y):
+# end LCS3 ---------------------------------------------------------------------
+
+def LCS4(X,Y):
   ''' Dynamic programming example.
   '''
   n = len(X)
@@ -90,30 +110,12 @@ def LCS3(X,Y):
     else:
       j-=1
   return str(opt[n][m]),S
-# end LCS1 ---------------------------------------------------------------------
-
-
-def LCS4(X, Y):
-  """
-  Recursive approach that is quite slow. This returns the correct subsequence 
-  but in reverse. To fix this apply [::-1] to resulting string. 
-  https://rosettacode.org/wiki/Longest_common_subsequence#Recursion_7 
-  """
-  if not X or not Y:
-    return ''
-  x, xs, y, ys = X[0], X[1:], Y[0], Y[1:]
-
-  if x == y:
-    return str(LCS4(xs, ys)) + x
-  else:
-    return max(LCS4(X, ys), LCS4(xs, Y), key=len)
-# end LCS4 ---------------------------------------------------------------------
+# end LCS3 ---------------------------------------------------------------------
 
 
 def print_LCS(X,Y,Z):
   ''' Simple function to print all sequence combinations
   '''
-  print()
   print('LCS of {} and {} is: \n {} with length of: {}'.format(X, Y, Z[1], Z[0]))
   print()
   # end print_LCS --------------------------------------------------------------

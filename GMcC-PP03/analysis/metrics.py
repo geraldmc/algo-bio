@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import os 
 from random import choice
+import time
 
 # https://stackoverflow.com/questions/21205836/generating-random-sequences-of-dna
 
@@ -17,3 +18,23 @@ def dna_str(length, weighted=False):
     else:
       dna+=choice("CGTA")
   return dna
+
+def profile(f):
+  ''' Function to profile a possibly recursive function
+  '''
+  is_evaluating = False
+  def g(x,y):
+      nonlocal is_evaluating
+      if is_evaluating:
+          return f(x,y)
+      else:
+          start_time = time.perf_counter()
+          is_evaluating = True
+          try:
+              value = f(x,y)
+          finally:
+              is_evaluating = False
+          end_time = time.perf_counter()
+          print('Elapsed time (sec): {time}'.format(time=end_time-start_time))
+          return value
+  return g
