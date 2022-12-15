@@ -38,3 +38,13 @@ def profile(f):
           print('Elapsed time (sec): {time}'.format(time=end_time-start_time))
           return value
   return g
+
+def call_counter(f):
+  """
+  Adds a ".calls" variable to the function that increments w/every call.
+  """
+  def wrapped(*args, **kwargs): # deal with any/all arguments
+      wrapped.calls += 1
+      return f(*args, **kwargs) # call the real function here
+  wrapped.calls = 0
+  return wrapped
