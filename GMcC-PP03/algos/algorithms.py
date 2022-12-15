@@ -28,10 +28,10 @@ def LCS1(X, Y):
 @profile
 def LCS2(X, Y):
   '''
-    The first two functions (LCS1 and LCS2) are essentially equivalent. Each 
-    takes as input sequences X[1..m] and Y[1..n], computes the LCS between 
-    X[1..i] and Y[1..j] for all 1 ≤ i ≤ m and 1 ≤ j ≤ n, and stores it in C[i,j]. 
-    C[m,n] will contain the length of the LCS of X and Y.
+    The next two DP functions (LCS2 and LCS3) are essentially equivalent. Each 
+    takes input sequences X[1..m] and Y[1..n], and computes the LCS between 
+    X[1..i] and Y[1..j] for all 1 ≤ i ≤ m and 1 ≤ j ≤ n. Each stores results in 
+    an array that contains the length of the LCS of X and Y.
   '''
   lengths = [[0] * (len(Y)+1) for _ in range(len(X)+1)]
   for i, x in enumerate(X):
@@ -52,7 +52,7 @@ def LCS2(X, Y):
 # end LCS2 ---------------------------------------------------------------------
 
 def LCS3(X, Y):
-  ''' 
+  ''' A second DP example.
 
   '''
   m = [['' for x in range(len(Y))] for x in range(len(X))]
@@ -71,7 +71,7 @@ def LCS3(X, Y):
 # end LCS3 ---------------------------------------------------------------------
 
 def LCS4(X,Y):
-  ''' Dynamic programming example.
+  ''' A final slightly more interesting DP example.
   '''
   n = len(X)
   m = len(Y)
@@ -114,7 +114,7 @@ def LCS4(X,Y):
 
 
 def print_LCS(X,Y,Z):
-  ''' Simple function to print all sequence combinations
+  ''' Function to print all sequence combinations
   '''
   print('LCS of {} and {} is: \n {} with length of: {}'.format(X, Y, Z[1], Z[0]))
   print()
