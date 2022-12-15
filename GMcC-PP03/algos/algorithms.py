@@ -27,32 +27,7 @@ def LCS1(X, Y):
 
 @profile
 def LCS2(X, Y):
-  '''
-    The next two DP functions (LCS2 and LCS3) are essentially equivalent. Each 
-    takes input sequences X[1..m] and Y[1..n], and computes the LCS between 
-    X[1..i] and Y[1..j] for all 1 ≤ i ≤ m and 1 ≤ j ≤ n. Each stores results in 
-    an array that contains the length of the LCS of X and Y.
-  '''
-  lengths = [[0] * (len(Y)+1) for _ in range(len(X)+1)]
-  for i, x in enumerate(X):
-    for j, y in enumerate(Y):
-      if x == y:
-        lengths[i+1][j+1] = lengths[i][j] + 1
-      else:
-        lengths[i+1][j+1] = max(lengths[i+1][j], lengths[i][j+1])
-
-    # read a substring from the matrix
-    result = ''
-    j = len(Y)
-    for i in range(1, len(X)+1):
-        if lengths[i][j] != lengths[i-1][j]:
-            result += X[i-1]
-
-    return result
-# end LCS2 ---------------------------------------------------------------------
-
-def LCS3(X, Y):
-  ''' A second DP example.
+  ''' An iterative DP example.
 
   '''
   m = [['' for x in range(len(Y))] for x in range(len(X))]
@@ -69,6 +44,33 @@ def LCS3(X, Y):
   return str(len(cs)), cs
 
 # end LCS3 ---------------------------------------------------------------------
+
+@profile
+def LCS3(X, Y):
+  '''
+    Takes input sequences X[1..m] and Y[1..n], and computes the LCS between 
+    X[1..i] and Y[1..j] for all 1 ≤ i ≤ m and 1 ≤ j ≤ n. Each stores results in 
+    an array that contains the length of the LCS of X and Y.
+  '''
+  count = 0
+  lengths = [[0] * (len(Y)+1) for _ in range(len(X)+1)]
+  for i, x in enumerate(X):
+    for j, y in enumerate(Y):
+      if x == y:
+        lengths[i+1][j+1] = lengths[i][j] + 1
+      else:
+        lengths[i+1][j+1] = max(lengths[i+1][j], lengths[i][j+1])
+
+    # read a substring from the matrix
+    result = ''
+    j = len(Y)
+    for i in range(1, len(X)+1):
+      if lengths[i][j] != lengths[i-1][j]:
+        result += X[i-1]
+
+    return result
+# end LCS2 ---------------------------------------------------------------------
+
 
 def LCS4(X,Y):
   ''' A final slightly more interesting DP example.
@@ -111,11 +113,3 @@ def LCS4(X,Y):
       j-=1
   return str(opt[n][m]),S
 # end LCS3 ---------------------------------------------------------------------
-
-
-def print_LCS(X,Y,Z):
-  ''' Function to print all sequence combinations
-  '''
-  print('LCS of {} and {} is: \n {} with length of: {}'.format(X, Y, Z[1], Z[0]))
-  print()
-  # end print_LCS --------------------------------------------------------------
