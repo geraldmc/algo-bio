@@ -45,8 +45,8 @@ if __name__ == "__main__":
 # Run the base DNA string comparison from the supplied input file --------------
 # Compare every element (sequence) to every other element (sequence), only once. 
 # Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
-  for s1, s2 in itertools.combinations(sequences, 2):
-    print_LCS(s1, s2, LCS4(s1, s2))
+#  for s1, s2 in itertools.combinations(sequences, 2):
+#    print_LCS(s1, s2, LCS3(s1, s2))
 
 if RUN_ALL:
   # Run generated DNA string comparisons -------------------------------------
@@ -61,4 +61,4 @@ if RUN_ALL:
     for i in idx1:
         S1 = dna_str(i)
         S2 = dna_str(i)
-        LCS4(S1, S2)
+        LCS2(S1, S2)
