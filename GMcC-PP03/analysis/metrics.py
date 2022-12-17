@@ -30,9 +30,9 @@ def profile(f):
       inner function.
   ''' 
  
-  is_evaluating = False # handles nested recursion
+  is_evaluating = False # handle nested recursion
   def g(x,y):
-    nonlocal is_evaluating # useful with variables inside nested functions
+    nonlocal is_evaluating # used with variables inside nested functions
     if is_evaluating:
       return f(x,y)
     else:
@@ -43,7 +43,7 @@ def profile(f):
       finally:
           is_evaluating = False
       end_time = time.perf_counter()
-      print('Value {} had elapsed time (sec): {time}'.format(value, time=end_time-start_time))
+      print('LCS of length {} found in {time:.3f} seconds.'.format(value[0], time=end_time-start_time))
       return value
   return g
 
@@ -56,6 +56,7 @@ def call_counter(f):
       return f(*args, **kwargs) # call the real function here
   wrapped.calls = 0
   return wrapped
+
 
 def print_LCS(X,Y,Z):
   ''' Function to print all sequence combinations
