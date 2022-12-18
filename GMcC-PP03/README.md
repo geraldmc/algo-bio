@@ -60,6 +60,9 @@ Enter file input path: ./data/Input.txt
 
 There are several modules contained in this submission:
 
+The module `analysis` contains functions for profiling the code, notably `profile` which provides a means of 
+instrumenting each LCS algorithm and measuring its performance. 
+
 ## Performance
 
 ## REFERENCES
