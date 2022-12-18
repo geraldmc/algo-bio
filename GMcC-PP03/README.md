@@ -72,7 +72,7 @@ Finally, the `algorithms` module provides three
 
 Following is a performance plot of the three algorithms: LCS1 (recursive), LCS2 and LCS3 (DP/iterative).
 
-![alt text](perf_compare.png "Title")
+![alt text](perf_compare.png "Performance plot")
 
 ## Contact:
 
