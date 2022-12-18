@@ -61,7 +61,10 @@ Enter file input path: ./data/Input.txt
 There are several modules contained in this submission:
 
 The module `analysis` contains functions for profiling the code, notably `profile` which provides a means of 
-instrumenting each LCS algorithm and measuring its performance. 
+instrumenting each LCS algorithm and measuring its performance. This module also contains functions for randomly generating DNA strings 
+of varying length. ALso included is an *ipynb notebook for re-creating the plots that are included in the accompanying report. 
+
+The module ``
 
 ## Performance
 
