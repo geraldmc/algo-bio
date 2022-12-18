@@ -9,7 +9,7 @@ help() on a module or any other Python object.
 from analysis.metrics import profile
 
 #https://www.enjoyalgorithms.com/blog/longest-common-subsequence
-#@profile
+@profile
 def LCS1(X, Y):
   '''
   A brute-force approach using recursion. This returns the correct subsequence 
@@ -17,12 +17,12 @@ def LCS1(X, Y):
   '''
   if not X or not Y:
     return ''
-  x0, x1, y0, y1 = X[0], X[1:], Y[0], Y[1:] # X, Y, and X,Y offset by 1. 
+  x, xs, y, ys = X[0], X[1:], Y[0], Y[1:]
 
-  if x0 == y0:
-    return str(LCS1(x1, y1)) + x0
+  if x == y:
+    return str(LCS1(xs, ys)) + x
   else:
-    return max(LCS1(X, y1), LCS1(x1, Y), key=len)
+    return max(LCS1(X, ys), LCS1(xs, Y), key=len)
 
 def call_LCS1(X,Y):
   S = LCS1(X, Y)[::-1]

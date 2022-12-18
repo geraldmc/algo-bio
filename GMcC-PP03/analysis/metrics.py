@@ -43,7 +43,7 @@ def profile(f):
       finally:
           is_evaluating = False
       end_time = time.perf_counter()
-      print('LCS of length {} found in {time:.3f} seconds.'.format(value[0], time=end_time-start_time))
+      print('LCS of length {} found in {time:.3f} seconds.'.format(len(value), time=end_time-start_time))
       return value
   return g
 
