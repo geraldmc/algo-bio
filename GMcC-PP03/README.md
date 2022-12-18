@@ -50,7 +50,7 @@ To run the program change directories to `GMcC-PP03` and execute the file `drive
 >> python driver.py -file
 ```
 
-You will be prompted for a path to the input file. The required input file is provided, named `Input.txt`.
+You will be prompted for a path to the input file. The required input file is provided, renamed as `Input.txt`.
 
 ```
 Enter file input path: ./data/Input.txt
@@ -66,7 +66,7 @@ of varying length. Finally, it includes an *.ipynb notebook for re-creating the 
 
 The module `filehandler` contains the function `pre_process` which loads provided data from file and renders it as a dictionary for the three algorithms.  
 
-Finally, the `algorithms` module provides three 
+Finally, the `algorithms` module provides three implementations of the longest common subsequence problem. `LCS1` is a recursive solution; `LCS2` and `LCS3` are dynamic programming solutions. 
 
 ## Performance:
 
