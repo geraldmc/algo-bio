@@ -70,6 +70,8 @@ Finally, the `algorithms` module provides three
 
 ## Performance
 
+![alt text](perf_compare.png "Title")
+
 ## REFERENCES
 
  Email to student: gmccoll2@jhu.edu
