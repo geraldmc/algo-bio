@@ -68,11 +68,13 @@ The module `filehandler` contains the function `pre_process` which loads provide
 
 Finally, the `algorithms` module provides three 
 
-## Performance
+## Performance:
+
+Following is a performance plot of the three algorithms: LCS1 (recursive), LCS2 and LCS3 (DP/iterative).
 
 ![alt text](perf_compare.png "Title")
 
-## REFERENCES
+## Contact:
 
  Email to student: gmccoll2@jhu.edu
 
