@@ -30,16 +30,19 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 ```
 .
 ├── README.md
+├── algos
+│   ├── __init__.py
+│   └── algorithms.py
 ├── analysis
 │   ├── __init__.py
-│   └── metrics.py
+│   ├── metrics.py
+│   └── perf_runner.ipynb
 ├── data
 │   └── Input.txt
 ├── driver.py
-├── filehandler
-│   ├── __init__.py
-│   └── io.py
-└── perf.py
+└── filehandler
+    ├── __init__.py
+    └── io.py
 ```
 To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. 
 
@@ -47,7 +50,7 @@ To run the program change directories to `GMcC-PP03` and execute the file `drive
 >> python driver.py -file
 ```
 
-You will be prompted for a path to the input file.
+You will be prompted for a path to the input file. The required input file is provided, named `Input.txt`.
 
 ```
 Enter file input path: ./data/Input.txt

@@ -4,8 +4,6 @@ import os
 from random import choice
 import time
 
-# https://stackoverflow.com/questions/21205836/generating-random-sequences-of-dna
-
 def weightedchoice(items): # doesn't require numbers to add up to 100
 	return choice("".join(x * y for x, y in items))
 
@@ -50,17 +48,10 @@ def profile(f):
 def call_counter(f):
   """
   Adds a ".calls" variable to the function that increments w/every call.
+  Currently unused.
   """
   def wrapped(*args, **kwargs): # deal with any/all arguments
       wrapped.calls += 1
       return f(*args, **kwargs) # call the real function here
   wrapped.calls = 0
   return wrapped
-
-
-def print_LCS(X,Y,Z):
-  ''' Function to print all sequence combinations
-  '''
-  print('LCS of {} and {} is: \n {} with length of: {}'.format(X, Y, Z[1], Z[0]))
-  print()
-  # end print_LCS --------------------------------------------------------------
