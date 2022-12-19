@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-"""A module-level docstring
-
-Notice the comment above the docstring specifying the encoding.
-Docstrings do appear in the bytecode, so you can access this through
-the ``__doc__`` attribute. This is also what you'll see if you call
-help() on a module or any other Python object.
+"""A module for implementing various solutions to the 
+longest common subsequence problem. The first is a recursive 
+solution that executes with factorial complexity. The second and
+third are dynamic programming solution. Of these, the seccond (LCS3)
+is the most efficient. Each is wrapped in a decorator function `@profile`
+to measure their relative performance. The code for this decorator is contained
+in the file ./analysis/metrics.py
 """
 from analysis.metrics import profile
 
@@ -48,7 +49,7 @@ def LCS2(X,Y):
 
 @profile
 def LCS3(X,Y):
-  ''' An iterative DP example using memoization.
+  ''' A second iterative DP example that runs in O(nm) time.
   '''
   n,m = len(X), len(Y)
   result = []
