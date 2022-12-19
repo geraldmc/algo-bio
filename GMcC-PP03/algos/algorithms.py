@@ -8,7 +8,6 @@ help() on a module or any other Python object.
 """
 from analysis.metrics import profile
 
-#https://www.enjoyalgorithms.com/blog/longest-common-subsequence
 @profile
 def LCS1(X, Y):
   '''
@@ -49,7 +48,7 @@ def LCS2(X,Y):
 
 @profile
 def LCS3(X,Y):
-  ''' Return table such that L[j][k] is length of lcs for X[0:j] and Y[0:k].
+  ''' An iterative DP example using memoization.
   '''
   n,m = len(X), len(Y)
   result = []
