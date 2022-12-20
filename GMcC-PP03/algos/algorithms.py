@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""A module for implementing various solutions to the 
-longest common subsequence problem. The first is a recursive 
-solution that executes with factorial complexity. The second and
-third are dynamic programming solution. Of these, the seccond (LCS3)
-is the most efficient. Each is wrapped in a decorator function `@profile`
-to measure their relative performance. The code for this decorator is contained
+"""A module for implementing solutions to the longest common subsequence 
+problem. The first is a recursive solution that executes with factorial 
+complexity. The second and third are dynamic programming solution. Of these, 
+the seccond (LCS3) is the most efficient. Each is wrapped in a decorator function 
+`@profile` to measure their performance. The code for this decorator is contained 
 in the file ./analysis/metrics.py
 """
 from analysis.metrics import profile
@@ -25,6 +24,7 @@ def LCS1(X, Y):
     return max(LCS1(X, ys), LCS1(xs, Y), key=len)
 
 def call_LCS1(X,Y):
+  ''' Convenience function for calling LCS1. '''
   S = LCS1(X, Y)[::-1]
   return str(len(S)), S
 # end LCS1 ---------------------------------------------------------------------
@@ -32,6 +32,7 @@ def call_LCS1(X,Y):
 @profile
 def LCS2(X,Y):
   ''' An iterative DP example.
+  Running time is theta(mn)
   '''
   m = [['' for x in range(len(Y))] for x in range(len(X))]
   for i in range(len(X)):
@@ -49,7 +50,7 @@ def LCS2(X,Y):
 
 @profile
 def LCS3(X,Y):
-  ''' A second iterative DP example that runs in O(nm) time.
+  ''' A second iterative DP example that runs in O(mn) time.
   '''
   n,m = len(X), len(Y)
   result = []
