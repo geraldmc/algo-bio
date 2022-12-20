@@ -74,6 +74,58 @@ Following is a performance plot of the three algorithms: LCS1 (recursive), LCS2 
 
 ![alt text](perf_compare.png "Performance plot")
 
+
+## Output
+
+Enter file input path: ./data/input.txt
+
+NOTE: The recursive LCS1 function runs very slowly on sequences longer than
+18 characters. It is run on generated test data specific to it, not on the 
+provided test data (for time considerations).
+
+Running LCS2 on provided data...
+
+	LCS of length 20 found in 0.002 seconds.
+	LCS of length 19 found in 0.002 seconds.
+	LCS of length 11 found in 0.001 seconds.
+	LCS of length 20 found in 0.001 seconds.
+	LCS of length 12 found in 0.001 seconds.
+	LCS of length 13 found in 0.001 seconds.
+
+Running LCS3 on provided data...
+
+	LCS of length 20 found in 0.001 seconds.
+	LCS of length 19 found in 0.001 seconds.
+	LCS of length 11 found in 0.000 seconds.
+	LCS of length 20 found in 0.001 seconds.
+	LCS of length 12 found in 0.000 seconds.
+	LCS of length 13 found in 0.000 seconds.
+
+------------------------generated---------------------------
+
+Running LCS1 on generated data...
+
+	LCS of length C found in 0.000 seconds.
+	LCS of length G found in 0.001 seconds.
+	LCS of length A found in 0.001 seconds.
+	LCS of length G found in 0.001 seconds.
+	LCS of length G found in 0.001 seconds.
+
+Running LCS2 on generated data...
+
+	LCS of length 1777 found in 2.708 seconds.
+	LCS of length 1950 found in 3.292 seconds.
+	LCS of length 2134 found in 4.004 seconds.
+	LCS of length 2324 found in 4.782 seconds.
+
+Running LCS3 on generated data...
+
+	LCS of length 1780 found in 1.626 seconds.
+	LCS of length 1956 found in 2.018 seconds.
+	LCS of length 2131 found in 2.393 seconds.
+	LCS of length 2332 found in 2.806 seconds.
+
+--------------------------fin-------------------------------
 ## Contact:
 
  Email to student: gmccoll2@jhu.edu
