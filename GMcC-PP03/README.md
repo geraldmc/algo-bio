@@ -1,3 +1,5 @@
+# Programming Project 3 - Fall 2022 (Gerald McCollam)
+# EN.605.620.81.FA22 Algorithms for Bioinformatics
 
 ## Requirements
 
@@ -76,6 +78,7 @@ Following is a performance plot of the three algorithms: LCS1 (recursive), LCS2 
 
 
 ## Output
+#### Following is output from a sample run at the command line.
 
 Enter file input path: ./data/input.txt
 
