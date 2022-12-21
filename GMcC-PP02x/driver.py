@@ -31,7 +31,7 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   for item in data:
     lph.insert(item)
   lph_table = ['-----' if i is None else i for i in lph.table]
-  print(end='\n\n')
+  print(end='\n')
   if hash_method==1:
     print('LINEAR PROBING, hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 1))
@@ -55,7 +55,7 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   print('Primary collisions: {}'.format(lph.collision_count(data)))
   print('Slots remaining: {}'.format(lph.slots_remaining))
   print('Slots used: {}'.format(lph.items_count))
-  print(end='\n\n')
+  print(end='\n')
   print('--------------------------------------------------------------------END')
 
 def QuadHash(data, mod, depth, size=120, hash_method=1):
@@ -64,7 +64,7 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   for item in data:
     qph.insert(item)
   qph_table = ['-----' if i is None else i for i in qph.table]
-  print(end='\n\n')
+  print(end='\n')
   if hash_method==1:
     print('QUADRATIC PROBING, hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 1))
@@ -88,7 +88,7 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   print('Primary collisions: {}'.format(qph.collision_count(data)))
   print('Slots remaining: {}'.format(qph.slots_remaining))
   print('Slots used: {}'.format(qph.items_count))
-  print(end='\n\n')
+  print(end='\n')
   print('--------------------------------------------------------------------END')
 
 def ChainHash(data, mod, depth, size, hash_method):
@@ -96,7 +96,7 @@ def ChainHash(data, mod, depth, size, hash_method):
   for item in data:
     sch.insert(item)
   sch_table = ['-----' if i is None else i for i in sch.table]
-  print(end='\n\n')
+  print(end='\n')
   print('METHOD: Chaining, hash map (mod={}, depth={}, size={})'.format(mod, depth, size))
   sch_iter = divide_chunks(sch_table, 5)
   print_5iter(sch_iter)
@@ -111,7 +111,7 @@ def ChainHash(data, mod, depth, size, hash_method):
   print('\tSlots used: {}'.format(sch.items_count))
 
 
-  print(end='\n\n')
+  print(end='\n')
   print('--------------------------------------------------------------------END')
 
 if __name__ == "__main__":
