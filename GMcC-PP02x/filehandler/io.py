@@ -55,6 +55,7 @@ def print_3iter(generator):
 
 def traverse(o, tree_types=(list, tuple)):
   ''' print(list(traverse(inp_data)))
+      CURRENTLY UNUSED
   '''
   if isinstance(o, tree_types):
     for value in o:
@@ -64,7 +65,7 @@ def traverse(o, tree_types=(list, tuple)):
     yield o
 
 def output_results_to(data, f=None):
-  ''' '''
+  ''' CURRENTLY UNUSED '''
   if f is None:
     pass
   else:

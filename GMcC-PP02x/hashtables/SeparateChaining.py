@@ -8,7 +8,7 @@ __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
 class Node:
-  ''' Node class is required for chaining in table.'''
+  ''' A Node class is required for chaining `in table`.'''
   def __init__(self, key):
     self.key = key
     self.next = None
