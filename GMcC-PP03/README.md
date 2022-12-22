@@ -16,8 +16,6 @@ The program is made up of several modules. The user interacts with the file `dri
 and the following message will be displayed.
 
 ```
->> python driver.py -h
-
 usage: driver.py [-h] --input INFILE [--output OUTPUT]
 
 optional arguments:
