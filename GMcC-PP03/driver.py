@@ -54,7 +54,7 @@ if __name__ == "__main__":
 # print ("This won't appear in file")
 # f.close()
 
-  if args.infile.name == './data/Additional.txt':
+  if args.infile.name == './data/Added.txt':
     print('------------ RUNNING 3 ALGORITHMS ON STUDENT SUPPLIED DATA ---------------')
     print()
     sleep(2)
