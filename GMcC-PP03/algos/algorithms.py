@@ -8,7 +8,7 @@ in the file ./analysis/metrics.py
 """
 from analysis.metrics import profile
 
-@profile
+#@profile
 def LCS1(X, Y):
   '''
   A brute-force approach using recursion. This returns the correct subsequence 
@@ -25,8 +25,10 @@ def LCS1(X, Y):
 
 def call_LCS1(X,Y):
   ''' Convenience function for calling LCS1. '''
+  result = []
   S = LCS1(X, Y)[::-1]
-  return str(len(S)), S
+  print ('\t' + 'LCS of length: ' + str(len(S)) + ' ', S)
+  return S
 # end LCS1 ---------------------------------------------------------------------
 
 @profile

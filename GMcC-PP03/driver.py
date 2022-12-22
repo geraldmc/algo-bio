@@ -14,33 +14,64 @@ __assignment__  = "Programming Problem 3"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-RUN_ALL = True
+RUN_ALL = False
 
-def default():
+class Tee(object):
+  ''' Class object that allows printing program output to console AND TO A FILE.
+  '''
+  def __init__(self, *files):
+    self.files = files
+  def write(self, obj):
+    for f in self.files:
+      f.write(obj)
+      f.flush() # If you want the output to be visible immediately
+  def flush(self) :
+    for f in self.files:
+      f.flush()
+
+#def default():
   # Support file input.
-  try:
-    inp = input("Enter file input path: ")
-    print()
-  except (FileNotFoundError, IsADirectoryError):
-    print('File not found.')
-  return (inp.strip())
+#  try:
+#    inp = input("Enter file input path: ")
+#    print()
+#  except (FileNotFoundError, IsADirectoryError):
+#    print('File not found.')
+#  return (inp.strip())
 
 if __name__ == "__main__":
   """ Driver. 
   """
-  parser = argparse.ArgumentParser(description='Exercise in longest common subsequence.')
-  group = parser.add_mutually_exclusive_group(required=True)
-  group.add_argument('-file', action="store_true",
-                      help='provide a path to a file containing sequences.')
-  args = parser.parse_args()
+  #parser = argparse.ArgumentParser(description='Exercise in longest common subsequence.')
+  #group = parser.add_mutually_exclusive_group(required=True)
+  #group.add_argument('-file', action="store_true",
+  #                    help='provide a path to a file containing sequences.')
+  #args = parser.parse_args()
 
-  if args.file: # the default path
-    inp = default()
-    seq_input = pre_process(inp)
+  #if args.file: # the default path
+  #  inp = default()
+  #  seq_input = pre_process(inp)
+
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--input", dest="infile", required=True,
+                    help="input file", type=lambda f: open(f)) 
+  parser.add_argument("--output", help = "output file name")
+  args = parser.parse_args()
   
+  inp_data = []
+  seq_input = pre_process(args.infile.name)
+
   sequences = []
   for k in list(seq_input.keys()):
     sequences.append(seq_input[k])
+
+# ------ this `tees` stdout to print to a file also.  
+  f = open(args.output, 'w')
+  original = sys.stdout # 
+  sys.stdout = Tee(sys.stdout, f)
+# ------ to get the original filehandle back...  
+# sys.stdout = original
+# print ("This won't appear in file")
+# f.close()
 
 # Run the base DNA string comparison from the supplied input file --------------
 # Compare every element (sequence) to every other element (sequence), once. 
@@ -49,7 +80,17 @@ if __name__ == "__main__":
   print('18 characters. It is run on generated test data specific to it, not on the ')
   print('provided test data (for time considerations).')
   print()
-  time.sleep(6)  
+
+  print('Running LCS1 on provided data...')
+  print()
+  results = []
+  for s1, s2 in itertools.combinations(sequences, 2):
+    results.append(call_LCS1(s1, s2))
+  lcd = max(results, key=len)
+
+  print()
+  print('\tLCD of all input DNA strings: ' + lcd + ' ' + str(len(lcd)))
+  print()
   print('Running LCS2 on provided data...')
   print()
   for s1, s2 in itertools.combinations(sequences, 2):

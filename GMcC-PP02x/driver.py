@@ -139,14 +139,16 @@ if __name__ == "__main__":
     inp_data.append([int(i) for i in s]) # convert to ints
   input_list = [item for sub in inp_data for item in sub]
 
-# ------ this `tees` stdout to print also to a file.  
+# ------ this `tees` stdout to print to a file also.  
   f = open(args.output, 'w')
   original = sys.stdout # 
   sys.stdout = Tee(sys.stdout, f)
-# ------ to use the original filehandle...  
+# ------ to get the original filehandle back...  
 # sys.stdout = original
 # print ("This won't appear in file")
 # f.close()
+
+# ------------------- The 11 Exercises from Lab's Handout --------------------
 
 # Division modulo 120, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=120, depth=1)            #1
@@ -168,4 +170,5 @@ if __name__ == "__main__":
                 hash_method=2)                         #10
   ChainHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #11
+
 # ----------------------------------- FIN -----------------------------------
