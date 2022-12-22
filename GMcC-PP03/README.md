@@ -13,7 +13,7 @@ The program is made up of several modules. The user interacts with the file `dri
 >> python driver.py -h
 ```
 
-and the following message will be displayed.
+The following message will be displayed.
 
 ```
 usage: driver.py [-h] --input INFILE [--output OUTPUT]
