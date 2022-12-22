@@ -36,7 +36,7 @@ A second data file is supplied and is named `./data/Additional.txt` To run this 
 ```
 >> python driver.py --input ./data/Input.txt --output ./docs/output.txt
 ```
-The additional data will exercise all three algortihms. 
+The additional data file is designed to be run using all three algorithms, `LCS1 (recursive)`, `LCS2 (DP/iterative)`, `LCS3 (DP/iterative)`  
 
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
 
