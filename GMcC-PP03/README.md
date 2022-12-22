@@ -24,6 +24,18 @@ optional arguments:
   --output OUTPUT  output file name
 ```
 
+### Run Assignment Code
+To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. To run student supplied data execute the following command:
+
+```
+>> python driver.py --input ./data/Additional.txt --output ./docs/output.txt
+```
+
+To run the data supplied as part of the assignment execute the following command:
+```
+>> python driver.py --input ./data/Input.txt --output ./docs/output.txt
+```
+
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
 
 ```
@@ -42,16 +54,6 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 └── filehandler
     ├── __init__.py
     └── io.py
-```
-To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. To run student supplied data execute the following command:
-
-```
->> python driver.py --input ./data/Additional.txt --output ./docs/output.txt
-```
-
-To run the data supplied as part of the assignment execute the following command:
-```
->> python driver.py --input ./data/Input.txt --output ./docs/output.txt
 ```
 
 ### Supporting Code
