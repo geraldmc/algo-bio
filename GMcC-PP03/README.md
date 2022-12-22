@@ -1,11 +1,11 @@
 ## Programming Project 3 - Fall 2022 (Gerald McCollam)
 ## EN.605.620.81.FA22 Algorithms for Bioinformatics
 
-## Requirements
+### Requirements
 
   * Python 3+ is required. No external libraries used.
 
-## Execution & Output
+### Execution & Output
 
 The program is made up of several modules. The user interacts with the file `driver.py`. To learn more, please type the following at the command prompt: 
 
@@ -54,7 +54,7 @@ To run the data supplied as part of the assignment execute the following command
 >> python driver.py --input ./data/Input.txt --output ./docs/output.txt
 ```
 
-## Supporting Code
+### Supporting Code
 
 There are several modules contained in this submission:
 
@@ -66,13 +66,13 @@ The module `filehandler` contains the function `pre_process` which loads provide
 
 Finally, the `algorithms` module provides three implementations of the longest common subsequence problem. `LCS1` is a recursive solution; `LCS2` and `LCS3` are dynamic programming solutions. 
 
-## Performance:
+### Performance:
 
 Following is a performance plot of the three algorithms: LCS1 (recursive), LCS2 and LCS3 (DP/iterative).
 
 ![alt text](perf_compare.png "Performance plot")
 
-## Contact:
+### Contact:
 
  Email to student: gmccoll2@jhu.edu
 
