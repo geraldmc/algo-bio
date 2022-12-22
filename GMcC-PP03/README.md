@@ -25,12 +25,12 @@ optional arguments:
 ```
 
 ### Run Assignment Code
-To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. There are two data files supplied with the code. The first is `./data/Input.txt` and is the required input file for this assignment. To run this file execute the following:
+To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. There are two data files supplied with the code. The first is `./data/Input.txt`. This is the required input file for the assignment. To run this file execute the following:
 
 ```
 >> python driver.py --input ./data/Input.txt --output ./docs/output.txt
 ```
-Please note: the recursive algorithm (`./algos/algorithms.py#LCS1`) is not run on the course supplied data for time considerations. It takes a while to complete. 
+Please note: the recursive algorithm (`./algos/algorithms.py#LCS1`) is not run on the course supplied data for time considerations. 
 
 A second data file is supplied and is named `./data/Additional.txt` To run this file execute the following command:
 ```
