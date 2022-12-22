@@ -3,7 +3,7 @@
 
 """driver.py
 """
-import argparse
+import argparse, sys
 from hashtables.LinearProbing import LinearProbing
 from hashtables.QuadraticProbing import QuadraticProbing
 from hashtables.SeparateChaining import SeparateChaining
@@ -17,13 +17,33 @@ __semester__    = "Fall, 2022"
 
 NUM_BINS = 6 # for hash distribution map
 
-def default():
-  # Support file input.
-  try:
-    inp = input("Enter file input path: ")
-  except (FileNotFoundError, IsADirectoryError):
-    print('File not found.')
-  return (inp.strip())
+class Tee(object):
+  ''' Class object that allows printing  output to console AND to a file.
+  '''
+  def __init__(self, *files):
+    self.files = files
+  def write(self, obj):
+    for f in self.files:
+      f.write(obj)
+      f.flush() # If you want the output to be visible immediately
+  def flush(self) :
+    for f in self.files:
+      f.flush()
+
+def is_valid_file(parser, arg):
+  ''' Minimum error check on file'''
+  if not os.path.exists(arg):
+    parser.error("The file %s does not exist! Use the --help flag for input options." % arg)
+  else:
+    return arg
+
+#def default():
+#  # Support file input/ouput.
+#  try:
+#    inp = input("Enter file input path: ")
+#  except (FileNotFoundError, IsADirectoryError):
+#    print('File not found.')
+#  return (inp.strip())
 
 def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph = LinearProbing(modulus=mod, slot_depth=depth, 
@@ -110,46 +130,51 @@ def ChainHash(data, mod, depth, size, hash_method):
   print('\tSlots remaining: {}'.format(sch.slots_remaining))
   print('\tSlots used: {}'.format(sch.items_count))
 
-
   print(end='\n')
   print('--------------------------------------------------------------------END')
 
 if __name__ == "__main__":
   """ Driver. 
   """
-  parser = argparse.ArgumentParser(description='Exercise in hashing.')
-  group = parser.add_mutually_exclusive_group(required=True)
-  group.add_argument('-file', action="store_true",
-                      help='provide a path to a file containing hash input.')
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--input", dest="infile", required=True,
+                    help="input file", type=lambda f: open(f)) 
+  parser.add_argument("--output", help = "output file name")
   args = parser.parse_args()
+  inp_data = []
+  raw_input = pre_process(args.infile.name)
+  for s in raw_input:
+    inp_data.append([int(i) for i in s]) # convert to ints
+  input_list = [item for sub in inp_data for item in sub]
 
-  if args.file: # the default path
-    inp_data = []
-    inp = default()
-    raw_input = pre_process(inp)
-    for s in raw_input:
-      inp_data.append([int(i) for i in s]) # convert to ints
-    input_list = [item for sub in inp_data for item in sub]
+# ------ this `tees` stdout to print also to a file.  
+  f = open(args.output, 'w')
+  original = sys.stdout # 
+  sys.stdout = Tee(sys.stdout, f)
+# ------ to use the original filehandle...  
+# sys.stdout = original
+# print ("This won't appear in file")
+# f.close()
 
 # Division modulo 120, bucket size=1 -----------------------------------------
-    LinProbeHash(input_list, mod=120, depth=1)            #1
-    QuadHash(input_list, mod=120, depth=1)                #2
-    ChainHash(input_list, mod=120, depth=1, 
-                          hash_method=1, size=120)        #3
+  LinProbeHash(input_list, mod=120, depth=1)            #1
+  QuadHash(input_list, mod=120, depth=1)                #2
+  ChainHash(input_list, mod=120, depth=1, 
+                        hash_method=1, size=120)        #3
 # Division modulo 113, bucket size=1 -----------------------------------------
-    LinProbeHash(input_list, mod=113, depth=1)            #4
-    QuadHash(input_list, mod=113, depth=1)                #5
-    ChainHash(input_list, mod=113, depth=1, 
-                          hash_method=1, size=120)        #6
+  LinProbeHash(input_list, mod=113, depth=1)            #4
+  QuadHash(input_list, mod=113, depth=1)                #5
+  ChainHash(input_list, mod=113, depth=1, 
+                        hash_method=1, size=120)        #6
 # Division modulo 41, bucket size=3 ------------------------------------------
-    LinProbeHash(input_list, mod=41, depth=3, size=40)    #7
-    QuadHash(input_list, mod=41, depth=3, size=40)        #8
+  LinProbeHash(input_list, mod=41, depth=3, size=40)    #7
+  QuadHash(input_list, mod=41, depth=3, size=40)        #8
 # Division modulo 120, bucket size=1, hash_method=multiplicative (2) ---------
-    LinProbeHash(input_list, mod=120, depth=1, size=120, 
-                 hash_method=2)                           #9
-    QuadHash(input_list, mod=120, depth=1, size=120, 
-                 hash_method=2)                           #10
-    ChainHash(input_list, mod=120, depth=1, size=120, 
-                 hash_method=2)                           #11
+  LinProbeHash(input_list, mod=120, depth=1, size=120, 
+                hash_method=2)                           #9
+  QuadHash(input_list, mod=120, depth=1, size=120, 
+                hash_method=2)                           #10
+  ChainHash(input_list, mod=120, depth=1, size=120, 
+                hash_method=2)                           #11
 # ----------------------------------- FIN -----------------------------------
 
