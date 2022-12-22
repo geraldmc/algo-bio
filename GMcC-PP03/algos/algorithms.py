@@ -31,7 +31,7 @@ def call_LCS1(X,Y):
   return S
 # end LCS1 ---------------------------------------------------------------------
 
-@profile
+#@profile
 def LCS2(X,Y):
   ''' An iterative DP example.
   Running time is theta(mn)
@@ -47,10 +47,12 @@ def LCS2(X,Y):
       else:
         m[i][j] = max(m[i-1][j], m[i][j-1], key=len)
   S = m[-1][-1]
-  return str(len(S)), S
+  #return str(len(S)), S
+  print ('\t' + 'LCS of length: ' + str(len(S)) + ' ', S)
+  return S
 # end LCS2 ---------------------------------------------------------------------
 
-@profile
+#@profile
 def LCS3(X,Y):
   ''' A second iterative DP example that runs in O(mn) time.
   '''
@@ -76,5 +78,7 @@ def LCS3(X,Y):
       m -= 1
   S = ''.join(reversed(result)) 
   l = len(S)
-  return l, S 
+  #return l, S
+  print ('\t' + 'LCS of length: ' + str(len(S)) + ' ', S)
+  return S 
 # end LCS3 ---------------------------------------------------------------------

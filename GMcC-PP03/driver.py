@@ -76,30 +76,35 @@ if __name__ == "__main__":
 # Run the base DNA string comparison from the supplied input file --------------
 # Compare every element (sequence) to every other element (sequence), once. 
 # Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
-  print('NOTE: The recursive LCS1 function runs very slowly on sequences longer than')
-  print('18 characters. It is run on generated test data specific to it, not on the ')
-  print('provided test data (for time considerations).')
   print()
 
-  print('Running LCS1 on provided data...')
+  print('Running LCS1 (recursive) on provided data...')
   print()
   results = []
   for s1, s2 in itertools.combinations(sequences, 2):
     results.append(call_LCS1(s1, s2))
-  lcd = max(results, key=len)
+  lcd_a = max(results, key=len)
 
   print()
-  print('\tLCD of all input DNA strings: ' + lcd + ' ' + str(len(lcd)))
+  print('\tLCD of all input DNA strings: ' + lcd_a + ' ' + str(len(lcd_a)))
   print()
-  print('Running LCS2 on provided data...')
+  print('Running LCS2 (DP/iterative, first try) on provided data...')
   print()
+  results = []
   for s1, s2 in itertools.combinations(sequences, 2):
-    LCS2(s1, s2)
+    results.append(LCS2(s1, s2))
+  lcd_b = max(results, key=len)
   print()
-  print('Running LCS3 on provided data...')
+  print('\tLCD of all input DNA strings: ' + lcd_b + ' ' + str(len(lcd_b)))
   print()
+  print('Running LCS3 (DP/iterative, second try) on provided data...')
+  print()
+  results = []
   for s1, s2 in itertools.combinations(sequences, 2):
-    LCS3(s1, s2)
+    results.append(LCS3(s1, s2))
+  lcd_c = max(results, key=len)
+  print()
+  print('\tLCD of all input DNA strings: ' + lcd_c + ' ' + str(len(lcd_c)))
   print()
   print('------------------------generated---------------------------')
   print()
