@@ -1,5 +1,5 @@
-# Programming Project 3 - Fall 2022 (Gerald McCollam)
-# EN.605.620.81.FA22 Algorithms for Bioinformatics
+## Programming Project 3 - Fall 2022 (Gerald McCollam)
+## EN.605.620.81.FA22 Algorithms for Bioinformatics
 
 ## Requirements
 
