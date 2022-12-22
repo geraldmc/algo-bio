@@ -18,13 +18,12 @@ and the following message will be displayed.
 ```
 >> python driver.py -h
 
-usage: driver.py [-h] -file
-
-Exercise in longest common subsequence.
+usage: driver.py [-h] --input INFILE [--output OUTPUT]
 
 optional arguments:
-  -h, --help  show this help message and exit
-  -file       provide a path to a file containing hash input.
+  -h, --help       show this help message and exit
+  --input INFILE   input file
+  --output OUTPUT  output file name
 ```
 
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
