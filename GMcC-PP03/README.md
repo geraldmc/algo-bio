@@ -46,16 +46,15 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
     ├── __init__.py
     └── io.py
 ```
-To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. 
+To run the program change directories to `GMcC-PP03` and execute the file `driver.py` as described. To run student supplied data execute the following command:
 
 ```
->> python driver.py -file
+>> python driver.py --input ./data/Additional.txt --output ./docs/output.txt
 ```
 
-You will be prompted for a path to the input file. The required input file is provided, renamed as `Input.txt`.
-
+To run the data supplied as part of the assignment execute the following command:
 ```
-Enter file input path: ./data/Input.txt
+>> python driver.py --input ./data/Input.txt --output ./docs/output.txt
 ```
 
 ## Supporting Code

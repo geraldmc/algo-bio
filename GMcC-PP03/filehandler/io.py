@@ -35,7 +35,7 @@ def pre_process(f):
   for l in list(result_dict.values()):
     if False in [x in BASEPAIRS for x in l]:
       raise ValueError("Found non-nucleotide character[s]. Please check the input file and try again")
-    print()
+  print()
   return result_dict
 
 

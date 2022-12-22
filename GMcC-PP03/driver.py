@@ -5,6 +5,7 @@
 """
 import argparse
 import itertools
+from time import sleep
 from analysis.metrics import *
 from filehandler.io import *
 from algos.algorithms import *
@@ -29,28 +30,9 @@ class Tee(object):
     for f in self.files:
       f.flush()
 
-#def default():
-  # Support file input.
-#  try:
-#    inp = input("Enter file input path: ")
-#    print()
-#  except (FileNotFoundError, IsADirectoryError):
-#    print('File not found.')
-#  return (inp.strip())
-
 if __name__ == "__main__":
   """ Driver. 
   """
-  #parser = argparse.ArgumentParser(description='Exercise in longest common subsequence.')
-  #group = parser.add_mutually_exclusive_group(required=True)
-  #group.add_argument('-file', action="store_true",
-  #                    help='provide a path to a file containing sequences.')
-  #args = parser.parse_args()
-
-  #if args.file: # the default path
-  #  inp = default()
-  #  seq_input = pre_process(inp)
-
   parser = argparse.ArgumentParser()
   parser.add_argument("--input", dest="infile", required=True,
                     help="input file", type=lambda f: open(f)) 
@@ -59,7 +41,6 @@ if __name__ == "__main__":
   
   inp_data = []
   seq_input = pre_process(args.infile.name)
-
   sequences = []
   for k in list(seq_input.keys()):
     sequences.append(seq_input[k])
@@ -73,43 +54,72 @@ if __name__ == "__main__":
 # print ("This won't appear in file")
 # f.close()
 
-# Run the base DNA string comparison from the supplied input file --------------
-# Compare every element (sequence) to every other element (sequence), once. 
-# Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
-  print()
+  if args.infile.name == './data/Additional.txt':
+    print('------------ RUNNING 3 ALGORITHMS ON STUDENT SUPPLIED DATA ---------------')
+    print()
+    sleep(2)
 
-  print('Running LCS1 (recursive) on provided data...')
-  print()
-  results = []
-  for s1, s2 in itertools.combinations(sequences, 2):
-    results.append(call_LCS1(s1, s2))
-  lcd_a = max(results, key=len)
+  # Run the base DNA string comparison from the supplied input file --------------
+  # Compare every element (sequence) to every other element (sequence), once. 
+  # Compare order (0,1), (0,2), (0,3), (1,2), (1,3), (2,3)
+    print('Running LCS1 (recursive) on student supplied data...')
+    print()
+    results = []
+    for s1, s2 in itertools.combinations(sequences, 2):
+      results.append(call_LCS1(s1, s2))
+    lcd_a = max(results, key=len)
 
-  print()
-  print('\tLCD of all input DNA strings: ' + lcd_a + ' ' + str(len(lcd_a)))
-  print()
-  print('Running LCS2 (DP/iterative, first try) on provided data...')
-  print()
-  results = []
-  for s1, s2 in itertools.combinations(sequences, 2):
-    results.append(LCS2(s1, s2))
-  lcd_b = max(results, key=len)
-  print()
-  print('\tLCD of all input DNA strings: ' + lcd_b + ' ' + str(len(lcd_b)))
-  print()
-  print('Running LCS3 (DP/iterative, second try) on provided data...')
-  print()
-  results = []
-  for s1, s2 in itertools.combinations(sequences, 2):
-    results.append(LCS3(s1, s2))
-  lcd_c = max(results, key=len)
-  print()
-  print('\tLCD of all input DNA strings: ' + lcd_c + ' ' + str(len(lcd_c)))
-  print()
-  print('------------------------generated---------------------------')
-  print()
+    print()
+    print('\tLCD of all input DNA strings: ' + lcd_a + ' ' + str(len(lcd_a)))
+    print()
+    print('Running LCS2 (DP/iterative, first version) on student data...')
+    print()
+    results = []
+    for s1, s2 in itertools.combinations(sequences, 2):
+      results.append(LCS2(s1, s2))
+    lcd_b = max(results, key=len)
+    print()
+    print('\tLCD of all input DNA strings: ' + lcd_b + ' ' + str(len(lcd_b)))
+    print()
+    print('Running LCS3 (DP/iterative, second version) on student data...')
+    print()
+    results = []
+    for s1, s2 in itertools.combinations(sequences, 2):
+      results.append(LCS3(s1, s2))
+    lcd_c = max(results, key=len)
+    print()
+    print('\tLCD of all input DNA strings: ' + lcd_c + ' ' + str(len(lcd_c)))
+    print()
+    print(' See output file: {}'.format(args.output))
+    print()
+  else:  
+    print('------------ RUNNING 2 ALGORITHMS ON CLASS SUPPLIED DATA ---------------')
+    print()
+    sleep(2)
 
-if RUN_ALL:
+    print()
+    print('Running LCS2 (DP/iterative, first version) on class provided data...')
+    print()
+    results = []
+    for s1, s2 in itertools.combinations(sequences, 2):
+      results.append(LCS2(s1, s2))
+    lcd_a = max(results, key=len)
+    print()
+    print('\tLCD of all input DNA strings: ' + lcd_a + ' ' + str(len(lcd_a)))
+    print()
+    print('Running LCS3 (DP/iterative, second version) on class provided data...')
+    print()
+    results = []
+    for s1, s2 in itertools.combinations(sequences, 2):
+      results.append(LCS3(s1, s2))
+    lcd_b = max(results, key=len)
+    print()
+    print('\tLCD of all input DNA strings: ' + lcd_b + ' ' + str(len(lcd_b)))
+    print()
+    print(' See output file: {}'.format(args.output))
+    print()
+
+if RUN_ALL: # DISABLED --------------------------------------
   # Run generated DNA string comparisons
     idx1 = [5, 6, 7, 8, 9] #,10,11,12,13,14,15,16,17,19,20]
     idx2 = [2728,3004,3280,3556] #,3832,4108,4384,4660,4936,5212,5488,5764,6040,6316,6592]
