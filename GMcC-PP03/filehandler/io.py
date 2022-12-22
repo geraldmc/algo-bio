@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 import sys, os 
 
+BASEPAIRS = {'A','C','T','G','U'}
+
 def pre_process(f):
   ''' This function takes a file handle as input.
       It returns a dictionary of sequences from the file:
@@ -30,4 +32,10 @@ def pre_process(f):
         print("Error reading from file")
   except (FileNotFoundError, PermissionError, OSError):
     print("Error opening file. Please try again.")
+  for l in list(result_dict.values()):
+    if False in [x in BASEPAIRS for x in l]:
+      raise ValueError("Found non-nucleotide character[s]. Please check the input file and try again")
+    print()
   return result_dict
+
+
