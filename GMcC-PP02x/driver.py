@@ -18,7 +18,7 @@ __semester__    = "Fall, 2022"
 NUM_BINS = 6 # for hash distribution map
 
 class Tee(object):
-  ''' Class object that allows printing  output to console AND to a file.
+  ''' Class object that allows printing program output to console AND TO A FILE.
   '''
   def __init__(self, *files):
     self.files = files
@@ -36,14 +36,6 @@ def is_valid_file(parser, arg):
     parser.error("The file %s does not exist! Use the --help flag for input options." % arg)
   else:
     return arg
-
-#def default():
-#  # Support file input/ouput.
-#  try:
-#    inp = input("Enter file input path: ")
-#  except (FileNotFoundError, IsADirectoryError):
-#    print('File not found.')
-#  return (inp.strip())
 
 def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph = LinearProbing(modulus=mod, slot_depth=depth, 
@@ -171,10 +163,9 @@ if __name__ == "__main__":
   QuadHash(input_list, mod=41, depth=3, size=40)        #8
 # Division modulo 120, bucket size=1, hash_method=multiplicative (2) ---------
   LinProbeHash(input_list, mod=120, depth=1, size=120, 
-                hash_method=2)                           #9
+                hash_method=2)                          #9
   QuadHash(input_list, mod=120, depth=1, size=120, 
-                hash_method=2)                           #10
+                hash_method=2)                         #10
   ChainHash(input_list, mod=120, depth=1, size=120, 
-                hash_method=2)                           #11
+                hash_method=2)                         #11
 # ----------------------------------- FIN -----------------------------------
-

@@ -26,6 +26,5 @@ if __name__ == "__main__":
   data = [item for sub in data for item in sub]
 
   ht = LinearProbing(hash_method=2, slot_depth=2, slot_size=120)
-  #sch = SeparateChaining(slot_size=120, slot_depth=1, modulus=120)
   
   plot(distribute(data, hash_function=ht, num_containers=12))
