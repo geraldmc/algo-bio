@@ -170,5 +170,3 @@ if __name__ == "__main__":
                 hash_method=2)                         #10
   ChainHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #11
-
-# ----------------------------------- FIN -----------------------------------
