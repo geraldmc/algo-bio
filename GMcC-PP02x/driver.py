@@ -15,7 +15,7 @@ __assignment__  = "Programming Problem 2"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-NUM_BINS = 6 # for hash distribution map
+NUM_BINS = 2 # for hash distribution map
 
 class Tee(object):
   ''' Class object that allows printing program output to console AND TO A FILE.
@@ -148,7 +148,7 @@ if __name__ == "__main__":
 # print ("This won't appear in file")
 # f.close()
 
-# ------------------- The 11 Exercises from Lab's Handout --------------------
+# ------------------- 11 Exercises from the Lab's Handout --------------------
 
 # Division modulo 120, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=120, depth=1)            #1

@@ -42,11 +42,11 @@ class QuadraticProbing:
   def quadratic(self, index, table):
     ''' '''
     found = False
-    # limit variable restricts function from infinite loop
+    # the limit variable restricts function from entering an infinite loop
     limit = len(table)-5
     i = 1
     while i <= limit:
-      # quadratic probe
+      # quadratically probe
       newIndex = index + (i**2)
       newIndex = newIndex % self.slot_size
       # if newIndex is available then break
