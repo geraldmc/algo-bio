@@ -37,6 +37,7 @@ def is_valid_file(parser, arg):
   else:
     return arg
 
+@profile
 def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph = LinearProbing(modulus=mod, slot_depth=depth, 
                       slot_size=size, hash_method=hash_method)
@@ -49,10 +50,10 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph_table = ['-----' if i is None else i for i in lph.table]
   print(end='\n')
   if hash_method==1:
-    print('LINEAR PROBING, hash map (mod={}, depth={}, size={}, method={})'
+    print('Hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 1))
   else:
-    print('LINEAR PROBING, hash map (mod={}, depth={}, size={}, method={})'
+    print('Hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 2))
   if depth==3:
     lph_flat_table = lph.flatten(lph.table)
@@ -62,13 +63,13 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   else:
     lph_iter = divide_chunks(lph_table, 5)
     print_5iter(lph_iter)
-  print('LINEAR hash distribution ({} bins, mod={}, depth={}, size={}).'
+  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
                                                  .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=lph, num_containers=NUM_BINS))
   print()
   print('Statistics:')
-  print('\tPrimary collisions: {}'.format(lph.collisions))
+  print('\tNumber of collisions: {}'.format(lph.collisions))
   print('\tEnding Load Factor: {}/1'.format(lph.load_factor))
   print('\tSlots occupied: {}'.format(lph.items_count))
   print('\tSlots remaining: {}'.format(lph.slots_remaining))
@@ -76,8 +77,8 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   print('\tSlot Size: {}'.format(lph.slot_size))
 
   print(end='\n')
-  print('--------------------------------------------------------------------END')
 
+@profile
 def QuadHash(data, mod, depth, size=120, hash_method=1):
   qph = QuadraticProbing(modulus=mod, slot_depth=depth, 
               slot_size=size, hash_method=hash_method)
@@ -90,10 +91,10 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   qph_table = ['-----' if i is None else i for i in qph.table]
   print(end='\n')
   if hash_method==1:
-    print('QUADRATIC PROBING, hash map (mod={}, depth={}, size={}, method={})'
+    print('Hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 1))
   else:
-    print('QUADRATIC PROBING, hash map (mod={}, depth={}, size={}, method={})'
+    print('Hash map (mod={}, depth={}, size={}, method={})'
                                       .format(mod, depth, size, 2))
   if depth==3:
     qph_flat_table = qph.flatten(qph.table)
@@ -103,21 +104,21 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   else:
     qph_iter = divide_chunks(qph_table, 5)
     print_5iter(qph_iter)
-  print('QUADRATIC hash distribution ({} bins, mod={}, depth={}, size={}).'
+  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
                                                         .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=qph, num_containers=NUM_BINS))
   print()
   print('Statistics:')
-  print('\tPrimary collisions: {}'.format(qph.collisions))
+  print('\tNumber of collisions: {}'.format(qph.collisions))
   print('\tEnding Load Factor: {}/1'.format(qph.load_factor))
   print('\tSlots occupied: {}'.format(qph.items_count))
   print('\tSlots remaining: {}'.format(qph.slots_remaining))
   print('\tSlot Depth: {}'.format(qph.slot_depth))
   print('\tSlot Size: {}'.format(qph.slot_size))
   print(end='\n')
-  print('--------------------------------------------------------------------END')
 
+@profile
 def ChainHash(data, mod, depth, size, hash_method):
   sch = SeparateChaining(modulus=mod, slot_size=size, hash_method=hash_method)
   load_factor_array = []
@@ -128,16 +129,16 @@ def ChainHash(data, mod, depth, size, hash_method):
     collisions_array.append(str(sch.collisions))
   sch_table = ['-----' if i is None else i for i in sch.table]
   print(end='\n')
-  print('METHOD: Chaining, hash map (mod={}, depth={}, size={})'.format(mod, depth, size))
+  print('Hash map (mod={}, depth={}, size={})'.format(mod, depth, size))
   sch_iter = divide_chunks(sch_table, 5)
   print_5iter(sch_iter)
-  print('METHOD: Chaining hash distribution ({} bins, mod={}, depth={}, size={}).'
+  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
                                                         .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=sch, num_containers=NUM_BINS))
   print()
   print('Statistics:')
-  print('\tPrimary collisions: {}'.format(sch.collisions))
+  print('\tNumber of collisions: {}'.format(sch.collisions))
   print('\tEnding Load Factor: {}/1'.format(sch.load_factor))
   print('\tSlots occupied: {}'.format(sch.items_count))
   print('\tSlots remaining: {}'.format(sch.slots_remaining))
@@ -145,7 +146,6 @@ def ChainHash(data, mod, depth, size, hash_method):
   print('\tSlot Size: {}'.format(sch.slot_size))
 
   print(end='\n')
-  print('--------------------------------------------------------------------END')
 
 if __name__ == "__main__":
   """ Driver. 
@@ -174,21 +174,32 @@ if __name__ == "__main__":
 
 # Division modulo 120, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=120, depth=1)            #1
+  print('--------------------------------------------------- end Linear Probe #1')
   QuadHash(input_list, mod=120, depth=1)                #2
+  print('------------------------------------------------------ end Quadratic #2')
   ChainHash(input_list, mod=120, depth=1, 
                         hash_method=1, size=120)        #3
+  print('---------------------------------------------- end Separate Chaining #3')
 # Division modulo 113, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=113, depth=1)            #4
+  print('--------------------------------------------------- end Linear Probe #4')
   QuadHash(input_list, mod=113, depth=1)                #5
+  print('------------------------------------------------------ end Quadratic #5')
   ChainHash(input_list, mod=113, depth=1, 
                         hash_method=1, size=120)        #6
+  print('---------------------------------------------- end Separate Chaining #6')
 # Division modulo 41, bucket size=3 ------------------------------------------
   LinProbeHash(input_list, mod=41, depth=3, size=40)    #7
+  print('--------------------------------------------------- end Linear Probe #7')
   QuadHash(input_list, mod=41, depth=3, size=40)        #8
+  print('------------------------------------------------------ end Quadratic #8')
 # Division modulo 120, bucket size=1, hash_method=multiplicative (2) ---------
   LinProbeHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                          #9
+  print('--------------------------------------------------- end Linear Probe #9')
   QuadHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #10
+  print('----------------------------------------------------- end Quadratic #10')
   ChainHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #11
+  print('--------------------------------------------- end Separate Chaining #11')
