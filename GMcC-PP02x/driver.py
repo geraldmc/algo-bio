@@ -50,10 +50,10 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph_table = ['-----' if i is None else i for i in lph.table]
   print(end='\n')
   if hash_method==1:
-    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
+    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}.'
                                       .format(mod, depth, size, 1))
   else:
-    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
+    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}.'
                                       .format(mod, depth, size, 2))
   if depth==3:
     lph_flat_table = lph.flatten(lph.table)
@@ -63,7 +63,7 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   else:
     lph_iter = divide_chunks(lph_table, 5)
     print_5iter(lph_iter)
-  print('KEY DISTRIBUTION ({} bins, modulus={}, slot depth={}, slot size={}).'
+  print('KEY DISTRIBUTION - {} bins, modulus={}, slot depth={}, slot size={}.'
                                                  .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=lph, num_containers=NUM_BINS))
@@ -91,10 +91,10 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   qph_table = ['-----' if i is None else i for i in qph.table]
   print(end='\n')
   if hash_method==1:
-    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, method={}'
+    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}.'
                                       .format(mod, depth, size, 1))
   else:
-    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
+    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}.'
                                       .format(mod, depth, size, 2))
   if depth==3:
     qph_flat_table = qph.flatten(qph.table)
@@ -129,7 +129,7 @@ def ChainHash(data, mod, depth, size, hash_method):
     collisions_array.append(str(sch.collisions))
   sch_table = ['-----' if i is None else i for i in sch.table]
   print(end='\n')
-  print('SEPARATE CHAINING HASH TABLE - modulus={}, slot depth={}, slot size={}'.format(mod, depth, size))
+  print('SEPARATE CHAINING HASH TABLE - modulus={}, slot depth={}, slot size={}.'.format(mod, depth, size))
   sch_iter = divide_chunks(sch_table, 5)
   print_5iter(sch_iter)
   print('KEY DISTRIBUTION - {} bins, modulus={}, slot depth={}, slot size={}.'
@@ -171,35 +171,39 @@ if __name__ == "__main__":
 # f.close()
 
 # ------------------- 11 Exercises from the Lab's Handout --------------------
-
+  print('\n')
+  print('===================== ++++++++++++++++++++++++++++++++++++ ======================')
+  print('===================== VARIATIONS ON HASHING - 11 EXERCISES ======================')
+  print('===================== ++++++++++++++++++++++++++++++++++++ ======================')
+  print('\n')
 # Division modulo 120, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=120, depth=1)            #1
-  print('--------------------------------------------------- end Linear Probe #1')
+  print('------------------------------------------------------------- end Linear Probe #1')
   QuadHash(input_list, mod=120, depth=1)                #2
-  print('------------------------------------------------------ end Quadratic #2')
+  print('---------------------------------------------------------------- end Quadratic #2')
   ChainHash(input_list, mod=120, depth=1, 
                         hash_method=1, size=120)        #3
-  print('---------------------------------------------- end Separate Chaining #3')
+  print('-------------------------------------------------------- end Separate Chaining #3')
 # Division modulo 113, bucket size=1 -----------------------------------------
   LinProbeHash(input_list, mod=113, depth=1)            #4
-  print('--------------------------------------------------- end Linear Probe #4')
+  print('------------------------------------------------------------- end Linear Probe #4')
   QuadHash(input_list, mod=113, depth=1)                #5
-  print('------------------------------------------------------ end Quadratic #5')
+  print('---------------------------------------------------------------- end Quadratic #5')
   ChainHash(input_list, mod=113, depth=1, 
                         hash_method=1, size=120)        #6
-  print('---------------------------------------------- end Separate Chaining #6')
+  print('-------------------------------------------------------- end Separate Chaining #6')
 # Division modulo 41, bucket size=3 ------------------------------------------
   LinProbeHash(input_list, mod=41, depth=3, size=40)    #7
-  print('--------------------------------------------------- end Linear Probe #7')
+  print('------------------------------------------------------------- end Linear Probe #7')
   QuadHash(input_list, mod=41, depth=3, size=40)        #8
-  print('------------------------------------------------------ end Quadratic #8')
+  print('---------------------------------------------------------------- end Quadratic #8')
 # Division modulo 120, bucket size=1, hash_method=multiplicative (2) ---------
   LinProbeHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                          #9
-  print('--------------------------------------------------- end Linear Probe #9')
+  print('------------------------------------------------------------- end Linear Probe #9')
   QuadHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #10
-  print('----------------------------------------------------- end Quadratic #10')
+  print('--------------------------------------------------------------- end Quadratic #10')
   ChainHash(input_list, mod=120, depth=1, size=120, 
                 hash_method=2)                         #11
-  print('--------------------------------------------- end Separate Chaining #11')
+  print('------------------------------------------------------- end Separate Chaining #11')
