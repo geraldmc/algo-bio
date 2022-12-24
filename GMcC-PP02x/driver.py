@@ -15,7 +15,7 @@ __assignment__  = "Programming Problem 2"
 __class__       = "605.620"
 __semester__    = "Fall, 2022"
 
-NUM_BINS = 2 # for hash distribution map
+NUM_BINS = 12 # for hash distribution map
 
 class Tee(object):
   ''' Class object that allows printing program output to console AND TO A FILE.
@@ -40,8 +40,12 @@ def is_valid_file(parser, arg):
 def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph = LinearProbing(modulus=mod, slot_depth=depth, 
                       slot_size=size, hash_method=hash_method)
+  load_factor_array = []
+  collisions_array = []
   for item in data:
     lph.insert(item)
+    load_factor_array.append(round(lph.load_factor,3))
+    collisions_array.append(str(lph.collisions))
   lph_table = ['-----' if i is None else i for i in lph.table]
   print(end='\n')
   if hash_method==1:
@@ -63,18 +67,26 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   print()
   plot(distribute(data, hash_function=lph, num_containers=NUM_BINS))
   print()
-  print('Misc statistics:')
-  print('Primary collisions: {}'.format(lph.collision_count(data)))
-  print('Slots remaining: {}'.format(lph.slots_remaining))
-  print('Slots used: {}'.format(lph.items_count))
+  print('Statistics:')
+  print('\tPrimary collisions: {}'.format(lph.collisions))
+  print('\tEnding Load Factor: {}/1'.format(lph.load_factor))
+  print('\tSlots occupied: {}'.format(lph.items_count))
+  print('\tSlots remaining: {}'.format(lph.slots_remaining))
+  print('\tSlot Depth: {}'.format(lph.slot_depth))
+  print('\tSlot Size: {}'.format(lph.slot_size))
+
   print(end='\n')
   print('--------------------------------------------------------------------END')
 
 def QuadHash(data, mod, depth, size=120, hash_method=1):
   qph = QuadraticProbing(modulus=mod, slot_depth=depth, 
               slot_size=size, hash_method=hash_method)
+  load_factor_array = []
+  collisions_array = []
   for item in data:
     qph.insert(item)
+    load_factor_array.append(round(qph.load_factor,3))
+    collisions_array.append(str(qph.collisions))
   qph_table = ['-----' if i is None else i for i in qph.table]
   print(end='\n')
   if hash_method==1:
@@ -96,17 +108,24 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   print()
   plot(distribute(data, hash_function=qph, num_containers=NUM_BINS))
   print()
-  print('Misc statistics:')
-  print('Primary collisions: {}'.format(qph.collision_count(data)))
-  print('Slots remaining: {}'.format(qph.slots_remaining))
-  print('Slots used: {}'.format(qph.items_count))
+  print('Statistics:')
+  print('\tPrimary collisions: {}'.format(qph.collisions))
+  print('\tEnding Load Factor: {}/1'.format(qph.load_factor))
+  print('\tSlots occupied: {}'.format(qph.items_count))
+  print('\tSlots remaining: {}'.format(qph.slots_remaining))
+  print('\tSlot Depth: {}'.format(qph.slot_depth))
+  print('\tSlot Size: {}'.format(qph.slot_size))
   print(end='\n')
   print('--------------------------------------------------------------------END')
 
 def ChainHash(data, mod, depth, size, hash_method):
   sch = SeparateChaining(modulus=mod, slot_size=size, hash_method=hash_method)
+  load_factor_array = []
+  collisions_array = []
   for item in data:
     sch.insert(item)
+    load_factor_array.append(round(sch.load_factor,3))
+    collisions_array.append(str(sch.collisions))
   sch_table = ['-----' if i is None else i for i in sch.table]
   print(end='\n')
   print('METHOD: Chaining, hash map (mod={}, depth={}, size={})'.format(mod, depth, size))
@@ -117,10 +136,13 @@ def ChainHash(data, mod, depth, size, hash_method):
   print()
   plot(distribute(data, hash_function=sch, num_containers=NUM_BINS))
   print()
-  print('Misc statistics:')
-  print('\tPrimary collisions: {}'.format(sch.collision_count(data)))
+  print('Statistics:')
+  print('\tPrimary collisions: {}'.format(sch.collisions))
+  print('\tEnding Load Factor: {}/1'.format(sch.load_factor))
+  print('\tSlots occupied: {}'.format(sch.items_count))
   print('\tSlots remaining: {}'.format(sch.slots_remaining))
-  print('\tSlots used: {}'.format(sch.items_count))
+  print('\tSlot Depth: {}'.format(sch.slot_depth))
+  print('\tSlot Size: {}'.format(sch.slot_size))
 
   print(end='\n')
   print('--------------------------------------------------------------------END')

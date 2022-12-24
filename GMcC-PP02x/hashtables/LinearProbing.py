@@ -16,7 +16,7 @@ class LinearProbing:
   def __init__(self, hash_method=1, modulus=120, slot_size=120, 
                slot_depth=1, load_factor=1.00):
     self.items_count = 0
-    self.load_factor = load_factor
+    #self.load_factor = load_factor
     self.modulus = modulus
     self.slot_size = slot_size
     self.slot_depth = slot_depth
@@ -28,8 +28,7 @@ class LinearProbing:
       self.table = [None] * slot_size
       self.state = [0] * slot_size
     self.hash_method = hash_method
-    self.first_collisions = 0
-    self.second_collisions = 0
+    self.collisions = 0
 
   def hash_func(self, key):
     import math
@@ -50,7 +49,8 @@ class LinearProbing:
       index = self.hash_func(key)
       table = self.flatten(self.table)
       state = self.flatten(self.state)
-      while state[index] == 1:
+      while state[index] == 1: # is occupied if true
+        self.collisions += 1
         if len(table) > self.modulus:
           index = (index + 1) % len(table) # probe
         else:
@@ -60,7 +60,8 @@ class LinearProbing:
       self.state = self.unflatten(state, self.slot_depth)
     else:
       index = self.hash_func(key)
-      while self.state[index] == 1:
+      while self.state[index] == 1: # is occupied if true
+        self.collisions += 1
         if len(self.table) > self.modulus:
           index = (index + 1) % len(self.table) # probe
         else:
@@ -133,6 +134,13 @@ class LinearProbing:
       return len(self.table)*self.slot_depth - self.items_count
     else:
       return len(self.table) - self.items_count
+
+  @property
+  def load_factor(self):
+    if self.slot_depth>1:
+      return round(1-self.slots_remaining/len(self.table)/self.slot_depth,3)
+    else:
+      return round(1 - self.slots_remaining/len(self.table),3)
 
   def __rehash(self):
     ''' NOT CURRENTLY USED'''

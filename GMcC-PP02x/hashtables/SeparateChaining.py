@@ -31,8 +31,7 @@ class SeparateChaining:
     self.slot_size = slot_size
     self.slot_depth = slot_depth
     self.table = [None] * slot_size
-    self.first_collisions = 0
-    self.second_collisions = 0
+    self.collisions = 0
 
   def hash_func(self, key):
     import math
@@ -49,6 +48,7 @@ class SeparateChaining:
     '''
     new_node = Node(key)
     if not self.table[index]:
+      self.collisions += 1
       self.table[index] = new_node
       return
     current = self.table[index]
@@ -107,6 +107,10 @@ class SeparateChaining:
   @property
   def slots_remaining(self):
     return len(self.table) - self.items_count
+
+  @property
+  def load_factor(self):
+    return  round(1 - self.slots_remaining/len(self.table), 3)
 
   def __rehash(self):
     ''' NOT CURRENTLY IN USE'''
