@@ -50,10 +50,10 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   lph_table = ['-----' if i is None else i for i in lph.table]
   print(end='\n')
   if hash_method==1:
-    print('Hash map (mod={}, depth={}, size={}, method={})'
+    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
                                       .format(mod, depth, size, 1))
   else:
-    print('Hash map (mod={}, depth={}, size={}, method={})'
+    print('LINEAR PROBE HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
                                       .format(mod, depth, size, 2))
   if depth==3:
     lph_flat_table = lph.flatten(lph.table)
@@ -63,7 +63,7 @@ def LinProbeHash(data, mod, depth, hash_method=1, size=120):
   else:
     lph_iter = divide_chunks(lph_table, 5)
     print_5iter(lph_iter)
-  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
+  print('KEY DISTRIBUTION ({} bins, modulus={}, slot depth={}, slot size={}).'
                                                  .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=lph, num_containers=NUM_BINS))
@@ -91,10 +91,10 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   qph_table = ['-----' if i is None else i for i in qph.table]
   print(end='\n')
   if hash_method==1:
-    print('Hash map (mod={}, depth={}, size={}, method={})'
+    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, method={}'
                                       .format(mod, depth, size, 1))
   else:
-    print('Hash map (mod={}, depth={}, size={}, method={})'
+    print('QUADRATIC HASH TABLE - modulus={}, slot depth={}, slot size={}, hashing method={}'
                                       .format(mod, depth, size, 2))
   if depth==3:
     qph_flat_table = qph.flatten(qph.table)
@@ -104,7 +104,7 @@ def QuadHash(data, mod, depth, size=120, hash_method=1):
   else:
     qph_iter = divide_chunks(qph_table, 5)
     print_5iter(qph_iter)
-  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
+  print('KEY DISTRIBUTION - {} bins, modulus={}, slot depth={}, slot size={}.'
                                                         .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=qph, num_containers=NUM_BINS))
@@ -129,10 +129,10 @@ def ChainHash(data, mod, depth, size, hash_method):
     collisions_array.append(str(sch.collisions))
   sch_table = ['-----' if i is None else i for i in sch.table]
   print(end='\n')
-  print('Hash map (mod={}, depth={}, size={})'.format(mod, depth, size))
+  print('SEPARATE CHAINING HASH TABLE - modulus={}, slot depth={}, slot size={}'.format(mod, depth, size))
   sch_iter = divide_chunks(sch_table, 5)
   print_5iter(sch_iter)
-  print('Hash key distribution ({} bins, mod={}, depth={}, size={}).'
+  print('KEY DISTRIBUTION - {} bins, modulus={}, slot depth={}, slot size={}.'
                                                         .format(NUM_BINS, mod, depth, size))
   print()
   plot(distribute(data, hash_function=sch, num_containers=NUM_BINS))
