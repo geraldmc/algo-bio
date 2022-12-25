@@ -24,13 +24,13 @@ optional arguments:
 ```
 
 ### Run Assignment Code
-To run the program change directories to `GMcC-PP02x` and execute the file `driver.py` as described. There are two data files supplied. The first is `./data/Minimum.txt`. This is the required input file for the assignment. To run this file execute the following:
+To run the program change directories to `GMcC-PP02x` and execute the file `driver.py`. There are two input data files supplied. The first is `./data/Minimum.txt`. This is the required input for the assignment. To run this, please execute the following:
 
 ```
 >> python driver.py --input ./data/Minimum.txt --output ./data/output.txt
 ```
 
-A second data file is supplied and is named `./data/Extra.txt` To run this file execute the following command:
+A second supplied data file is named `./data/Extra.txt` To run this execute the following:
 ```
 >> python driver.py --input ./data/Extra.txt --output ./docs/output.txt
 ```
@@ -61,11 +61,11 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 
 ### Supporting Code
 
-There are several modules contained in this submission:
+There are several modules contained in the submission:
 
 #### `analysis`
 
-The module `analysis` contains functions for profiling the code. 
+The module `analysis` contains functions for profiling: `metrics.py` and `perf_notebook.ipynb`. The first executes code to recreate the hash key distribution plots (`>>python metrics.py`). The Python notebook may be executed on Google Colab by pressing the Colab tab. 
 
 
 ## REFERENCES
