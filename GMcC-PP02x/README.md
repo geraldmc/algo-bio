@@ -1,5 +1,4 @@
-### Programming Project 2 - Fall 2022 (Gerald McCollam)
-### EN.605.620.81.FA22 Algorithms for Bioinformatics
+## EN.605.620.81.FA22 Algorithms for Bioinformatics Programming Project 2 - Fall 2022 (Gerald McCollam) 
 
 ### Requirements
 
@@ -60,14 +59,13 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 └── perf.py
 ```
 
-## Supporting Code
+### Supporting Code
 
 There are several modules contained in this submission:
 
 #### `analysis`
 
-The module `analysis` contains functions for profiling the code, notably `plot` which provides a means of 
-plotting a histogram for each variation of hashing algorithm and measuring the distribution of hash keys. The module `filehandler` contains functions to handle input and ouput using a number of functions `pre_process`, `divide_chunks`, `print_5iter`, and `print_3iter`. The function `pre_process` loads provided data from file and renders it as a dictionary for the three algorithms. Finally, the `hashtables` module provides three implementations of hashing schemes `LinearProbing.py`, `QuadraticProbing.py` and `SeparateChaining.py`. 
+The module `analysis` contains functions for profiling the code. 
 
 
 ## REFERENCES
