@@ -1,11 +1,11 @@
-## Programming Project 2 - Fall 2022 (Gerald McCollam)
-## EN.605.620.81.FA22 Algorithms for Bioinformatics
+### Programming Project 2 - Fall 2022 (Gerald McCollam)
+### EN.605.620.81.FA22 Algorithms for Bioinformatics
 
-## Requirements
+### Requirements
 
   * Python 3+ is required. No external libraries used.
 
-## Execution & Output
+### Execution & Output
 
 The program is made up of several modules. The user interacts with the file `driver.py`. To learn more, please type the following at the command prompt: 
 
