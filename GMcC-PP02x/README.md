@@ -13,32 +13,41 @@ The program is made up of several modules. The user interacts with the file `dri
 >> python driver.py -h
 ```
 
-and the following message will be displayed.
+The following message will be displayed.
 
 ```
->> python driver.py -h
-
-usage: driver.py [-h] -file
-
-Exercise in hashing.
+usage: driver.py [-h] --input INFILE [--output OUTPUT]
 
 optional arguments:
-  -h, --help  show this help message and exit
-  -file       provide a path to a file containing hash input.
+  -h, --help       show this help message and exit
+  --input INFILE   input file
+  --output OUTPUT  output file name
+```
+
+### Run Assignment Code
+To run the program change directories to `GMcC-PP02x` and execute the file `driver.py` as described. There are two data files supplied. The first is `./data/Minimum.txt`. This is the required input file for the assignment. To run this file execute the following:
+
+```
+>> python driver.py --input ./data/Minimum.txt --output ./data/output.txt
+```
+
+A second data file is supplied and is named `./data/Extra.txt` To run this file execute the following command:
+```
+>> python driver.py --input ./data/Extra.txt --output ./docs/output.txt
 ```
 
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
-
 ```
 .
 ├── LICENSE
 ├── README.md
 ├── analysis
 │   ├── __init__.py
-│   └── metrics.py
+│   ├── metrics.py
+│   └── perf_notebook.ipynb
 ├── data
 │   ├── Extra.txt
-│   └── Input.txt
+│   └── Minimum.txt
 ├── driver.py
 ├── filehandler
 │   ├── __init__.py
@@ -47,19 +56,8 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 │   ├── LinearProbing.py
 │   ├── QuadraticProbing.py
 │   ├── SeparateChaining.py
-│   └── __init__py
+│   ├── __init__py
 └── perf.py
-```
-To run the program change directories to `GMcC-PP02` and execute the file `driver.py` as described. 
-
-```
->> python driver.py -file
-```
-
-You will be prompted for a path to the input file. The required input file is provided, renamed as `Input.txt`.
-
-```
-Enter file input path: ./data/Input.txt
 ```
 
 ## Supporting Code
