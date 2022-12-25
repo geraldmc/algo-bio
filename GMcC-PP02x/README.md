@@ -64,8 +64,14 @@ The code is delivered as a zipped folder. Once unzipped it has the following dir
 There are several modules contained in the submission:
 
 #### `analysis`
+The module `analysis` contains functions for profiling including `metrics.py` and `perf_notebook.ipynb`. The first executes code to recreate the hash key distribution plot and to instrument the hashing functions for timing purposes. The notebook creates the plots that are contained in the report and can be run on Google Colab.
 
-The module `analysis` contains functions for profiling: `metrics.py` and `perf_notebook.ipynb`. The first executes code to recreate the hash key distribution plots (`>>python metrics.py`). The Python notebook may be executed on Google Colab by pressing the Colab tab. 
+#### `filehandler`
+This module contains several functions for inputing data, and printing the resulting output in proper format.
+
+#### `hashtables`
+This contains three files `LinearProbing.py`, `QuadraticProbing.py`, and `SeparateChaining.py`.
+
 
 
 ## REFERENCES
