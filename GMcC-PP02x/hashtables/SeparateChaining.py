@@ -44,7 +44,7 @@ class SeparateChaining:
       return math.floor(self.slot_size*(key*0.357840 % 1)) 
 
   def __insert_last(self, index, key):
-    ''' Always insert a new node following the last.
+    ''' Always insert a new node after the last one added.
     '''
     new_node = Node(key)
     if not self.table[index]:

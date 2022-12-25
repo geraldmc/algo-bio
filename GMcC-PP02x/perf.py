@@ -19,7 +19,7 @@ if __name__ == "__main__":
   sys.path.append(os.path.dirname(SCRIPT_DIR))
 
   data = []
-  data_path = './data/Input.txt'
+  data_path = './data/Extra.txt'
   raw_input = pre_process(data_path)
   for s in raw_input:
     data.append([int(i) for i in s]) # convert to ints  
