@@ -152,8 +152,8 @@ if __name__ == "__main__":
   """
   parser = argparse.ArgumentParser()
   parser.add_argument("--input", dest="infile", required=True,
-                    help="input file", type=lambda f: open(f)) 
-  parser.add_argument("--output", help = "output file name")
+                    help="input file name containing values to be hashed.", type=lambda f: open(f)) 
+  parser.add_argument("--output", help = "output file name.")
   args = parser.parse_args()
   inp_data = []
   raw_input = pre_process(args.infile.name)
