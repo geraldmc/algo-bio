@@ -20,8 +20,8 @@ usage: driver.py [-h] --input INFILE [--output OUTPUT]
 
 optional arguments:
   -h, --help       show this help message and exit
-  --input INFILE   input file
-  --output OUTPUT  output file name
+  --input INFILE   input file containing values to be hashed.
+  --output OUTPUT  output file.
 ```
 
 ### Run Assignment Code
