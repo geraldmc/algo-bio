@@ -52,21 +52,3 @@ def print_3iter(generator):
       break
     print(a,b,c)
   print()
-
-def traverse(o, tree_types=(list, tuple)):
-  ''' print(list(traverse(inp_data)))
-      CURRENTLY UNUSED
-  '''
-  if isinstance(o, tree_types):
-    for value in o:
-      for subvalue in traverse(value, tree_types):
-        yield subvalue
-  else:
-    yield o
-
-def output_results_to(data, f=None):
-  ''' CURRENTLY UNUSED '''
-  if f is None:
-    pass
-  else:
-    pass
