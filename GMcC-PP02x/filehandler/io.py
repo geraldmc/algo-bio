@@ -19,12 +19,12 @@ def pre_process(f):
   return result[:-1] 
 
 def divide_chunks(l, n):
-  ''' '''
+  ''' Yield generator objects to print'''
   for i in range(0, len(l), n):
     yield l[i:i+n]
 
 def print_5iter(generator):
-  ''' '''
+  ''' Print a generator in fives.'''
   try:
     assert next(generator, None) is not None
   except AssertionError:
@@ -39,7 +39,7 @@ def print_5iter(generator):
   print()
 
 def print_3iter(generator):
-  ''' '''
+  ''' Print a generator in threes. '''
   try:
     assert next(generator, None) is not None
   except AssertionError:
