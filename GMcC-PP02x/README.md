@@ -1,4 +1,4 @@
-## Algorithms for Bioinformatics Programming Project 2 - Fall 2022 (Gerald McCollam) 
+## Algorithms for Bioinformatics Programming Project 2 - Fall 2022
 
 ### Requirements
 
