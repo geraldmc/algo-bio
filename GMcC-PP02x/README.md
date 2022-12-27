@@ -32,7 +32,7 @@ To run the program change directories to `GMcC-PP02x` and execute the file `driv
 
 A second supplied data file is named `./data/Extra.txt` To run this execute the following:
 ```
->> python driver.py --input ./data/Extra.txt --output ./docs/output.txt
+>> python driver.py --input ./data/Extra.txt --output ./data/output.txt
 ```
 
 The code is delivered as a zipped folder. Once unzipped it has the following directory structure:
