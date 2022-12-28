@@ -153,11 +153,12 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("--input", dest="infile", required=True,
                     help="input file containing values to be hashed. ", 
-                    type=lambda f: open(f)) 
+                    type=lambda f: is_valid_file(parser, f)) 
   parser.add_argument("--output", help = "output file.")
   args = parser.parse_args()
+
   inp_data = []
-  raw_input = pre_process(args.infile.name)
+  raw_input = pre_process(args.infile)
   for s in raw_input:
     inp_data.append([int(i) for i in s]) # convert to ints
   input_list = [item for sub in inp_data for item in sub]
