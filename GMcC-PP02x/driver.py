@@ -160,7 +160,10 @@ if __name__ == "__main__":
   inp_data = []
   raw_input = pre_process(args.infile)
   for s in raw_input:
-    inp_data.append([int(i) for i in s]) # convert to ints
+    if False in [x.isnumeric() for x in s]:
+      raise ValueError("Non-numeric input found. Please edit input file and try again.")
+    else:
+      inp_data.append([int(i) for i in s]) # convert to ints
   input_list = [item for sub in inp_data for item in sub]
 
 # ------ this `tees` stdout to print to a file also.  
